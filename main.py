@@ -1,62 +1,25 @@
-from flask import Flask, request
-from caesar import rotate_string
+# Third party
+from flask import Flask, request, render_template
+
+# Custom
+from scripts.caesar import rotate_string
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
-
-form = """
-    <!DOCTYPE html>
-
-    <html>
-        <head>
-            <style>
-                form {{
-                    background-color: #eee;
-                    padding: 20px;
-                    margin: 0 auto;
-                    width: 540px;
-                    font: 16px sans-serif;
-                    border-radius: 10px;
-
-                }}
-                textarea {{
-                    margin: 10px 0;
-                    width: 540px;
-                    height: 120px;
-                }}
-            </style>
-        </head>
-        <body>
-            <form method="post">
-                <label for="rot">Rotate by:</label>
-                <input type="text" name="rot" value="0"/>
-                <p class="error"></p>
-                <textarea name="text">{0}</textarea>
-           
-            
-            
-            
-            
-                <input type="submit" />
-            </form>
-        </body>
-    </html>
-
-"""
+app.config['DEBUG'] = False
 
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 def index():
-    
-    return form.format("")
-    
+    return render_template("index.html", text="")
+
+
 @app.route("/", methods=['POST'])
-def encrypt():
+def return_encrypted_text():
     rot = int(request.form["rot"])
     text = request.form["text"]
-    message = rotate_string(text, rot)
-    return form.format(message)
+    encrypted_text = rotate_string(text, rot)
+    return render_template("index.html", text=encrypted_text)
 
     
-
-app.run()
+if __name__ == "__main__":
+    app.run()
