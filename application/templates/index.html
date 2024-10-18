@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-
 <html>
 
-<head>
-    <link rel="stylesheet" href="../static/css/style.css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description"
+            content="An HTML user form that uses a Python (Flask) backend to return text that has been encrypted using Caesar's cipher.">
+        <link rel="stylesheet" href="../static/css/style.css">
 
-<body>
-    <form method="post">
-        <label for="rot">Rotate by:</label>
-        <input type="text" name="rot" value="0" />
-        <p class="error"></p>
-        <textarea name="text">{{text}}</textarea>
-        <input type="submit" />
-    </form>
-</body>
+        <title>Web Caesar</title>
+    </head>
+
+    <body>
+        <form method="post">
+            <label for="rot">Rotate by:</label>
+            <input type="text" name="rot" value="0" />
+            <p class="error"></p>
+            <textarea name="text">{{text}}</textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
 
 </html>
