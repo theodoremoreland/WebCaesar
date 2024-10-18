@@ -1,13 +1,13 @@
 def alphabet_position(character):
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
     lower = character.lower()
+
     return alphabet.index(lower)
 
 
 def rotate_string_13(text):
-
-    rotated = ''
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    rotated = ""
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
 
     for char in text:
         rotated_idx = (alphabet_position(char) + 13) % 26
@@ -20,7 +20,7 @@ def rotate_string_13(text):
 
 
 def rotate_character(char, rot):
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
     rotated_idx = (alphabet_position(char) + rot) % 26
 
     if char.isupper():
@@ -30,11 +30,10 @@ def rotate_character(char, rot):
 
 
 def rotate_string(text, rot):
-
-    rotated = ''
+    rotated = ""
 
     for char in text:
-        if (char.isalpha()):
+        if char.isalpha():
             rotated = rotated + rotate_character(char, rot)
         else:
             rotated = rotated + char
