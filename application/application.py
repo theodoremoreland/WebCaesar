@@ -23,7 +23,7 @@ def dad_joke():
     joke = get_random_dad_joke()
     encrypted_dad_joke = rotate_string(joke, random.randint(1, 26))
 
-    return json.dumps({"joke": joke, encrypted_dad_joke: encrypted_dad_joke})
+    return json.dumps({"joke": joke, "encrypted_dad_joke": encrypted_dad_joke})
 
 
 @application.route("/encrypt", methods=["POST"])
