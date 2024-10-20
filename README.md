@@ -16,6 +16,7 @@ _This program was created for a homework assignment at LaunchCode's Lc101 (2018)
 
 -   Python
 -   TypeScript
+-   JavaScript
 -   Flask
 -   React
 -   HTML
