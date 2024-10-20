@@ -15,9 +15,12 @@ _This program was created for a homework assignment at LaunchCode's Lc101 (2018)
 ## Technologies Used
 
 -   Python
+-   TypeScript
 -   Flask
+-   React
 -   HTML
 -   CSS
+-   Vite
 
 ## Screenshots
 

@@ -1,25 +1,29 @@
+# First party
+import json
+
 # Third party
-from flask import Flask, request, render_template
+from flask import Flask, request, send_from_directory
 
 # Custom
 from modules.caesar import rotate_string
 
-application = Flask(__name__)
-application.config["DEBUG"] = False
+application = Flask(__name__, static_folder="ui/dist", static_url_path="/")
+application.config["DEBUG"] = True
 
 
 @application.route("/", methods=["GET"])
 def index():
-    return render_template("index.html", text="")
+    return send_from_directory("ui/dist", "index.html")
 
 
-@application.route("/", methods=["POST"])
-def return_encrypted_text():
-    rot = int(request.form["rot"])
-    text = request.form["text"]
+@application.route("/encrypt", methods=["POST"])
+def encrypt():
+    data = request.json
+    rot = data["rot"]
+    text = data["text"]
     encrypted_text = rotate_string(text, rot)
 
-    return render_template("index.html", text=encrypted_text)
+    return json.dumps({"encrypted_text": encrypted_text})
 
 
 if __name__ == "__main__":
