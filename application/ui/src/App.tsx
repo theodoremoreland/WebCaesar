@@ -20,7 +20,12 @@ import "./App.css";
  */
 const App = (): ReactElement => {
 	const [rot, setRot] = useState<number>(0);
-	const [text, setText] = useState<string>("");
+	const [originalText, setOriginalText] = useState<string | undefined>(
+		undefined
+	);
+	const [encryptedText, setEncryptedText] = useState<string | undefined>(
+		undefined
+	);
 
 	const { data: jokeData } = useQuery("dad-joke", getDadJoke);
 	const { data: encryptData, mutate } = useMutation(encrypt);
@@ -28,18 +33,20 @@ const App = (): ReactElement => {
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		mutate({ text, rot });
+		if (originalText) {
+			mutate({ text: originalText, rot });
+		}
 	};
 
 	useEffect(() => {
 		if (jokeData) {
-			setText(jokeData.encrypted_dad_joke);
+			setOriginalText(jokeData.encrypted_dad_joke);
 		}
 	}, [jokeData]);
 
 	useEffect(() => {
 		if (encryptData) {
-			setText(encryptData.encrypted_text);
+			setEncryptedText(encryptData.encrypted_text);
 		}
 	}, [encryptData]);
 
@@ -55,8 +62,8 @@ const App = (): ReactElement => {
 			<p className="error"></p>
 			<textarea
 				name="text"
-				onChange={(e) => setText(e.target.value)}
-				value={text}
+				onChange={(e) => setOriginalText(e.target.value)}
+				value={encryptedText || originalText}
 			/>
 			<button type="submit">Submit</button>
 		</form>

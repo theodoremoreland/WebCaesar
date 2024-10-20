@@ -16,7 +16,7 @@ DAD_JOKES = [
     "A plateau is the highest form of flattery.",
     "How do you find Will Smith in the snow? Look for fresh prints.",
     "What did the grape say when it was stepped on? Nothing, it just let out a little wine.",
-    "A burger walks into a bar. The bartender says 'Sorry, we don't serve food here'",
+    "A burger walks into a bar. The bartender says 'Sorry, we don't serve food here'.",
     "Orion's Belt is a huge waist of space.",
     "To the guy who invented zero: Thanks for nothing!",
     "What's brown and sticky? A stick.",
