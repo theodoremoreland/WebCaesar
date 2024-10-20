@@ -21,6 +21,8 @@ _This program was created for a homework assignment at LaunchCode's Lc101 (2018)
 -   HTML
 -   CSS
 -   Vite
+-   Axios
+-   Tanstack React Query
 
 ## Screenshots
 
