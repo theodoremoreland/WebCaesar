@@ -2,8 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 
 
 interface JokeResponse {
-    joke: string
-    encrypted_joke: string;
+    dad_joke: string
+    encrypted_dad_joke: string;
 }
 
 export default async (): Promise<JokeResponse> => {

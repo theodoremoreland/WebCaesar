@@ -33,7 +33,7 @@ const App = (): ReactElement => {
 
 	useEffect(() => {
 		if (jokeData) {
-			setText(jokeData.encrypted_joke);
+			setText(jokeData.encrypted_dad_joke);
 		}
 	}, [jokeData]);
 

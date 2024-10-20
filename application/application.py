@@ -21,9 +21,9 @@ def index():
 @application.route("/dad_joke", methods=["GET"])
 def dad_joke():
     joke = get_random_dad_joke()
-    encrypted_dad_joke = rotate_string(joke, random.randint(1, 26))
+    encrypted_dad_joke = rotate_string(joke, random.randint(1, 25))
 
-    return json.dumps({"joke": joke, "encrypted_dad_joke": encrypted_dad_joke})
+    return json.dumps({"dad_joke": joke, "encrypted_dad_joke": encrypted_dad_joke})
 
 
 @application.route("/encrypt", methods=["POST"])
