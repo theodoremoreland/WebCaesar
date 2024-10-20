@@ -2,9 +2,10 @@
 import { ReactElement, useState, FormEvent, useEffect } from "react";
 
 // React Query
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 
 // hooks
+import getDadJoke from "./http/getDadJoke";
 import encrypt from "./http/encrypt";
 
 // Styles
@@ -21,7 +22,8 @@ const App = (): ReactElement => {
 	const [rot, setRot] = useState<number>(0);
 	const [text, setText] = useState<string>("");
 
-	const { data, mutate } = useMutation(encrypt);
+	const { data: jokeData } = useQuery("dad-joke", getDadJoke);
+	const { data: encryptData, mutate } = useMutation(encrypt);
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -30,10 +32,16 @@ const App = (): ReactElement => {
 	};
 
 	useEffect(() => {
-		if (data) {
-			setText(data.encrypted_text);
+		if (jokeData) {
+			setText(jokeData.encrypted_joke);
 		}
-	}, [data]);
+	}, [jokeData]);
+
+	useEffect(() => {
+		if (encryptData) {
+			setText(encryptData.encrypted_text);
+		}
+	}, [encryptData]);
 
 	return (
 		<form method="post" onSubmit={handleSubmit}>
