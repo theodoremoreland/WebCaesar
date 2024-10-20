@@ -1,5 +1,11 @@
 // React
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, FormEvent, useEffect } from "react";
+
+// React Query
+import { useMutation } from "react-query";
+
+// hooks
+import encrypt from "./http/encrypt";
 
 // Styles
 import "./App.css";
@@ -12,20 +18,40 @@ import "./App.css";
  * Initializes with encrypted dad joke, then prompts user to experiment with wheel to decrypt
  */
 const App = (): ReactElement => {
-	const [text, setText] = useState("");
+	const [rot, setRot] = useState<number>(0);
+	const [text, setText] = useState<string>("");
+
+	const { data, mutate } = useMutation(encrypt);
+
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		mutate({ text, rot });
+	};
+
+	useEffect(() => {
+		if (data) {
+			setText(data.encrypted_text);
+		}
+	}, [data]);
 
 	return (
-		<>
-			<form method="post">
-				<label htmlFor="rot">Rotate by:</label>
-				<input type="text" name="rot" value="0" />
-				<p className="error"></p>
-				<textarea name="text" onChange={(e) => setText(e.target.value)}>
-					{text}
-				</textarea>
-				<button type="submit">Submit</button>
-			</form>
-		</>
+		<form method="post" onSubmit={handleSubmit}>
+			<label htmlFor="rot">Rotate by:</label>
+			<input
+				type="number"
+				name="rot"
+				value={rot}
+				onChange={(e) => setRot(parseInt(e.target.value))}
+			/>
+			<p className="error"></p>
+			<textarea
+				name="text"
+				onChange={(e) => setText(e.target.value)}
+				value={text}
+			/>
+			<button type="submit">Submit</button>
+		</form>
 	);
 };
 
