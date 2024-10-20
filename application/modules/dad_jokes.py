@@ -1,3 +1,5 @@
+import random
+
 DAD_JOKES = [
     "When my son told me to stop impersonating a flamingo, I had to put my foot down.",
     "Why can't a bicycle stand on its own? It's two-tired.",
@@ -22,3 +24,7 @@ DAD_JOKES = [
     "There are only two things I don't eat for breakfast: Lunch and dinner.",
     "What do you call a fake dad? A faux pas.",
 ]
+
+
+def get_random_dad_joke():
+    return random.choice(DAD_JOKES)
