@@ -18,7 +18,7 @@ ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 # Latvian - "lv"
 # Dutch - "nl"
 
-spell = SpellChecker(distance=1)
+spell = SpellChecker(distance=1, language="en")
 
 
 def alphabet_position(character: str) -> int:
