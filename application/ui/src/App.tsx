@@ -72,28 +72,30 @@ const App = (): ReactElement => {
 	}, [decryptData]);
 
 	return (
-		<div>
-			<div>
+		<main>
+			<div className="buttons">
 				<button id="decrypt" type="button" onClick={handleDecrypt}>
 					Decrypt
 				</button>
 			</div>
-			<textarea
-				name="original_text"
-				onChange={handleChange}
-				value={originalText}
-			/>
-			<div className="rot-container">
-				<label htmlFor="rot">Rotate by:</label>
-				<input
-					type="number"
-					name="rot"
-					value={rot}
-					onChange={handleRotate}
+			<div className="content">
+				<textarea
+					name="original_text"
+					onChange={handleChange}
+					value={originalText}
 				/>
+				<div className="rot-container">
+					<label htmlFor="rot">Rotate by</label>
+					<input
+						type="number"
+						name="rot"
+						value={rot}
+						onChange={handleRotate}
+					/>
+				</div>
+				<textarea name="rotated_text" readOnly value={rotatedText} />
 			</div>
-			<textarea name="rotated_text" readOnly value={rotatedText} />
-		</div>
+		</main>
 	);
 };
 
