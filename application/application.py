@@ -6,7 +6,7 @@ import random
 from flask import Flask, request, send_from_directory
 
 # Custom
-from modules.caesar import rotate_string
+from modules.caesar import rotate_string, decrypt
 from modules.dad_jokes import get_random_dad_joke
 
 application = Flask(__name__, static_folder="ui/dist", static_url_path="/")
@@ -19,7 +19,7 @@ def index():
 
 
 @application.route("/dad_joke", methods=["GET"])
-def dad_joke():
+def dad_joke_route():
     joke = get_random_dad_joke()
     encrypted_dad_joke = rotate_string(joke, random.randint(1, 25))
 
@@ -27,13 +27,22 @@ def dad_joke():
 
 
 @application.route("/encrypt", methods=["POST"])
-def encrypt():
+def encrypt_route():
     data = request.json
     rot = data["rot"]
     text = data["text"]
     encrypted_text = rotate_string(text, rot)
 
     return json.dumps({"encrypted_text": encrypted_text})
+
+
+@application.route("/decrypt", methods=["POST"])
+def decrypt_route():
+    data = request.json
+    text = data["text"]
+    decrypted = decrypt(text)
+
+    return json.dumps(decrypted)
 
 
 if __name__ == "__main__":
