@@ -30,6 +30,11 @@ const App = (): ReactElement => {
 	const { data: jokeData } = useQuery("dad-joke", getDadJoke);
 	const { data: encryptData, mutate } = useMutation(encrypt);
 
+	const handleChange = (e: FormEvent<HTMLTextAreaElement>) => {
+		setOriginalText(e.currentTarget.value);
+		setEncryptedText(undefined);
+	};
+
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -52,6 +57,11 @@ const App = (): ReactElement => {
 
 	return (
 		<form method="post" onSubmit={handleSubmit}>
+			<textarea
+				name="original_text"
+				onChange={handleChange}
+				value={originalText}
+			/>
 			<label htmlFor="rot">Rotate by:</label>
 			<input
 				type="number"
@@ -59,12 +69,7 @@ const App = (): ReactElement => {
 				value={rot}
 				onChange={(e) => setRot(parseInt(e.target.value))}
 			/>
-			<p className="error"></p>
-			<textarea
-				name="text"
-				onChange={(e) => setOriginalText(e.target.value)}
-				value={encryptedText || originalText}
-			/>
+			<textarea name="encrypted_text" readOnly value={encryptedText} />
 			<button type="submit">Submit</button>
 		</form>
 	);
