@@ -5,7 +5,7 @@ import { ReactElement, useState, useEffect, ChangeEvent } from "react";
 import { useMutation, useQuery } from "react-query";
 
 // Custom
-import rotateSwing from "./modules/rotateSwing";
+import rotateString from "./modules/rotateString";
 
 // HTTP
 import getDadJoke from "./http/getDadJoke";
@@ -43,7 +43,7 @@ const App = (): ReactElement => {
 		const _rot: number = parseInt(e.currentTarget.value);
 
 		setRot(_rot);
-		setRotatedText(rotateSwing(originalText ?? "", _rot));
+		setRotatedText(rotateString(originalText ?? "", _rot));
 	};
 
 	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -67,6 +67,7 @@ const App = (): ReactElement => {
 
 	useEffect(() => {
 		if (decryptData) {
+			setRot(decryptData.rot);
 			setRotatedText(decryptData.result);
 		}
 	}, [decryptData]);
