@@ -1,12 +1,15 @@
 // React
-import { ReactElement, useState, FormEvent, useEffect } from "react";
+import { ReactElement, useState, useEffect, ChangeEvent } from "react";
 
 // React Query
 import { useMutation, useQuery } from "react-query";
 
-// hooks
+// Custom
+import rotateSwing from "./modules/rotateSwing";
+
+// HTTP
 import getDadJoke from "./http/getDadJoke";
-import encrypt from "./http/encrypt";
+import decrypt from "./http/decrypt";
 
 // Styles
 import "./App.css";
@@ -23,23 +26,36 @@ const App = (): ReactElement => {
 	const [originalText, setOriginalText] = useState<string | undefined>(
 		undefined
 	);
-	const [encryptedText, setEncryptedText] = useState<string | undefined>(
+	const [rotatedText, setRotatedText] = useState<string | undefined>(
 		undefined
 	);
 
 	const { data: jokeData } = useQuery("dad-joke", getDadJoke);
-	const { data: encryptData, mutate } = useMutation(encrypt);
+	const {
+		data: decryptData,
+		mutate: decryptMutate,
+		// isLoading: isDecryptLoading,
+	} = useMutation(decrypt);
 
-	const handleChange = (e: FormEvent<HTMLTextAreaElement>) => {
-		setOriginalText(e.currentTarget.value);
-		setEncryptedText(undefined);
-	};
-
-	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+	const handleRotate = (e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 
+		const _rot: number = parseInt(e.currentTarget.value);
+
+		setRot(_rot);
+		setRotatedText(rotateSwing(originalText ?? "", _rot));
+	};
+
+	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		e.preventDefault();
+
+		setOriginalText(e.currentTarget.value);
+		setRotatedText(undefined);
+	};
+
+	const handleDecrypt = () => {
 		if (originalText) {
-			mutate({ text: originalText, rot });
+			decryptMutate({ text: originalText });
 		}
 	};
 
@@ -50,28 +66,34 @@ const App = (): ReactElement => {
 	}, [jokeData]);
 
 	useEffect(() => {
-		if (encryptData) {
-			setEncryptedText(encryptData.encrypted_text);
+		if (decryptData) {
+			setRotatedText(decryptData.result);
 		}
-	}, [encryptData]);
+	}, [decryptData]);
 
 	return (
-		<form method="post" onSubmit={handleSubmit}>
+		<div>
+			<div>
+				<button id="decrypt" type="button" onClick={handleDecrypt}>
+					Decrypt
+				</button>
+			</div>
 			<textarea
 				name="original_text"
 				onChange={handleChange}
 				value={originalText}
 			/>
-			<label htmlFor="rot">Rotate by:</label>
-			<input
-				type="number"
-				name="rot"
-				value={rot}
-				onChange={(e) => setRot(parseInt(e.target.value))}
-			/>
-			<textarea name="encrypted_text" readOnly value={encryptedText} />
-			<button type="submit">Submit</button>
-		</form>
+			<div className="rot-container">
+				<label htmlFor="rot">Rotate by:</label>
+				<input
+					type="number"
+					name="rot"
+					value={rot}
+					onChange={handleRotate}
+				/>
+			</div>
+			<textarea name="rotated_text" readOnly value={rotatedText} />
+		</div>
 	);
 };
 
