@@ -31,13 +31,13 @@ LANGUAGES: List[Dict[str, str]] = [
 
 
 def alphabet_position(character: str, alphabet: List[str]) -> int:
-    lower = character.lower()
+    lower: str = character.lower()
 
     return alphabet.index(lower)
 
 
 def rotate_character(char: str, rot: int, alphabet: List[str]) -> str:
-    rotated_idx = (alphabet_position(char, alphabet) + rot) % len(alphabet)
+    rotated_idx: int = (alphabet_position(char, alphabet) + rot) % len(alphabet)
 
     if char.isupper():
         return alphabet[rotated_idx].upper()
@@ -46,7 +46,7 @@ def rotate_character(char: str, rot: int, alphabet: List[str]) -> str:
 
 
 def rotate_string(text: str, rot: int, alphabet: List[str] = ALPHABET_EN) -> str:
-    rotated = ""
+    rotated: str = ""
 
     for char in text:
         if char.isalpha():

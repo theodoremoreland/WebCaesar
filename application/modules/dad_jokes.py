@@ -26,5 +26,5 @@ DAD_JOKES = [
 ]
 
 
-def get_random_dad_joke():
+def get_random_dad_joke() -> str:
     return random.choice(DAD_JOKES)
