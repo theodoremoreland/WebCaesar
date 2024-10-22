@@ -23,12 +23,8 @@ import "./App.css";
  */
 const App = (): ReactElement => {
 	const [rot, setRot] = useState<number>(0);
-	const [originalText, setOriginalText] = useState<string | undefined>(
-		undefined
-	);
-	const [rotatedText, setRotatedText] = useState<string | undefined>(
-		undefined
-	);
+	const [originalText, setOriginalText] = useState<string>("");
+	const [rotatedText, setRotatedText] = useState<string>("");
 
 	const { data: jokeData } = useQuery("dad-joke", getDadJoke);
 	const {
@@ -50,7 +46,7 @@ const App = (): ReactElement => {
 		e.preventDefault();
 
 		setOriginalText(e.currentTarget.value);
-		setRotatedText(undefined);
+		setRotatedText("");
 	};
 
 	const handleDecrypt = () => {
