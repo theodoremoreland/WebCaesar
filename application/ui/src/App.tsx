@@ -97,6 +97,7 @@ const App = (): ReactElement => {
 						type="number"
 						name="rot"
 						value={rot}
+						autoComplete="off"
 						onChange={handleRotate}
 					/>
 				</div>
