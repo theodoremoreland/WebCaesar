@@ -9,6 +9,8 @@ interface DecryptResponse {
     rot: number;
     matches: number;
     result: string;
+    language: string;
+    language_code: string;
 }
 
 export default async ({text}: DecryptRequest): Promise<DecryptResponse> => {
