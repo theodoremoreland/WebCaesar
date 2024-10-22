@@ -30,7 +30,7 @@ const App = (): ReactElement => {
 	const {
 		data: decryptData,
 		mutate: decryptMutate,
-		// isLoading: isDecryptLoading,
+		isLoading: isDecryptLoading,
 	} = useMutation(decrypt);
 
 	const handleRotate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -95,6 +95,7 @@ const App = (): ReactElement => {
 					onChange={handleChange}
 					value={originalText}
 					spellCheck="false"
+					disabled={isDecryptLoading}
 				/>
 				<div className="rot-container">
 					<label htmlFor="rot">Rotate by</label>
@@ -104,6 +105,9 @@ const App = (): ReactElement => {
 						value={rot}
 						autoComplete="off"
 						onChange={handleRotate}
+						min={0}
+						max={25}
+						disabled={isDecryptLoading}
 					/>
 				</div>
 				<textarea
@@ -112,6 +116,7 @@ const App = (): ReactElement => {
 					spellCheck="false"
 					readOnly
 					value={rotatedText}
+					disabled={isDecryptLoading}
 				/>
 			</div>
 		</main>
