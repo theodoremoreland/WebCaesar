@@ -44,9 +44,10 @@ const App = (): ReactElement => {
 
 	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		e.preventDefault();
+		const _originalText: string = e.currentTarget.value;
 
-		setOriginalText(e.currentTarget.value);
-		setRotatedText("");
+		setOriginalText(_originalText);
+		setRotatedText(rotateString(_originalText ?? "", rot));
 	};
 
 	const handleDecrypt = () => {
@@ -58,6 +59,8 @@ const App = (): ReactElement => {
 	useEffect(() => {
 		if (jokeData) {
 			setOriginalText(jokeData.encrypted_dad_joke);
+			setRotatedText(rotateString(jokeData.encrypted_dad_joke, 0));
+			setRot(0);
 		}
 	}, [jokeData]);
 
@@ -87,9 +90,11 @@ const App = (): ReactElement => {
 			</div>
 			<div className="content">
 				<textarea
+					id="original_text"
 					name="original_text"
 					onChange={handleChange}
 					value={originalText}
+					spellCheck="false"
 				/>
 				<div className="rot-container">
 					<label htmlFor="rot">Rotate by</label>
@@ -101,7 +106,13 @@ const App = (): ReactElement => {
 						onChange={handleRotate}
 					/>
 				</div>
-				<textarea name="rotated_text" readOnly value={rotatedText} />
+				<textarea
+					id="rotated_text"
+					name="rotated_text"
+					spellCheck="false"
+					readOnly
+					value={rotatedText}
+				/>
 			</div>
 		</main>
 	);
