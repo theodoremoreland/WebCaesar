@@ -39,4 +39,5 @@ main {
 textarea {
 	flex-grow: 1;
 	height: 100%;
+	resize: none;
 }
