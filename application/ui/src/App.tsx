@@ -74,6 +74,16 @@ const App = (): ReactElement => {
 				<button id="decrypt" type="button" onClick={handleDecrypt}>
 					Decrypt
 				</button>
+				<a
+					href={`data:text/plain;charset=utf-8,${encodeURIComponent(
+						rotatedText
+					)}`}
+					download="decrypted.txt"
+				>
+					<button id="download" type="button">
+						Download
+					</button>
+				</a>
 			</div>
 			<div className="content">
 				<textarea
