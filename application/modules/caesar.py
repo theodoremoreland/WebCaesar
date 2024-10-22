@@ -37,7 +37,7 @@ def alphabet_position(character: str, alphabet: List[str]) -> int:
 
 
 def rotate_character(char: str, rot: int, alphabet: List[str]) -> str:
-    rotated_idx = (alphabet_position(char, alphabet) + rot) % 26
+    rotated_idx = (alphabet_position(char, alphabet) + rot) % len(alphabet)
 
     if char.isupper():
         return alphabet[rotated_idx].upper()
