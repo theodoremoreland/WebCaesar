@@ -74,7 +74,12 @@ const App = (): ReactElement => {
 	return (
 		<main>
 			<div className="buttons">
-				<button id="decrypt" type="button" onClick={handleDecrypt}>
+				<button
+					id="decrypt"
+					type="button"
+					onClick={handleDecrypt}
+					disabled={isDecryptLoading}
+				>
 					Decrypt
 				</button>
 				<a
