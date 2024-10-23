@@ -1,6 +1,7 @@
 import random
+from typing import List
 
-DAD_JOKES = [
+DAD_JOKES: List[str] = [
     "When my son told me to stop impersonating a flamingo, I had to put my foot down.",
     "Why can't a bicycle stand on its own? It's two-tired.",
     "I told my wife she should embrace her mistakes. She gave me a hug.",
