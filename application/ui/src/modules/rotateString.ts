@@ -56,7 +56,7 @@ const rotateCharacter = (
 
 	if (alphabetPosition === -1) {
 		throw new Error(
-			`Character ${char} is not a valid character for chosen language`
+			`Character ${char} is not a valid character for chosen language.`
 		);
 	}
 

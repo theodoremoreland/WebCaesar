@@ -67,7 +67,6 @@ def decrypt(text: str) -> Dict[str, Any]:
     }
 
     for language in LANGUAGES:
-        # TODO - Likely a bottleneck, investigate alternative of lifting this out of the loop
         spell = SpellChecker(distance=1, language=language["code"])
         alphabet: List[str] = language["alphabet"]
 

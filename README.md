@@ -24,6 +24,7 @@ _This program was created for a homework assignment at LaunchCode's Lc101 (2018)
 -   Vite
 -   Axios
 -   Tanstack React Query
+-   pyspellchecker
 
 ## Screenshots
 
