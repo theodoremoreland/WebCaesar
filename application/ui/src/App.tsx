@@ -5,7 +5,10 @@ import { ReactElement, useState, useEffect, ChangeEvent } from "react";
 import { useMutation, useQuery } from "react-query";
 
 // Custom
-import rotateString, { supportedLanguages } from "./modules/rotateString";
+import rotateString, {
+	SupportedLanguage,
+	supportedLanguages,
+} from "./modules/rotateString";
 
 // HTTP
 import getDadJoke from "./http/getDadJoke";
@@ -23,7 +26,9 @@ import "./App.css";
  */
 const App = (): ReactElement => {
 	const [rot, setRot] = useState<number>(0);
-	const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
+	const [selectedLanguage, setSelectedLanguage] = useState<SupportedLanguage>(
+		SupportedLanguage.English
+	);
 	const [originalText, setOriginalText] = useState<string>("");
 	const [rotatedText, setRotatedText] = useState<string>("");
 
@@ -40,7 +45,13 @@ const App = (): ReactElement => {
 		const _rot: number = parseInt(e.currentTarget.value);
 
 		setRot(_rot);
-		setRotatedText(rotateString(originalText ?? "", _rot));
+		setRotatedText(
+			rotateString(
+				originalText ?? "",
+				_rot,
+				supportedLanguages[selectedLanguage].alphabet
+			)
+		);
 	};
 
 	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
@@ -48,12 +59,19 @@ const App = (): ReactElement => {
 		const _originalText: string = e.currentTarget.value;
 
 		setOriginalText(_originalText);
-		setRotatedText(rotateString(_originalText ?? "", rot));
+		setRotatedText(
+			rotateString(
+				_originalText ?? "",
+				rot,
+				supportedLanguages[selectedLanguage].alphabet
+			)
+		);
 	};
 
 	const handleChangeLanguage = (e: ChangeEvent<HTMLSelectElement>): void => {
 		e.preventDefault();
-		const _selectedLanguage: string = e.currentTarget.value;
+		const _selectedLanguage: SupportedLanguage = e.currentTarget
+			.value as SupportedLanguage;
 		let _rot: number = rot;
 
 		if (rot > supportedLanguages[_selectedLanguage].alphabet.length - 1) {

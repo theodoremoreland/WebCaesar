@@ -9,8 +9,21 @@ const ALPHABET_AR: string = "ابتثجحخدذرزسشصضطظعغفقكلمن�
 const ALPHABET_EU: string = "abcdefghijklmnopqrstuvwxyzñ";
 const ALPHABET_LV: string = "aābcčdeēfgģhiījkķlļmnņoprsštuūvzž";
 const ALPHABET_NL: string = "abcdefghijklmnopqrstuvwxyz";
+export enum SupportedLanguage {
+	English = "English",
+	Spanish = "Spanish",
+	French = "French",
+	Portuguese = "Portuguese",
+	German = "German",
+	Italian = "Italian",
+	Russian = "Russian",
+	Arabic = "Arabic",
+	Basque = "Basque",
+	Latvian = "Latvian",
+	Dutch = "Dutch",
+}
 export const supportedLanguages: {
-	[language: string]: {
+	[K in SupportedLanguage]: {
 		alphabet: string;
 		code: string;
 	};
@@ -27,27 +40,8 @@ export const supportedLanguages: {
 	Latvian: { alphabet: ALPHABET_LV, code: "lv" },
 	Dutch: { alphabet: ALPHABET_NL, code: "nl" },
 };
-const alphabetSet: Set<string> = new Set(
-	ALPHABET_EN +
-		ALPHABET_ES +
-		ALPHABET_FR +
-		ALPHABET_PT +
-		ALPHABET_DE +
-		ALPHABET_IT +
-		ALPHABET_RU +
-		ALPHABET_AR +
-		ALPHABET_EU +
-		ALPHABET_LV +
-		ALPHABET_NL
-);
-const combinedAlphabet: string = Array.from(alphabetSet).join("");
 
-const isAlpha = (char: string) =>
-	new RegExp(`[${combinedAlphabet + combinedAlphabet.toUpperCase()}]`).test(
-		char
-	);
-
-const alphabetPosition = (character: string, alphabet: string): number => {
+const findAlphabetPosition = (character: string, alphabet: string): number => {
 	const lower: string = character.toLowerCase();
 
 	return alphabet.indexOf(lower);
@@ -58,8 +52,15 @@ const rotateCharacter = (
 	rot: number,
 	alphabet: string
 ): string => {
-	const rotatedIndex: number =
-		(alphabetPosition(char, alphabet) + rot) % alphabet.length;
+	const alphabetPosition: number = findAlphabetPosition(char, alphabet);
+
+	if (alphabetPosition === -1) {
+		throw new Error(
+			`Character ${char} is not a valid character for chosen language`
+		);
+	}
+
+	const rotatedIndex: number = (alphabetPosition + rot) % alphabet.length;
 
 	if (char.toUpperCase() === char) {
 		return alphabet[rotatedIndex].toUpperCase();
@@ -76,7 +77,7 @@ export default (
 	let rotated: string = "";
 
 	for (const char of text) {
-		if (isAlpha(char)) {
+		if (alphabet.includes(char.toLowerCase())) {
 			rotated = rotated + rotateCharacter(char, rot, alphabet);
 		} else {
 			rotated = rotated + char;
