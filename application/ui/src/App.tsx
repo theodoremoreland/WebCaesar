@@ -34,7 +34,7 @@ const App = (): ReactElement => {
 		isLoading: isDecryptLoading,
 	} = useMutation(decrypt);
 
-	const handleRotate = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleRotate = (e: ChangeEvent<HTMLInputElement>): void => {
 		e.preventDefault();
 
 		const _rot: number = parseInt(e.currentTarget.value);
@@ -43,7 +43,7 @@ const App = (): ReactElement => {
 		setRotatedText(rotateString(originalText ?? "", _rot));
 	};
 
-	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
 		e.preventDefault();
 		const _originalText: string = e.currentTarget.value;
 
@@ -51,7 +51,27 @@ const App = (): ReactElement => {
 		setRotatedText(rotateString(_originalText ?? "", rot));
 	};
 
-	const handleDecrypt = () => {
+	const handleChangeLanguage = (e: ChangeEvent<HTMLSelectElement>): void => {
+		e.preventDefault();
+		const _selectedLanguage: string = e.currentTarget.value;
+		let _rot: number = rot;
+
+		if (rot > supportedLanguages[_selectedLanguage].alphabet.length - 1) {
+			_rot = supportedLanguages[_selectedLanguage].alphabet.length - 1;
+		}
+
+		setSelectedLanguage(_selectedLanguage);
+		setRot(_rot);
+		setRotatedText(
+			rotateString(
+				originalText ?? "",
+				_rot,
+				supportedLanguages[_selectedLanguage].alphabet
+			)
+		);
+	};
+
+	const handleDecrypt = (): void => {
 		if (originalText) {
 			decryptMutate({ text: originalText });
 		}
@@ -124,9 +144,7 @@ const App = (): ReactElement => {
 						name="supported-languages"
 						disabled={isDecryptLoading}
 						value={selectedLanguage}
-						onChange={(e) =>
-							setSelectedLanguage(e.currentTarget.value)
-						}
+						onChange={handleChangeLanguage}
 					>
 						{Object.keys(supportedLanguages).map((language) => (
 							<option key={language} value={language}>
