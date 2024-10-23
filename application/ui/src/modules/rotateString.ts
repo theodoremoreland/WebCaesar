@@ -9,6 +9,24 @@ const ALPHABET_AR: string = "ابتثجحخدذرزسشصضطظعغفقكلمن�
 const ALPHABET_EU: string = "abcdefghijklmnopqrstuvwxyzñ";
 const ALPHABET_LV: string = "aābcčdeēfgģhiījkķlļmnņoprsštuūvzž";
 const ALPHABET_NL: string = "abcdefghijklmnopqrstuvwxyz";
+export const supportedLanguages: {
+	[language: string]: {
+		alphabet: string;
+		code: string;
+	};
+} = {
+	English: { alphabet: ALPHABET_EN, code: "en" },
+	Spanish: { alphabet: ALPHABET_ES, code: "es" },
+	French: { alphabet: ALPHABET_FR, code: "fr" },
+	Portuguese: { alphabet: ALPHABET_PT, code: "pt" },
+	German: { alphabet: ALPHABET_DE, code: "de" },
+	Italian: { alphabet: ALPHABET_IT, code: "it" },
+	Russian: { alphabet: ALPHABET_RU, code: "ru" },
+	Arabic: { alphabet: ALPHABET_AR, code: "ar" },
+	Basque: { alphabet: ALPHABET_EU, code: "eu" },
+	Latvian: { alphabet: ALPHABET_LV, code: "lv" },
+	Dutch: { alphabet: ALPHABET_NL, code: "nl" },
+};
 const alphabetSet: Set<string> = new Set(
 	ALPHABET_EN +
 		ALPHABET_ES +

@@ -5,7 +5,7 @@ import { ReactElement, useState, useEffect, ChangeEvent } from "react";
 import { useMutation, useQuery } from "react-query";
 
 // Custom
-import rotateString from "./modules/rotateString";
+import rotateString, { supportedLanguages } from "./modules/rotateString";
 
 // HTTP
 import getDadJoke from "./http/getDadJoke";
@@ -15,14 +15,15 @@ import decrypt from "./http/decrypt";
 import "./App.css";
 
 /**
- * Can upload text file that will be encrypted and output into text area
- * Can submit for auto detection of encrypted text and decryption
- * Can rotate text area output degree by degree using a wheel
- * Can download textarea output as text file
- * Initializes with encrypted dad joke, then prompts user to experiment with wheel to decrypt
+ * TODO: Can upload text file that will be encrypted and output into text area
+ * [x] Can submit for auto detection of encrypted text and decryption
+ * TODO: Can rotate text area output degree by degree using a wheel
+ * [x] Can download textarea output as text file
+ * [x] Initializes with encrypted dad joke, then prompts user to experiment with wheel to decrypt
  */
 const App = (): ReactElement => {
 	const [rot, setRot] = useState<number>(0);
+	const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
 	const [originalText, setOriginalText] = useState<string>("");
 	const [rotatedText, setRotatedText] = useState<string>("");
 
@@ -111,9 +112,28 @@ const App = (): ReactElement => {
 						autoComplete="off"
 						onChange={handleRotate}
 						min={0}
-						max={25}
+						max={
+							supportedLanguages[selectedLanguage].alphabet
+								.length - 1
+						}
 						disabled={isDecryptLoading}
 					/>
+					<label htmlFor="supported-languages">Language</label>
+					<select
+						id="supported-languages"
+						name="supported-languages"
+						disabled={isDecryptLoading}
+						value={selectedLanguage}
+						onChange={(e) =>
+							setSelectedLanguage(e.currentTarget.value)
+						}
+					>
+						{Object.keys(supportedLanguages).map((language) => (
+							<option key={language} value={language}>
+								{language}
+							</option>
+						))}
+					</select>
 				</div>
 				<textarea
 					id="rotated_text"
