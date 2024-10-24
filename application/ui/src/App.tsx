@@ -112,35 +112,29 @@ const App = (): ReactElement => {
 
 	return (
 		<main>
-			<div className="buttons">
-				<button
-					id="decrypt"
-					type="button"
-					onClick={handleDecrypt}
-					disabled={isDecryptLoading}
-				>
-					Decrypt
-				</button>
-				<a
-					href={`data:text/plain;charset=utf-8,${encodeURIComponent(
-						rotatedText
-					)}`}
-					download="decrypted.txt"
-				>
-					<button id="download" type="button">
-						Download
-					</button>
-				</a>
-			</div>
 			<div className="content">
-				<textarea
-					id="original_text"
-					name="original_text"
-					onChange={handleChange}
-					value={originalText}
-					spellCheck="false"
-					disabled={isDecryptLoading}
-				/>
+				<div className="textarea-container">
+					<label htmlFor="original-text">Original text</label>
+					<textarea
+						id="original-text"
+						name="original-text"
+						onChange={handleChange}
+						value={originalText}
+						spellCheck="false"
+						disabled={isDecryptLoading}
+					/>
+					<hr />
+					<div className="buttons">
+						<button
+							id="decrypt"
+							type="button"
+							onClick={handleDecrypt}
+							disabled={isDecryptLoading}
+						>
+							Decrypt
+						</button>
+					</div>
+				</div>
 				<div className="rot-container">
 					<label htmlFor="rot">Rotate by</label>
 					<input
@@ -171,14 +165,30 @@ const App = (): ReactElement => {
 						))}
 					</select>
 				</div>
-				<textarea
-					id="rotated_text"
-					name="rotated_text"
-					spellCheck="false"
-					readOnly
-					value={rotatedText}
-					disabled={isDecryptLoading}
-				/>
+				<div className="textarea-container">
+					<label htmlFor="rotated-text">Rotated text</label>
+					<textarea
+						id="rotated-text"
+						name="rotated-text"
+						spellCheck="false"
+						readOnly
+						value={rotatedText}
+						disabled={isDecryptLoading}
+					/>
+					<hr />
+					<div className="buttons">
+						<a
+							href={`data:text/plain;charset=utf-8,${encodeURIComponent(
+								rotatedText
+							)}`}
+							download="decrypted.txt"
+						>
+							<button id="download" type="button">
+								Download
+							</button>
+						</a>
+					</div>
+				</div>
 			</div>
 		</main>
 	);

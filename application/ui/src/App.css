@@ -10,14 +10,6 @@ main {
 	border-radius: 10px;
 }
 
-.buttons {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-}
-
 .content {
 	display: flex;
 	flex-direction: row;
@@ -36,8 +28,56 @@ main {
 	height: 100%;
 }
 
-textarea {
+.textarea-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
 	flex-grow: 1;
 	height: 100%;
-	resize: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+
+	label {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		width: 100%;
+		padding: 0.625rem 0.75rem 0.5rem 0.75rem;
+		text-align: left;
+		font-size: large;
+	}
+
+	textarea {
+		flex-grow: 1;
+		width: 100%;
+		height: 100%;
+		resize: none;
+		outline: transparent;
+		padding: 0 0.75rem;
+		border: none;
+
+		&#rotated-text {
+			cursor: copy;
+		}
+	}
+
+	hr {
+		width: 100%;
+		height: 1px;
+		background-color: #ccc;
+		border: none;
+		margin: 0;
+	}
+
+	.buttons {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		padding: 0.625rem 0.75rem 0.5rem 0.75rem;
+	}
 }
