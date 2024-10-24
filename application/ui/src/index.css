@@ -1,5 +1,45 @@
+@font-face {
+	font-family: custom-thin;
+	src: url("./assets/fonts/Urbanist-Thin.ttf");
+}
+
+@font-face {
+	font-family: custom-light;
+	src: url("./assets/fonts/Urbanist-Light.ttf");
+}
+
+@font-face {
+	font-family: custom-regular;
+	src: url("./assets/fonts/Urbanist-Regular.ttf");
+}
+
+@font-face {
+	font-family: custom-medium;
+	src: url("./assets/fonts/Urbanist-Medium.ttf");
+}
+
+@font-face {
+	font-family: custom-bold;
+	src: url("./assets/fonts/Urbanist-Bold.ttf");
+}
+
+:root {
+	--primary-color: #101014;
+	--secondary-color: #202024;
+	--primary-highlight-color: #8300b3;
+
+	--primary-font-color: #ffffff;
+}
+
 * {
 	box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+	font-family: custom-regular, sans-serif;
+	color: var(--primary-font-color);
+	background-color: var(--secondary-color);
 }
 
 html,
