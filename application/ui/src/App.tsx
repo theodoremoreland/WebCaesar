@@ -16,6 +16,8 @@ import decrypt from "./http/decrypt";
 
 // Images
 import AttachAddIcon from "./assets/images/attach_file_add.svg?react";
+import DownloadIcon from "./assets/images/download.svg?react";
+import RotateAutoIcon from "./assets/images/rotate_auto.svg?react";
 
 // Styles
 import "./App.css";
@@ -154,7 +156,7 @@ const App = (): ReactElement => {
 							onClick={handleDecrypt}
 							disabled={isDecryptLoading}
 						>
-							Auto decrypt
+							<RotateAutoIcon className="icon" /> Auto decrypt
 						</button>
 					</div>
 				</div>
@@ -212,7 +214,8 @@ const App = (): ReactElement => {
 								type="button"
 								title="Download rotated text."
 							>
-								Download result
+								<DownloadIcon className="icon" /> Download
+								result
 							</button>
 						</a>
 					</div>
