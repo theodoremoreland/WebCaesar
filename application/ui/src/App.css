@@ -39,6 +39,10 @@ main {
 	border: 1px solid #ccc;
 	border-radius: 4px;
 
+	&:focus-within {
+		border-color: #007bff;
+	}
+
 	label {
 		display: flex;
 		flex-direction: row;
