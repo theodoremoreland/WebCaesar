@@ -17,6 +17,16 @@ import decrypt from "./http/decrypt";
 // Styles
 import "./App.css";
 
+const copyToClipboard = async (text: string): Promise<void> => {
+	try {
+		await navigator.clipboard.writeText(text);
+
+		alert("Copied to clipboard!");
+	} catch (err) {
+		console.error("Failed to copy: ", err);
+	}
+};
+
 /**
  * TODO: Can upload text file that will be encrypted and output into text area
  * [x] Can submit for auto detection of encrypted text and decryption
@@ -174,6 +184,7 @@ const App = (): ReactElement => {
 						readOnly
 						value={rotatedText}
 						disabled={isDecryptLoading}
+						onClick={() => copyToClipboard(rotatedText)}
 					/>
 					<hr />
 					<div className="buttons">
