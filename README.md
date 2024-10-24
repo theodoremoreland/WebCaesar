@@ -8,7 +8,7 @@
 
 ## Overview
 
-An HTML user form that uses a Python (Flask) backend to return text that has been encrypted using Caesar's cipher. Screenshots of the program can be viewed below.
+Encrypt and decrypt text using Caesar's cipher. Supports multiple languages.
 
 _This program was created for a homework assignment at LaunchCode's Lc101 (2018)._
 
