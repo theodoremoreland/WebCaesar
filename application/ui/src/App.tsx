@@ -138,7 +138,7 @@ const App = (): ReactElement => {
 						<button
 							id="decrypt"
 							type="button"
-							title="Command server to attempt decrypting text."
+							title="Attempt to auto decrypt text."
 							onClick={handleDecrypt}
 							disabled={isDecryptLoading}
 						>
@@ -195,7 +195,11 @@ const App = (): ReactElement => {
 							)}`}
 							download="decrypted.txt"
 						>
-							<button id="download" type="button">
+							<button
+								id="download"
+								type="button"
+								title="Download rotated text."
+							>
 								Download Result
 							</button>
 						</a>
