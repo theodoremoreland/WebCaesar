@@ -142,7 +142,7 @@ const App = (): ReactElement => {
 							onClick={handleDecrypt}
 							disabled={isDecryptLoading}
 						>
-							Auto Decrypt
+							Auto decrypt
 						</button>
 					</div>
 				</div>
@@ -200,7 +200,7 @@ const App = (): ReactElement => {
 								type="button"
 								title="Download rotated text."
 							>
-								Download Result
+								Download result
 							</button>
 						</a>
 					</div>
