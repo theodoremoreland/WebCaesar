@@ -14,6 +14,9 @@ import rotateString, {
 import getDadJoke from "./http/getDadJoke";
 import decrypt from "./http/decrypt";
 
+// Images
+import AttachAddIcon from "./assets/images/attach_file_add.svg?react";
+
 // Styles
 import "./App.css";
 
@@ -135,6 +138,15 @@ const App = (): ReactElement => {
 					/>
 					<hr />
 					<div className="buttons">
+						<button
+							id="upload"
+							type="button"
+							title="Upload text file."
+							disabled={isDecryptLoading}
+						>
+							<AttachAddIcon className="icon" />
+							Attach .txt file
+						</button>
 						<button
 							id="decrypt"
 							type="button"
