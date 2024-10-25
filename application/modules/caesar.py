@@ -11,7 +11,6 @@ ALPHABET_PT: str = "abcdefghijklmnopqrstuvwxyzàáâãçéêíóôõú"
 ALPHABET_DE: str = "abcdefghijklmnopqrstuvwxyzäöüß"
 ALPHABET_IT: str = "abcdefghijklmnopqrstuvwxyzàèéìíîòóùú"
 ALPHABET_RU: str = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-ALPHABET_AR: str = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي"
 ALPHABET_EU: str = "abcdefghijklmnopqrstuvwxyzñ"
 ALPHABET_LV: str = "aābcčdeēfgģhiījkķlļmnņoprsštuūvzž"
 ALPHABET_NL: str = "abcdefghijklmnopqrstuvwxyz"
@@ -23,7 +22,6 @@ LANGUAGES: List[Dict[str, str]] = [
     {"name": "German", "code": "de", "alphabet": ALPHABET_DE},
     {"name": "Italian", "code": "it", "alphabet": ALPHABET_IT},
     {"name": "Russian", "code": "ru", "alphabet": ALPHABET_RU},
-    {"name": "Arabic", "code": "ar", "alphabet": ALPHABET_AR},
     {"name": "Basque", "code": "eu", "alphabet": ALPHABET_EU},
     {"name": "Latvian", "code": "lv", "alphabet": ALPHABET_LV},
     {"name": "Dutch", "code": "nl", "alphabet": ALPHABET_NL},

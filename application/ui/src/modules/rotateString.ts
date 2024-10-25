@@ -5,7 +5,6 @@ const ALPHABET_PT: string = "abcdefghijklmnopqrstuvwxyzàáâãçéêíóôõú"
 const ALPHABET_DE: string = "abcdefghijklmnopqrstuvwxyzäöüß";
 const ALPHABET_IT: string = "abcdefghijklmnopqrstuvwxyzàèéìíîòóùú";
 const ALPHABET_RU: string = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-const ALPHABET_AR: string = "ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
 const ALPHABET_EU: string = "abcdefghijklmnopqrstuvwxyzñ";
 const ALPHABET_LV: string = "aābcčdeēfgģhiījkķlļmnņoprsštuūvzž";
 const ALPHABET_NL: string = "abcdefghijklmnopqrstuvwxyz";
@@ -17,7 +16,6 @@ export enum SupportedLanguage {
 	German = "German",
 	Italian = "Italian",
 	Russian = "Russian",
-	Arabic = "Arabic",
 	Basque = "Basque",
 	Latvian = "Latvian",
 	Dutch = "Dutch",
@@ -35,7 +33,6 @@ export const supportedLanguages: {
 	German: { alphabet: ALPHABET_DE, code: "de" },
 	Italian: { alphabet: ALPHABET_IT, code: "it" },
 	Russian: { alphabet: ALPHABET_RU, code: "ru" },
-	Arabic: { alphabet: ALPHABET_AR, code: "ar" },
 	Basque: { alphabet: ALPHABET_EU, code: "eu" },
 	Latvian: { alphabet: ALPHABET_LV, code: "lv" },
 	Dutch: { alphabet: ALPHABET_NL, code: "nl" },
