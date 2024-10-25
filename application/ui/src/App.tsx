@@ -27,6 +27,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const copyToastId: string = "copy-toast";
+const decryptSuccessToastId: string = "decrypt-success-toast";
 const decryptErrorToastId: string = "decrypt-error-toast";
 const jokeErrorToastId: string = "joke-error-toast";
 
@@ -167,6 +168,15 @@ const App = (): ReactElement => {
 		if (decryptData) {
 			setRot(decryptData.rot);
 			setRotatedText(decryptData.result);
+
+			toast.success(
+				`Detected ${decryptData.language} with ${Math.fround(
+					decryptData.percentage
+				)}% confidence.`,
+				{
+					toastId: decryptSuccessToastId,
+				}
+			);
 		}
 	}, [decryptData]);
 
