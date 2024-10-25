@@ -298,6 +298,7 @@ const App = (): ReactElement => {
 								id="download"
 								type="button"
 								title="Download rotated text."
+								disabled={isDecryptLoading}
 							>
 								<DownloadIcon className="icon" />{" "}
 								<span>Download result</span>
