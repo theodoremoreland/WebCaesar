@@ -59,5 +59,6 @@ a {
 }
 
 .Toastify__close-button--light {
+	opacity: 0.8;
 	color: var(--primary-font-color) !important;
 }
