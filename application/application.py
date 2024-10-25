@@ -3,7 +3,7 @@ import json
 import random
 
 # Third party
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, abort
 
 # Custom
 from modules.caesar import rotate_string, decrypt
@@ -40,7 +40,11 @@ def encrypt_route():
 def decrypt_route():
     data = request.json
     text = data["text"]
-    decrypted = decrypt(text)
+
+    try:
+        decrypted = decrypt(text)
+    except ValueError as e:
+        return abort(422, str(e))
 
     return json.dumps(decrypted)
 

@@ -57,13 +57,14 @@ def rotate_string(text: str, rot: int, alphabet: List[str] = ALPHABET_EN) -> str
     return rotated
 
 
-def decrypt(text: str) -> Dict[str, Any]:
+def decrypt(text: str, threshold: int = 50) -> Dict[str, Any]:
     best_match: Dict[str, Any] = {
         "rot": 0,
         "result": "",
         "matches": 0,
         "language": "",
         "language_code": "",
+        "percentage": 0,
     }
 
     for language in LANGUAGES:
@@ -75,14 +76,21 @@ def decrypt(text: str) -> Dict[str, Any]:
                 rot_result: str = rotate_string(text, i, alphabet)
                 words: List[str] = rot_result.split()
                 known = spell.known(words)
+                matches: int = len(known)
 
                 if len(known) > best_match["matches"]:
                     best_match["rot"] = i
                     best_match["result"] = rot_result
-                    best_match["matches"] = len(known)
+                    best_match["matches"] = matches
                     best_match["language"] = language["name"]
                     best_match["language_code"] = language["code"]
+                    best_match["percentage"] = (matches / len(words)) * 100
         except:
             continue
+
+    if best_match["percentage"] < threshold:
+        raise ValueError(
+            f"""Did not find enough matches given the threshold of {threshold}%."""
+        )
 
     return best_match
