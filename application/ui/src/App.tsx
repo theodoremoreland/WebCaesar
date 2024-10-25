@@ -57,6 +57,10 @@ const App = (): ReactElement => {
 	);
 	const [originalText, setOriginalText] = useState<string>("");
 	const [rotatedText, setRotatedText] = useState<string>("");
+	const [languageDropdownState, setLanguageDropdownState] = useState<{
+		originalText: boolean;
+		rotatedText: boolean;
+	}>({ originalText: false, rotatedText: false });
 
 	const { data: jokeData, error: jokeError } = useQuery(
 		"dad-joke",
@@ -101,26 +105,27 @@ const App = (): ReactElement => {
 		);
 	};
 
-	const handleChangeLanguage = (e: ChangeEvent<HTMLSelectElement>): void => {
-		e.preventDefault();
-		const _selectedLanguage: SupportedLanguage = e.currentTarget
-			.value as SupportedLanguage;
-		let _rot: number = rot;
+	// const handleChangeLanguage = (e: ChangeEvent<HTMLSelectElement>): void => {
+	// 	e.preventDefault();
 
-		if (rot > supportedLanguages[_selectedLanguage].alphabet.length - 1) {
-			_rot = supportedLanguages[_selectedLanguage].alphabet.length - 1;
-		}
+	// 	const _selectedLanguage: SupportedLanguage = e.currentTarget
+	// 		.value as SupportedLanguage;
+	// 	let _rot: number = rot;
 
-		setSelectedLanguage(_selectedLanguage);
-		setRot(_rot);
-		setRotatedText(
-			rotateString(
-				originalText ?? "",
-				_rot,
-				supportedLanguages[_selectedLanguage].alphabet
-			)
-		);
-	};
+	// 	if (rot > supportedLanguages[_selectedLanguage].alphabet.length - 1) {
+	// 		_rot = supportedLanguages[_selectedLanguage].alphabet.length - 1;
+	// 	}
+
+	// 	setSelectedLanguage(_selectedLanguage);
+	// 	setRot(_rot);
+	// 	setRotatedText(
+	// 		rotateString(
+	// 			originalText ?? "",
+	// 			_rot,
+	// 			supportedLanguages[_selectedLanguage].alphabet
+	// 		)
+	// 	);
+	// };
 
 	const handleDecrypt = (): void => {
 		if (originalText) {
@@ -170,7 +175,7 @@ const App = (): ReactElement => {
 			setRotatedText(decryptData.result);
 
 			toast.success(
-				`Detected ${decryptData.language} with ${Math.fround(
+				`Detected ${decryptData.language} with ${Math.ceil(
 					decryptData.percentage
 				)}% confidence.`,
 				{
@@ -210,12 +215,57 @@ const App = (): ReactElement => {
 							disabled={isDecryptLoading}
 						/>
 						<div className="pills">
-							<button
-								type="button"
-								className="pill selected-language"
-							>
-								{selectedLanguage}
-							</button>
+							<div className="pill-container">
+								<button
+									type="button"
+									className="pill selected-language"
+									onClick={() =>
+										setLanguageDropdownState({
+											...languageDropdownState,
+											originalText:
+												!languageDropdownState.originalText,
+										})
+									}
+								>
+									{selectedLanguage}
+								</button>
+								{languageDropdownState.originalText && (
+									<ul className="pill-list">
+										{Object.keys(supportedLanguages).map(
+											(language) => (
+												<li
+													key={language}
+													onClick={() => {
+														setSelectedLanguage(
+															language as SupportedLanguage
+														);
+														setRotatedText(
+															rotateString(
+																originalText ??
+																	"",
+																rot,
+																supportedLanguages[
+																	language as SupportedLanguage
+																].alphabet
+															)
+														);
+														setLanguageDropdownState(
+															{
+																rotatedText:
+																	false,
+																originalText:
+																	false,
+															}
+														);
+													}}
+												>
+													{language}
+												</li>
+											)
+										)}
+									</ul>
+								)}
+							</div>
 						</div>
 					</div>
 					<hr />
@@ -263,20 +313,6 @@ const App = (): ReactElement => {
 						}
 						disabled={isDecryptLoading}
 					/>
-					<label htmlFor="supported-languages">Language</label>
-					<select
-						id="supported-languages"
-						name="supported-languages"
-						disabled={isDecryptLoading}
-						value={selectedLanguage}
-						onChange={handleChangeLanguage}
-					>
-						{Object.keys(supportedLanguages).map((language) => (
-							<option key={language} value={language}>
-								{language}
-							</option>
-						))}
-					</select>
 				</div>
 				<section
 					id="rotated-textarea-section"
@@ -294,12 +330,57 @@ const App = (): ReactElement => {
 							onClick={() => copyToClipboard(rotatedText)}
 						/>
 						<div className="pills">
-							<button
-								type="button"
-								className="pill selected-language"
-							>
-								{selectedLanguage}
-							</button>
+							<div className="pill-container">
+								<button
+									type="button"
+									className="pill selected-language"
+									onClick={() =>
+										setLanguageDropdownState({
+											...languageDropdownState,
+											rotatedText:
+												!languageDropdownState.rotatedText,
+										})
+									}
+								>
+									{selectedLanguage}
+								</button>
+								{languageDropdownState.rotatedText && (
+									<ul className="pill-list">
+										{Object.keys(supportedLanguages).map(
+											(language) => (
+												<li
+													key={language}
+													onClick={() => {
+														setSelectedLanguage(
+															language as SupportedLanguage
+														);
+														setRotatedText(
+															rotateString(
+																originalText ??
+																	"",
+																rot,
+																supportedLanguages[
+																	language as SupportedLanguage
+																].alphabet
+															)
+														);
+														setLanguageDropdownState(
+															{
+																rotatedText:
+																	false,
+																originalText:
+																	false,
+															}
+														);
+													}}
+												>
+													{language}
+												</li>
+											)
+										)}
+									</ul>
+								)}
+							</div>
 						</div>
 					</div>
 					<hr />
