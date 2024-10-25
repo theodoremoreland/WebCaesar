@@ -118,8 +118,12 @@ const App = (): ReactElement => {
 		if (file) {
 			const reader: FileReader = new FileReader();
 
-			reader.onload = (e) => {
-				const text = e.target?.result as string;
+			reader.onload = (e: ProgressEvent<FileReader>) => {
+				const text = e.target?.result;
+
+				if (typeof text !== "string") {
+					return;
+				}
 
 				setOriginalText(text);
 				setRotatedText(
@@ -130,6 +134,7 @@ const App = (): ReactElement => {
 					)
 				);
 			};
+
 			reader.readAsText(file);
 		}
 	};
