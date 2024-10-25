@@ -33,7 +33,7 @@ const copyToClipboard = async (text: string): Promise<void> => {
 };
 
 /**
- * TODO: Can upload text file that will be encrypted and output into text area
+ * [x]: Can upload text file that will be encrypted and output into text area
  * [x] Can submit for auto detection of encrypted text and decryption
  * TODO: Can rotate text area output degree by degree using a wheel
  * [x] Can download textarea output as text file
@@ -239,7 +239,7 @@ const App = (): ReactElement => {
 							href={`data:text/plain;charset=utf-8,${encodeURIComponent(
 								rotatedText
 							)}`}
-							download="decrypted.txt"
+							download="rotated_text.txt"
 						>
 							<button
 								id="download"
