@@ -4,6 +4,9 @@ import { ReactElement, useState, useEffect, ChangeEvent } from "react";
 // React Query
 import { useMutation, useQuery } from "react-query";
 
+// Toastify
+import { ToastContainer, toast } from "react-toastify";
+
 // Custom
 import rotateString, {
 	SupportedLanguage,
@@ -20,13 +23,14 @@ import DownloadIcon from "./assets/images/download.svg?react";
 import RotateAutoIcon from "./assets/images/rotate_auto.svg?react";
 
 // Styles
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const copyToClipboard = async (text: string): Promise<void> => {
 	try {
 		await navigator.clipboard.writeText(text);
 
-		alert("Copied to clipboard!");
+		toast.info("Copied to clipboard");
 	} catch (err) {
 		console.error("Failed to copy: ", err);
 	}
@@ -161,11 +165,13 @@ const App = (): ReactElement => {
 
 	useEffect(() => {
 		if (jokeError) {
-			console.error(jokeError);
+			console.error(String(jokeError));
+			toast.error(String(jokeError));
 		}
 
 		if (decryptError) {
-			console.error(decryptError);
+			console.error(String(decryptError));
+			toast.error(String(decryptError));
 		}
 	}, [jokeError, decryptError]);
 
@@ -273,6 +279,7 @@ const App = (): ReactElement => {
 					</div>
 				</div>
 			</div>
+			<ToastContainer />
 		</main>
 	);
 };
