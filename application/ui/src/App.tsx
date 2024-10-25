@@ -57,10 +57,8 @@ const App = (): ReactElement => {
 	);
 	const [originalText, setOriginalText] = useState<string>("");
 	const [rotatedText, setRotatedText] = useState<string>("");
-	const [languageDropdownState, setLanguageDropdownState] = useState<{
-		originalText: boolean;
-		rotatedText: boolean;
-	}>({ originalText: false, rotatedText: false });
+	const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] =
+		useState<boolean>(false);
 
 	const { data: jokeData, error: jokeError } = useQuery(
 		"dad-joke",
@@ -215,59 +213,7 @@ const App = (): ReactElement => {
 							disabled={isDecryptLoading}
 							maxLength={30_000}
 						/>
-						<div className="pills">
-							<div className="pill-container">
-								<button
-									type="button"
-									className="pill selected-language"
-									onClick={() =>
-										setLanguageDropdownState({
-											...languageDropdownState,
-											originalText:
-												!languageDropdownState.originalText,
-										})
-									}
-								>
-									{selectedLanguage}
-								</button>
-								{languageDropdownState.originalText && (
-									<ul className="pill-list">
-										{Object.keys(supportedLanguages).map(
-											(language) => (
-												<li
-													key={language}
-													onClick={() => {
-														setSelectedLanguage(
-															language as SupportedLanguage
-														);
-														setRotatedText(
-															rotateString(
-																originalText ??
-																	"",
-																rot,
-																supportedLanguages[
-																	language as SupportedLanguage
-																].alphabet
-															)
-														);
-														setLanguageDropdownState(
-															{
-																rotatedText:
-																	false,
-																originalText:
-																	false,
-															}
-														);
-													}}
-												>
-													{language}
-												</li>
-											)
-										)}
-									</ul>
-								)}
-							</div>
-						</div>
+						<div className="pills"></div>
 					</div>
 					<hr />
 					<div className="buttons">
@@ -336,16 +282,12 @@ const App = (): ReactElement => {
 									type="button"
 									className="pill selected-language"
 									onClick={() =>
-										setLanguageDropdownState({
-											...languageDropdownState,
-											rotatedText:
-												!languageDropdownState.rotatedText,
-										})
+										setIsLanguageDropdownOpen(true)
 									}
 								>
 									{selectedLanguage}
 								</button>
-								{languageDropdownState.rotatedText && (
+								{isLanguageDropdownOpen && (
 									<ul className="pill-list">
 										{Object.keys(supportedLanguages).map(
 											(language) => (
@@ -365,13 +307,8 @@ const App = (): ReactElement => {
 																].alphabet
 															)
 														);
-														setLanguageDropdownState(
-															{
-																rotatedText:
-																	false,
-																originalText:
-																	false,
-															}
+														setIsLanguageDropdownOpen(
+															false
 														);
 													}}
 												>
