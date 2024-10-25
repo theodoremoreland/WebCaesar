@@ -185,7 +185,10 @@ const App = (): ReactElement => {
 	return (
 		<main>
 			<div className="content">
-				<section className="textarea-section">
+				<section
+					id="original-textarea-section"
+					className="textarea-section"
+				>
 					<label htmlFor="original-text">Original text</label>
 					<div className="textarea-container">
 						<textarea
@@ -265,7 +268,10 @@ const App = (): ReactElement => {
 						))}
 					</select>
 				</div>
-				<section className="textarea-section">
+				<section
+					id="rotated-textarea-section"
+					className="textarea-section"
+				>
 					<label htmlFor="rotated-text">Rotated text</label>
 					<div className="textarea-container">
 						<textarea
