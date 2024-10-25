@@ -271,6 +271,7 @@ const App = (): ReactElement => {
 							id="rotated-text"
 							name="rotated-text"
 							spellCheck="false"
+							title="Click to copy"
 							readOnly
 							value={rotatedText}
 							disabled={isDecryptLoading}
