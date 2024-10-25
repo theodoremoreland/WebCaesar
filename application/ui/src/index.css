@@ -29,6 +29,9 @@
 	--primary-highlight-color: #8300b3;
 
 	--primary-font-color: #ffffff;
+
+	--toastify-text-color-light: var(--primary-font-color) !important;
+	--toastify-color-light: var(--secondary-color) !important;
 }
 
 * {
@@ -53,4 +56,8 @@ body,
 
 a {
 	text-decoration: none;
+}
+
+.Toastify__close-button--light {
+	color: var(--primary-font-color) !important;
 }
