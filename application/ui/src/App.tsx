@@ -15,7 +15,7 @@ import getDadJoke from "./http/getDadJoke";
 import decrypt from "./http/decrypt";
 
 // Images
-import AttachAddIcon from "./assets/images/attach_file_add.svg?react";
+import UploadIcon from "./assets/images/upload_file.svg?react";
 import DownloadIcon from "./assets/images/download.svg?react";
 import RotateAutoIcon from "./assets/images/rotate_auto.svg?react";
 
@@ -69,7 +69,9 @@ const App = (): ReactElement => {
 		);
 	};
 
-	const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+	const handleChangeOriginalText = (
+		e: ChangeEvent<HTMLTextAreaElement>
+	): void => {
 		e.preventDefault();
 		const _originalText: string = e.currentTarget.value;
 
@@ -110,6 +112,28 @@ const App = (): ReactElement => {
 		}
 	};
 
+	const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
+		const file: File | undefined = e.target.files?.[0];
+
+		if (file) {
+			const reader: FileReader = new FileReader();
+
+			reader.onload = (e) => {
+				const text = e.target?.result as string;
+
+				setOriginalText(text);
+				setRotatedText(
+					rotateString(
+						text ?? "",
+						rot,
+						supportedLanguages[selectedLanguage].alphabet
+					)
+				);
+			};
+			reader.readAsText(file);
+		}
+	};
+
 	useEffect(() => {
 		if (jokeData) {
 			setOriginalText(jokeData.encrypted_dad_joke);
@@ -133,7 +157,7 @@ const App = (): ReactElement => {
 					<textarea
 						id="original-text"
 						name="original-text"
-						onChange={handleChange}
+						onChange={handleChangeOriginalText}
 						value={originalText}
 						spellCheck="false"
 						disabled={isDecryptLoading}
@@ -146,17 +170,25 @@ const App = (): ReactElement => {
 							title="Upload text file."
 							disabled={isDecryptLoading}
 						>
-							<AttachAddIcon className="icon" />
-							Attach .txt file
+							<UploadIcon className="icon" />
+							<span>Upload text file</span>
+							<input
+								className="hidden"
+								title="Upload text file."
+								type="file"
+								accept=".txt"
+								onChange={handleFileUpload}
+							/>
 						</button>
 						<button
 							id="decrypt"
 							type="button"
-							title="Attempt to auto decrypt text."
+							title="Attempt to automatically decrypt text."
 							onClick={handleDecrypt}
 							disabled={isDecryptLoading}
 						>
-							<RotateAutoIcon className="icon" /> Auto decrypt
+							<RotateAutoIcon className="icon" />
+							<span>Auto rotate</span>
 						</button>
 					</div>
 				</div>
@@ -214,8 +246,8 @@ const App = (): ReactElement => {
 								type="button"
 								title="Download rotated text."
 							>
-								<DownloadIcon className="icon" /> Download
-								result
+								<DownloadIcon className="icon" />{" "}
+								<span>Download result</span>
 							</button>
 						</a>
 					</div>
