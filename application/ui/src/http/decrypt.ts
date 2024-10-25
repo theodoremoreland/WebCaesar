@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 interface DecryptRequest {
 	text: string;
@@ -13,11 +13,25 @@ interface DecryptResponse {
 	percentage: number;
 }
 
-export default async ({ text }: DecryptRequest): Promise<DecryptResponse> => {
-	const response: AxiosResponse<DecryptResponse> = await axios.post(
-		"/decrypt",
-		{ text }
-	);
+interface DecryptError {
+	message: string;
+}
 
-	return response.data;
+export default async ({ text }: DecryptRequest): Promise<DecryptResponse> => {
+	try {
+		const response: AxiosResponse<DecryptResponse> = await axios.post(
+			"/decrypt",
+			{ text }
+		);
+
+		return response.data;
+	} catch (error: unknown) {
+		if (axios.isAxiosError(error)) {
+			const axiosError: AxiosError<DecryptError> = error;
+
+			throw axiosError.response?.data.message;
+		}
+
+		throw error instanceof Error ? error.message : String(error);
+	}
 };

@@ -3,7 +3,7 @@ import json
 import random
 
 # Third party
-from flask import Flask, request, send_from_directory, abort, make_response
+from flask import Flask, request, send_from_directory, make_response
 
 # Custom
 from modules.caesar import rotate_string, decrypt
@@ -45,7 +45,7 @@ def encrypt_route():
     except KeyError as e:
         return make_response(
             {
-                "error": f"Invalid key error. Keys: 'rot' (int) and 'text' (non-empty string) must be provided. Invalid key: {e}"
+                "message": f"Invalid key error. Keys: 'rot' (int) and 'text' (non-empty string) must be provided. Invalid key: {e}"
             },
             400,
         )
@@ -67,12 +67,12 @@ def decrypt_route():
     except KeyError:
         return make_response(
             {
-                "error": "Invalid key error. Key: 'text' must be of type 'string' and cannot be empty."
+                "message": "Invalid key error. Key: 'text' must be of type 'string' and cannot be empty."
             },
             400,
         )
     except ValueError as e:
-        return make_response({"error": str(e)}, 422)
+        return make_response({"message": str(e)}, 422)
 
 
 if __name__ == "__main__":

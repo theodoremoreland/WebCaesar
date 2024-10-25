@@ -47,12 +47,17 @@ const App = (): ReactElement => {
 	const [originalText, setOriginalText] = useState<string>("");
 	const [rotatedText, setRotatedText] = useState<string>("");
 
-	const { data: jokeData } = useQuery("dad-joke", getDadJoke);
+	const { data: jokeData, error: jokeError } = useQuery(
+		"dad-joke",
+		getDadJoke,
+		{ retry: false }
+	);
 	const {
 		data: decryptData,
 		mutate: decryptMutate,
 		isLoading: isDecryptLoading,
-	} = useMutation(decrypt);
+		error: decryptError,
+	} = useMutation(decrypt, { retry: false });
 
 	const handleRotate = (e: ChangeEvent<HTMLInputElement>): void => {
 		e.preventDefault();
@@ -153,6 +158,16 @@ const App = (): ReactElement => {
 			setRotatedText(decryptData.result);
 		}
 	}, [decryptData]);
+
+	useEffect(() => {
+		if (jokeError) {
+			console.error(jokeError);
+		}
+
+		if (decryptError) {
+			console.error(decryptError);
+		}
+	}, [jokeError, decryptError]);
 
 	return (
 		<main>
