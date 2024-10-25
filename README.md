@@ -25,6 +25,7 @@ _This program was created for a homework assignment at LaunchCode's Lc101 (2018)
 -   Axios
 -   Tanstack React Query
 -   pyspellchecker
+-   react-toastify
 
 ## Screenshots
 
