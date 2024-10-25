@@ -128,7 +128,8 @@ const App = (): ReactElement => {
 			const reader: FileReader = new FileReader();
 
 			reader.onload = (e: ProgressEvent<FileReader>) => {
-				const text = e.target?.result;
+				const text: string | ArrayBuffer | null | undefined =
+					e.target?.result;
 
 				if (typeof text !== "string") {
 					return;
@@ -178,16 +179,26 @@ const App = (): ReactElement => {
 	return (
 		<main>
 			<div className="content">
-				<div className="textarea-container">
+				<section className="textarea-section">
 					<label htmlFor="original-text">Original text</label>
-					<textarea
-						id="original-text"
-						name="original-text"
-						onChange={handleChangeOriginalText}
-						value={originalText}
-						spellCheck="false"
-						disabled={isDecryptLoading}
-					/>
+					<div className="textarea-container">
+						<textarea
+							id="original-text"
+							name="original-text"
+							onChange={handleChangeOriginalText}
+							value={originalText}
+							spellCheck="false"
+							disabled={isDecryptLoading}
+						/>
+						<div className="pills">
+							<button
+								type="button"
+								className="pill selected-language"
+							>
+								{selectedLanguage}
+							</button>
+						</div>
+					</div>
 					<hr />
 					<div className="buttons">
 						<button
@@ -217,7 +228,7 @@ const App = (): ReactElement => {
 							<span>Auto rotate</span>
 						</button>
 					</div>
-				</div>
+				</section>
 				<div className="rot-container">
 					<label htmlFor="rot">Rotate by</label>
 					<input
@@ -248,17 +259,27 @@ const App = (): ReactElement => {
 						))}
 					</select>
 				</div>
-				<div className="textarea-container">
+				<section className="textarea-section">
 					<label htmlFor="rotated-text">Rotated text</label>
-					<textarea
-						id="rotated-text"
-						name="rotated-text"
-						spellCheck="false"
-						readOnly
-						value={rotatedText}
-						disabled={isDecryptLoading}
-						onClick={() => copyToClipboard(rotatedText)}
-					/>
+					<div className="textarea-container">
+						<textarea
+							id="rotated-text"
+							name="rotated-text"
+							spellCheck="false"
+							readOnly
+							value={rotatedText}
+							disabled={isDecryptLoading}
+							onClick={() => copyToClipboard(rotatedText)}
+						/>
+						<div className="pills">
+							<button
+								type="button"
+								className="pill selected-language"
+							>
+								{selectedLanguage}
+							</button>
+						</div>
+					</div>
 					<hr />
 					<div className="buttons">
 						<a
@@ -277,7 +298,7 @@ const App = (): ReactElement => {
 							</button>
 						</a>
 					</div>
-				</div>
+				</section>
 			</div>
 			<ToastContainer />
 		</main>

@@ -29,7 +29,7 @@ main {
 	height: 100%;
 }
 
-.textarea-container {
+.textarea-section {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -60,19 +60,60 @@ main {
 		font-size: larger;
 	}
 
-	textarea {
-		flex-grow: 1;
+	.textarea-container {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
 		width: 100%;
 		height: 100%;
-		color: inherit;
-		background-color: transparent;
-		resize: none;
-		outline: transparent;
-		padding: 0 0.75rem;
-		border: none;
 
-		&#rotated-text {
-			cursor: copy;
+		> textarea {
+			flex-grow: 1;
+			width: 100%;
+			height: 100%;
+			color: inherit;
+			background-color: transparent;
+			resize: none;
+			outline: transparent;
+			padding: 0 0.75rem;
+			border: none;
+
+			&#rotated-text {
+				cursor: copy;
+			}
+		}
+
+		.pills {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-end;
+			align-items: center;
+			width: 100%;
+			padding: 0.5rem 0.75rem;
+		}
+
+		.pill {
+			cursor: pointer;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			gap: 0.35rem;
+			padding: 0.5rem 0.9rem;
+			border: none;
+			border-radius: 1.2rem;
+			color: #fff;
+			background-color: var(--secondary-color);
+		}
+
+		.pill:hover,
+		.pill:active {
+			filter: brightness(1.3);
 		}
 	}
 
