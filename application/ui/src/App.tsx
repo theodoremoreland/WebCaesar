@@ -26,11 +26,17 @@ import RotateAutoIcon from "./assets/images/rotate_auto.svg?react";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
+const copyToastId: string = "copy-toast";
+const decryptErrorToastId: string = "decrypt-error-toast";
+const jokeErrorToastId: string = "joke-error-toast";
+
 const copyToClipboard = async (text: string): Promise<void> => {
 	try {
 		await navigator.clipboard.writeText(text);
 
-		toast.info("Copied to clipboard");
+		toast.info("Copied to clipboard", {
+			toastId: copyToastId,
+		});
 	} catch (err) {
 		console.error("Failed to copy: ", err);
 	}
@@ -167,12 +173,12 @@ const App = (): ReactElement => {
 	useEffect(() => {
 		if (jokeError) {
 			console.error(String(jokeError));
-			toast.error(String(jokeError));
+			toast.error(String(jokeError), { toastId: jokeErrorToastId });
 		}
 
 		if (decryptError) {
 			console.error(String(decryptError));
-			toast.error(String(decryptError));
+			toast.error(String(decryptError), { toastId: decryptErrorToastId });
 		}
 	}, [jokeError, decryptError]);
 
