@@ -39,10 +39,19 @@ def encrypt_route():
 @application.route("/decrypt", methods=["POST"])
 def decrypt_route():
     data = request.json
-    text = data["text"]
 
     try:
+        text = data["text"]
+
+        if text == "" or type(text) != str:
+            raise KeyError("text")
+
         decrypted = decrypt(text)
+    except KeyError:
+        return abort(
+            400,
+            "Invalid key error. Key: 'text' must be of type 'string' and cannot be empty.",
+        )
     except ValueError as e:
         return abort(422, str(e))
 

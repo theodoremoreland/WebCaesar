@@ -1,20 +1,23 @@
-
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from "axios";
 
 interface DecryptRequest {
-    text: string;
+	text: string;
 }
 
 interface DecryptResponse {
-    rot: number;
-    matches: number;
-    result: string;
-    language: string;
-    language_code: string;
+	rot: number;
+	matches: number;
+	result: string;
+	language: string;
+	language_code: string;
+	percentage: number;
 }
 
-export default async ({text}: DecryptRequest): Promise<DecryptResponse> => {
-    const response: AxiosResponse<DecryptResponse> = await axios.post('/decrypt', { text });
+export default async ({ text }: DecryptRequest): Promise<DecryptResponse> => {
+	const response: AxiosResponse<DecryptResponse> = await axios.post(
+		"/decrypt",
+		{ text }
+	);
 
-    return response.data;
-}
+	return response.data;
+};
