@@ -27,6 +27,11 @@ main {
 	align-items: center;
 	width: 10%;
 	height: 100%;
+
+	> * {
+		width: 100%;
+		font-size: 1.5rem;
+	}
 }
 
 .textarea-section {
@@ -86,6 +91,10 @@ main {
 
 			&#rotated-text {
 				cursor: copy;
+			}
+
+			&#rotated-text:hover {
+				color: #c831ff;
 			}
 		}
 

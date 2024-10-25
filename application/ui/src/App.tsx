@@ -213,6 +213,7 @@ const App = (): ReactElement => {
 							value={originalText}
 							spellCheck="false"
 							disabled={isDecryptLoading}
+							maxLength={7_000}
 						/>
 						<div className="pills">
 							<div className="pill-container">
