@@ -132,28 +132,6 @@ const App = (): ReactElement => {
 		);
 	};
 
-	// const handleChangeLanguage = (e: ChangeEvent<HTMLSelectElement>): void => {
-	// 	e.preventDefault();
-
-	// 	const _selectedLanguage: SupportedLanguage = e.currentTarget
-	// 		.value as SupportedLanguage;
-	// 	let _rot: number = rot;
-
-	// 	if (rot > supportedLanguages[_selectedLanguage].alphabet.length - 1) {
-	// 		_rot = supportedLanguages[_selectedLanguage].alphabet.length - 1;
-	// 	}
-
-	// 	setSelectedLanguage(_selectedLanguage);
-	// 	setRot(_rot);
-	// 	setRotatedText(
-	// 		rotateString(
-	// 			originalText ?? "",
-	// 			_rot,
-	// 			supportedLanguages[_selectedLanguage].alphabet
-	// 		)
-	// 	);
-	// };
-
 	const handleDecrypt = (): void => {
 		if (originalText) {
 			decryptMutate({ text: originalText });
@@ -167,8 +145,7 @@ const App = (): ReactElement => {
 			const reader: FileReader = new FileReader();
 
 			reader.onload = (e: ProgressEvent<FileReader>) => {
-				const text: string | ArrayBuffer | null | undefined =
-					e.target?.result;
+				const text: string | ArrayBuffer | null | undefined = e.target?.result;
 
 				if (typeof text !== "string") {
 					return;
@@ -244,10 +221,7 @@ const App = (): ReactElement => {
 	return (
 		<main>
 			<div className="content">
-				<section
-					id="original-textarea-section"
-					className="textarea-section"
-				>
+				<section id="original-textarea-section" className="textarea-section">
 					<label htmlFor="original-text">Original text</label>
 					<div className="textarea-container">
 						<textarea
@@ -268,9 +242,7 @@ const App = (): ReactElement => {
 									setOriginalText("");
 									setRotatedText("");
 									setRot(0);
-									setSelectedLanguage(
-										SupportedLanguage.English
-									);
+									setSelectedLanguage(SupportedLanguage.English);
 
 									localStorage.clear();
 								}}
@@ -315,10 +287,7 @@ const App = (): ReactElement => {
 					</div>
 				</section>
 				<div className="rot-wheel-container"></div>
-				<section
-					id="rotated-textarea-section"
-					className="textarea-section"
-				>
+				<section id="rotated-textarea-section" className="textarea-section">
 					<label htmlFor="rotated-text">Rotated text</label>
 					<div className="textarea-container">
 						<textarea
@@ -326,9 +295,7 @@ const App = (): ReactElement => {
 							name="rotated-text"
 							placeholder="Rotated text will appear here..."
 							spellCheck="false"
-							title={
-								rotatedText === "" ? undefined : "Click to copy"
-							}
+							title={rotatedText === "" ? undefined : "Click to copy"}
 							readOnly
 							value={rotatedText}
 							disabled={isDecryptLoading}
@@ -357,8 +324,7 @@ const App = (): ReactElement => {
 										onChange={handleRotate}
 										min={0}
 										max={
-											supportedLanguages[selectedLanguage]
-												.alphabet.length - 1
+											supportedLanguages[selectedLanguage].alphabet.length - 1
 										}
 										disabled={isDecryptLoading}
 									/>
@@ -369,9 +335,7 @@ const App = (): ReactElement => {
 									type="button"
 									className="pill selected-language"
 									onClick={() => {
-										setIsLanguageDropdownOpen(
-											!isLanguageDropdownOpen
-										);
+										setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
 										setIsRotPopoverOpen(false);
 									}}
 									disabled={isDecryptLoading}
@@ -380,33 +344,37 @@ const App = (): ReactElement => {
 								</button>
 								{isLanguageDropdownOpen && (
 									<ul className="pill-list">
-										{Object.keys(supportedLanguages).map(
-											(language) => (
-												<li
-													key={language}
-													onClick={() => {
-														setSelectedLanguage(
-															language as SupportedLanguage
-														);
-														setRotatedText(
-															rotateString(
-																originalText ??
-																	"",
-																rot,
-																supportedLanguages[
-																	language as SupportedLanguage
-																].alphabet
-															)
-														);
-														setIsLanguageDropdownOpen(
-															false
-														);
-													}}
-												>
-													{language}
-												</li>
-											)
-										)}
+										{Object.keys(supportedLanguages).map((language) => (
+											<li
+												key={language}
+												onClick={() => {
+													const _selectedLanguage: SupportedLanguage =
+														language as SupportedLanguage;
+													const alphabetLength: number =
+														supportedLanguages[_selectedLanguage].alphabet
+															.length;
+													const isRotGreaterThanOrEqualToAlphabetLength: boolean =
+														rot >= alphabetLength;
+													const _rot: number =
+														isRotGreaterThanOrEqualToAlphabetLength
+															? alphabetLength - 1
+															: rot;
+
+													setRot(_rot);
+													setSelectedLanguage(_selectedLanguage);
+													setRotatedText(
+														rotateString(
+															originalText ?? "",
+															_rot,
+															supportedLanguages[_selectedLanguage].alphabet
+														)
+													);
+													setIsLanguageDropdownOpen(false);
+												}}
+											>
+												{language}
+											</li>
+										))}
 									</ul>
 								)}
 							</div>
@@ -428,12 +396,9 @@ const App = (): ReactElement => {
 										? "No text to download."
 										: "Download rotated text."
 								}
-								disabled={
-									rotatedText === "" || isDecryptLoading
-								}
+								disabled={rotatedText === "" || isDecryptLoading}
 							>
-								<DownloadIcon className="icon" />{" "}
-								<span>Download result</span>
+								<DownloadIcon className="icon" /> <span>Download result</span>
 							</button>
 						</a>
 					</div>
