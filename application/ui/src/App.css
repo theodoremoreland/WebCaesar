@@ -89,6 +89,11 @@ main {
 			padding: 0 0.75rem;
 			border: none;
 
+			&::selection {
+				color: var(--primary-font-color);
+				background-color: #c831ff;
+			}
+
 			&#rotated-text {
 				cursor: copy;
 			}
