@@ -7,6 +7,9 @@ import { useMutation, useQuery } from "react-query";
 // Toastify
 import { ToastContainer, toast } from "react-toastify";
 
+// Lodash
+import { debounce } from "lodash";
+
 // Custom
 import rotateString, {
 	SupportedLanguage,
@@ -31,7 +34,31 @@ const decryptSuccessToastId: string = "decrypt-success-toast";
 const decryptErrorToastId: string = "decrypt-error-toast";
 const jokeErrorToastId: string = "joke-error-toast";
 
+const getLocalStorageData = (): {
+	originalText: string | null;
+	rotatedText: string | null;
+	rot: string | null;
+	selectedLanguage: string | null;
+} => {
+	const originalText: string | null = localStorage.getItem("originalText");
+	const rotatedText: string | null = localStorage.getItem("rotatedText");
+	const rot: string | null = localStorage.getItem("rot");
+	const selectedLanguage: string | null =
+		localStorage.getItem("selectedLanguage");
+
+	return {
+		originalText,
+		rotatedText,
+		rot,
+		selectedLanguage,
+	};
+};
+
 const copyToClipboard = async (text: string): Promise<void> => {
+	if (text === "") {
+		return;
+	}
+
 	try {
 		await navigator.clipboard.writeText(text);
 
@@ -162,7 +189,15 @@ const App = (): ReactElement => {
 	};
 
 	useEffect(() => {
-		if (jokeData) {
+		const { originalText, rotatedText, rot, selectedLanguage } =
+			getLocalStorageData();
+
+		if (originalText && rotatedText && rot && selectedLanguage) {
+			setOriginalText(originalText);
+			setRotatedText(rotatedText);
+			setRot(parseInt(rot));
+			setSelectedLanguage(selectedLanguage as SupportedLanguage);
+		} else if (jokeData) {
 			setOriginalText(jokeData.encrypted_dad_joke);
 			setRotatedText(rotateString(jokeData.encrypted_dad_joke, 0));
 			setRot(0);
@@ -197,6 +232,19 @@ const App = (): ReactElement => {
 		}
 	}, [jokeError, decryptError]);
 
+	useEffect(() => {
+		const debounceSaveToLocalStorage = debounce(() => {
+			localStorage.setItem("originalText", originalText);
+			localStorage.setItem("rotatedText", rotatedText);
+			localStorage.setItem("rot", rot.toString());
+			localStorage.setItem("selectedLanguage", selectedLanguage);
+		}, 3_500);
+
+		if (originalText !== "" && rotatedText !== "") {
+			debounceSaveToLocalStorage();
+		}
+	}, [originalText, rotatedText, rot, selectedLanguage]);
+
 	return (
 		<main>
 			<div className="content">
@@ -209,13 +257,32 @@ const App = (): ReactElement => {
 						<textarea
 							id="original-text"
 							name="original-text"
+							placeholder="Enter text here..."
 							onChange={handleChangeOriginalText}
 							value={originalText}
 							spellCheck="false"
 							disabled={isDecryptLoading}
 							maxLength={30_000}
 						/>
-						<div className="pills"></div>
+						<div className="pills">
+							<button
+								type="button"
+								className="pill clear"
+								onClick={() => {
+									setOriginalText("");
+									setRotatedText("");
+									setRot(0);
+									setSelectedLanguage(
+										SupportedLanguage.English
+									);
+
+									localStorage.clear();
+								}}
+								disabled={isDecryptLoading}
+							>
+								Clear
+							</button>
+						</div>
 					</div>
 					<hr />
 					<div className="buttons">
@@ -257,6 +324,7 @@ const App = (): ReactElement => {
 						<textarea
 							id="rotated-text"
 							name="rotated-text"
+							placeholder="Rotated text will appear here..."
 							spellCheck="false"
 							title="Click to copy"
 							readOnly
