@@ -110,11 +110,12 @@ main {
 			flex-direction: row;
 			justify-content: flex-end;
 			align-items: center;
+			gap: 0.5rem;
 			width: 100%;
 			padding: 0.5rem 0.75rem;
 		}
 
-		.pill-container {
+		.pill-wrapper {
 			position: relative;
 		}
 
@@ -152,6 +153,8 @@ main {
 			margin: 0;
 			color: var(--primary-font-color);
 			background-color: var(--secondary-color);
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+				rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 		}
 
 		.pill-list li {
@@ -160,6 +163,27 @@ main {
 
 		.pill-list li:hover {
 			color: #c831ff;
+		}
+
+		.popover {
+			position: absolute;
+			bottom: 125%;
+			left: -0.65rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+			padding: 0.7rem 1rem;
+			background-color: var(--secondary-color);
+			border-radius: 0.5rem;
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+				rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+		}
+
+		.popover > input {
+			width: 100%;
+			border: none;
+			font-size: 1rem;
 		}
 	}
 

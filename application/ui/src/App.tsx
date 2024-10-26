@@ -58,6 +58,7 @@ const App = (): ReactElement => {
 	);
 	const [originalText, setOriginalText] = useState<string>("");
 	const [rotatedText, setRotatedText] = useState<string>("");
+	const [isRotPopoverOpen, setIsRotPopoverOpen] = useState<boolean>(false);
 	const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] =
 		useState<boolean>(false);
 
@@ -279,15 +280,47 @@ const App = (): ReactElement => {
 							onClick={() => copyToClipboard(rotatedText)}
 						/>
 						<div className="pills">
-							<div className="pill-container">
+							<div className="pill-wrapper">
+								<button
+									type="button"
+									className="pill rot"
+									onClick={() => {
+										setIsRotPopoverOpen(!isRotPopoverOpen);
+										setIsLanguageDropdownOpen(false);
+									}}
+									disabled={isDecryptLoading}
+								>
+									rot{rot}
+								</button>
+								{isRotPopoverOpen && (
+									<div id="rot-popover" className="popover">
+										<input
+											type="number"
+											name="rot"
+											value={rot}
+											autoComplete="off"
+											onChange={handleRotate}
+											min={0}
+											max={
+												supportedLanguages[
+													selectedLanguage
+												].alphabet.length - 1
+											}
+											disabled={isDecryptLoading}
+										/>
+									</div>
+								)}
+							</div>
+							<div className="pill-wrapper">
 								<button
 									type="button"
 									className="pill selected-language"
-									onClick={() =>
+									onClick={() => {
 										setIsLanguageDropdownOpen(
 											!isLanguageDropdownOpen
-										)
-									}
+										);
+										setIsRotPopoverOpen(false);
+									}}
 								>
 									{selectedLanguage}
 								</button>
