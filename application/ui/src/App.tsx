@@ -201,8 +201,11 @@ const App = (): ReactElement => {
 			setOriginalText(jokeData.encrypted_dad_joke);
 			setRotatedText(rotateString(jokeData.encrypted_dad_joke, 0));
 			setRot(0);
+		} else if (jokeError) {
+			console.error(String(jokeError));
+			toast.error(String(jokeError), { toastId: jokeErrorToastId });
 		}
-	}, [jokeData]);
+	}, [jokeData, jokeError]);
 
 	useEffect(() => {
 		if (decryptData) {
@@ -217,20 +220,13 @@ const App = (): ReactElement => {
 					toastId: decryptSuccessToastId,
 				}
 			);
-		}
-	}, [decryptData]);
-
-	useEffect(() => {
-		if (jokeError) {
-			console.error(String(jokeError));
-			toast.error(String(jokeError), { toastId: jokeErrorToastId });
-		}
-
-		if (decryptError) {
+		} else if (decryptError) {
 			console.error(String(decryptError));
-			toast.error(String(decryptError), { toastId: decryptErrorToastId });
+			toast.error(String(decryptError), {
+				toastId: decryptErrorToastId,
+			});
 		}
-	}, [jokeError, decryptError]);
+	}, [decryptData, decryptError]);
 
 	useEffect(() => {
 		const debounceSaveToLocalStorage = debounce(() => {
