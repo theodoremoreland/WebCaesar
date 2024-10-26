@@ -165,7 +165,7 @@ main {
 			color: #c831ff;
 		}
 
-		.popover {
+		input.popover {
 			position: absolute;
 			bottom: 125%;
 			left: -0.65rem;
@@ -174,16 +174,16 @@ main {
 			justify-content: flex-start;
 			align-items: center;
 			padding: 0.7rem 1rem;
-			background-color: var(--secondary-color);
+			background-color: #202024;
 			border-radius: 0.5rem;
-			box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-				rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+			box-shadow: #0000001a 0 1px 3px, #0000000f 0 1px 2px;
+			border: none;
+			color: white;
+			font-size: 1rem;
 		}
 
-		.popover > input {
-			width: 100%;
-			border: none;
-			font-size: 1rem;
+		input.popover:focus {
+			outline: 1px solid var(--primary-highlight-color);
 		}
 	}
 

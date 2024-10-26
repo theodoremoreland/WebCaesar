@@ -293,22 +293,20 @@ const App = (): ReactElement => {
 									rot{rot}
 								</button>
 								{isRotPopoverOpen && (
-									<div id="rot-popover" className="popover">
-										<input
-											type="number"
-											name="rot"
-											value={rot}
-											autoComplete="off"
-											onChange={handleRotate}
-											min={0}
-											max={
-												supportedLanguages[
-													selectedLanguage
-												].alphabet.length - 1
-											}
-											disabled={isDecryptLoading}
-										/>
-									</div>
+									<input
+										type="number"
+										className="popover"
+										name="rot"
+										value={rot}
+										autoComplete="off"
+										onChange={handleRotate}
+										min={0}
+										max={
+											supportedLanguages[selectedLanguage]
+												.alphabet.length - 1
+										}
+										disabled={isDecryptLoading}
+									/>
 								)}
 							</div>
 							<div className="pill-wrapper">
