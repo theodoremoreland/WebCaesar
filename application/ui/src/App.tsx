@@ -283,7 +283,9 @@ const App = (): ReactElement => {
 									type="button"
 									className="pill selected-language"
 									onClick={() =>
-										setIsLanguageDropdownOpen(true)
+										setIsLanguageDropdownOpen(
+											!isLanguageDropdownOpen
+										)
 									}
 								>
 									{selectedLanguage}
