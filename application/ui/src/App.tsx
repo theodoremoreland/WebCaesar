@@ -37,6 +37,7 @@ const copyToClipboard = async (text: string): Promise<void> => {
 
 		toast.info("Copied to clipboard", {
 			toastId: copyToastId,
+			autoClose: 1_200,
 		});
 	} catch (err) {
 		console.error("Failed to copy: ", err);
