@@ -247,22 +247,7 @@ const App = (): ReactElement => {
 						</button>
 					</div>
 				</section>
-				<div className="rot-container">
-					<label htmlFor="rot">Rotate by</label>
-					<input
-						type="number"
-						name="rot"
-						value={rot}
-						autoComplete="off"
-						onChange={handleRotate}
-						min={0}
-						max={
-							supportedLanguages[selectedLanguage].alphabet
-								.length - 1
-						}
-						disabled={isDecryptLoading}
-					/>
-				</div>
+				<div className="rot-wheel-container"></div>
 				<section
 					id="rotated-textarea-section"
 					className="textarea-section"
