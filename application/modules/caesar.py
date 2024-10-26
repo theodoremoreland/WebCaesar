@@ -55,7 +55,7 @@ def rotate_string(text: str, rot: int, alphabet: List[str] = ALPHABET_EN) -> str
     return rotated
 
 
-def decrypt(text: str, threshold: int = 50) -> Dict[str, Any]:
+def decrypt(text: str, threshold: int = 30) -> Dict[str, Any]:
     best_match: Dict[str, Any] = {
         "rot": 0,
         "result": "",
