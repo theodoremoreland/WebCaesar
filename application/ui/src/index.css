@@ -39,7 +39,6 @@
 }
 
 html {
-	font-size: 16px;
 	font-family: custom-regular, sans-serif;
 	color: var(--primary-font-color);
 	background-color: var(--primary-color);
