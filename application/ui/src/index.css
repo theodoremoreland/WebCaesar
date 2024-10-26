@@ -57,6 +57,11 @@ a {
 	text-decoration: none;
 }
 
+button:disabled {
+	background-color: #cccccc40 !important;
+	cursor: not-allowed !important;
+}
+
 .Toastify__close-button--light {
 	opacity: 0.8 !important;
 	color: var(--primary-font-color) !important;

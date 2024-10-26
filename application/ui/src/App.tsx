@@ -301,9 +301,13 @@ const App = (): ReactElement => {
 						<button
 							id="decrypt"
 							type="button"
-							title="Attempt to automatically decrypt text."
+							title={
+								originalText === "" || isDecryptLoading
+									? "No text to decrypt."
+									: "Attempt to automatically decrypt text."
+							}
 							onClick={handleDecrypt}
-							disabled={isDecryptLoading}
+							disabled={originalText === "" || isDecryptLoading}
 						>
 							<RotateAutoIcon className="icon" />
 							<span>Auto rotate</span>
@@ -322,7 +326,9 @@ const App = (): ReactElement => {
 							name="rotated-text"
 							placeholder="Rotated text will appear here..."
 							spellCheck="false"
-							title="Click to copy"
+							title={
+								rotatedText === "" ? undefined : "Click to copy"
+							}
 							readOnly
 							value={rotatedText}
 							disabled={isDecryptLoading}
@@ -368,6 +374,7 @@ const App = (): ReactElement => {
 										);
 										setIsRotPopoverOpen(false);
 									}}
+									disabled={isDecryptLoading}
 								>
 									{selectedLanguage}
 								</button>
@@ -416,8 +423,14 @@ const App = (): ReactElement => {
 							<button
 								id="download"
 								type="button"
-								title="Download rotated text."
-								disabled={isDecryptLoading}
+								title={
+									rotatedText === "" || isDecryptLoading
+										? "No text to download."
+										: "Download rotated text."
+								}
+								disabled={
+									rotatedText === "" || isDecryptLoading
+								}
 							>
 								<DownloadIcon className="icon" />{" "}
 								<span>Download result</span>
