@@ -237,6 +237,9 @@ const App = (): ReactElement => {
 						<div className="pills">
 							<button
 								type="button"
+								title={
+									originalText === "" ? "No text to clear" : "Clear text area"
+								}
 								className="pill clear"
 								onClick={() => {
 									setOriginalText("");
@@ -246,7 +249,7 @@ const App = (): ReactElement => {
 
 									localStorage.clear();
 								}}
-								disabled={isDecryptLoading}
+								disabled={originalText === "" || isDecryptLoading}
 							>
 								Clear
 							</button>
@@ -264,7 +267,7 @@ const App = (): ReactElement => {
 							<span>Upload text file</span>
 							<input
 								className="hidden"
-								title="Upload text file."
+								title="Upload .txt file"
 								type="file"
 								accept=".txt"
 								onChange={handleFileUpload}
@@ -275,8 +278,8 @@ const App = (): ReactElement => {
 							type="button"
 							title={
 								originalText === "" || isDecryptLoading
-									? "No text to decrypt."
-									: "Attempt to automatically decrypt text."
+									? "No text to rotate"
+									: "Attempt to automatically decrypt text"
 							}
 							onClick={handleDecrypt}
 							disabled={originalText === "" || isDecryptLoading}
@@ -304,18 +307,24 @@ const App = (): ReactElement => {
 						<div className="pills">
 							<div className="pill-wrapper">
 								<button
+									title={
+										originalText === "" || isDecryptLoading
+											? "No text to rotate"
+											: "Rotate text by a certain degree"
+									}
 									type="button"
 									className="pill rot"
 									onClick={() => {
 										setIsRotPopoverOpen(!isRotPopoverOpen);
 										setIsLanguageDropdownOpen(false);
 									}}
-									disabled={isDecryptLoading}
+									disabled={originalText === "" || isDecryptLoading}
 								>
 									rot{rot}
 								</button>
 								{isRotPopoverOpen && (
 									<input
+										title="Rotate text by a certain degree"
 										type="number"
 										className="popover"
 										name="rot"
@@ -326,19 +335,24 @@ const App = (): ReactElement => {
 										max={
 											supportedLanguages[selectedLanguage].alphabet.length - 1
 										}
-										disabled={isDecryptLoading}
+										disabled={originalText === "" || isDecryptLoading}
 									/>
 								)}
 							</div>
 							<div className="pill-wrapper">
 								<button
+									title={
+										originalText === "" || isDecryptLoading
+											? "Must write text before changing language"
+											: "Change language"
+									}
 									type="button"
 									className="pill selected-language"
 									onClick={() => {
 										setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
 										setIsRotPopoverOpen(false);
 									}}
-									disabled={isDecryptLoading}
+									disabled={originalText === "" || isDecryptLoading}
 								>
 									{selectedLanguage}
 								</button>
@@ -393,8 +407,8 @@ const App = (): ReactElement => {
 								type="button"
 								title={
 									rotatedText === "" || isDecryptLoading
-										? "No text to download."
-										: "Download rotated text."
+										? "No text to download"
+										: "Download rotated text"
 								}
 								disabled={rotatedText === "" || isDecryptLoading}
 							>
