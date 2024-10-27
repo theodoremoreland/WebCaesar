@@ -15,6 +15,14 @@ import rotateString, {
 	SupportedLanguage,
 	supportedLanguages,
 } from "./modules/rotateString";
+import {
+	copyToClipboard,
+	getLocalStorageData,
+	setLocalStorageData,
+	decryptErrorToastId,
+	decryptSuccessToastId,
+	jokeErrorToastId,
+} from "./App.controller";
 
 // HTTP
 import getDadJoke from "./http/getDadJoke";
@@ -28,48 +36,6 @@ import RotateAutoIcon from "./assets/images/rotate_auto.svg?react";
 // Styles
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-
-const copyToastId: string = "copy-toast";
-const decryptSuccessToastId: string = "decrypt-success-toast";
-const decryptErrorToastId: string = "decrypt-error-toast";
-const jokeErrorToastId: string = "joke-error-toast";
-
-const getLocalStorageData = (): {
-	originalText: string | null;
-	rotatedText: string | null;
-	rot: string | null;
-	selectedLanguage: string | null;
-} => {
-	const originalText: string | null = localStorage.getItem("originalText");
-	const rotatedText: string | null = localStorage.getItem("rotatedText");
-	const rot: string | null = localStorage.getItem("rot");
-	const selectedLanguage: string | null =
-		localStorage.getItem("selectedLanguage");
-
-	return {
-		originalText,
-		rotatedText,
-		rot,
-		selectedLanguage,
-	};
-};
-
-const copyToClipboard = async (text: string): Promise<void> => {
-	if (text === "") {
-		return;
-	}
-
-	try {
-		await navigator.clipboard.writeText(text);
-
-		toast.info("Copied to clipboard", {
-			toastId: copyToastId,
-			autoClose: 1_200,
-		});
-	} catch (err) {
-		console.error("Failed to copy: ", err);
-	}
-};
 
 /**
  * [x]: Can upload text file that will be encrypted and output into text area
@@ -130,6 +96,26 @@ const App = (): ReactElement => {
 				supportedLanguages[selectedLanguage].alphabet
 			)
 		);
+	};
+
+	const handleChangeLanguage = (language: SupportedLanguage): void => {
+		const alphabetLength: number = supportedLanguages[language].alphabet.length;
+		const isRotGreaterThanOrEqualToAlphabetLength: boolean =
+			rot >= alphabetLength;
+		const _rot: number = isRotGreaterThanOrEqualToAlphabetLength
+			? alphabetLength - 1
+			: rot;
+
+		setRot(_rot);
+		setSelectedLanguage(language);
+		setRotatedText(
+			rotateString(
+				originalText ?? "",
+				_rot,
+				supportedLanguages[language].alphabet
+			)
+		);
+		setIsLanguageDropdownOpen(false);
 	};
 
 	const handleDecrypt = (): void => {
@@ -206,12 +192,11 @@ const App = (): ReactElement => {
 	}, [decryptData, decryptError]);
 
 	useEffect(() => {
-		const debounceSaveToLocalStorage = debounce(() => {
-			localStorage.setItem("originalText", originalText);
-			localStorage.setItem("rotatedText", rotatedText);
-			localStorage.setItem("rot", rot.toString());
-			localStorage.setItem("selectedLanguage", selectedLanguage);
-		}, 3_500);
+		const debounceSaveToLocalStorage = debounce(
+			() =>
+				setLocalStorageData(originalText, rotatedText, rot, selectedLanguage),
+			3_500
+		);
 
 		if (originalText !== "" && rotatedText !== "") {
 			debounceSaveToLocalStorage();
@@ -361,30 +346,9 @@ const App = (): ReactElement => {
 										{Object.keys(supportedLanguages).map((language) => (
 											<li
 												key={language}
-												onClick={() => {
-													const _selectedLanguage: SupportedLanguage =
-														language as SupportedLanguage;
-													const alphabetLength: number =
-														supportedLanguages[_selectedLanguage].alphabet
-															.length;
-													const isRotGreaterThanOrEqualToAlphabetLength: boolean =
-														rot >= alphabetLength;
-													const _rot: number =
-														isRotGreaterThanOrEqualToAlphabetLength
-															? alphabetLength - 1
-															: rot;
-
-													setRot(_rot);
-													setSelectedLanguage(_selectedLanguage);
-													setRotatedText(
-														rotateString(
-															originalText ?? "",
-															_rot,
-															supportedLanguages[_selectedLanguage].alphabet
-														)
-													);
-													setIsLanguageDropdownOpen(false);
-												}}
+												onClick={() =>
+													handleChangeLanguage(language as SupportedLanguage)
+												}
 											>
 												{language}
 											</li>
