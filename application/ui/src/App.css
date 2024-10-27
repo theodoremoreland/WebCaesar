@@ -87,6 +87,7 @@ main {
 			outline: transparent;
 			padding: 0 0.75rem;
 			border: none;
+			caret-color: #cb44fc;
 
 			&::selection {
 				color: var(--primary-font-color);

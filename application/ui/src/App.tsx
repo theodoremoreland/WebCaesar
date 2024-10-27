@@ -124,7 +124,7 @@ const App = (): ReactElement => {
 		}
 	};
 
-	const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleFileUpload = (e: ChangeEvent<HTMLInputElement>): void => {
 		const file: File | undefined = e.target.files?.[0];
 
 		if (file) {
