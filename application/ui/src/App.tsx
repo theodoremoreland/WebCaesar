@@ -339,7 +339,11 @@ const App = (): ReactElement => {
 									}}
 									disabled={originalText === "" || isDecryptLoading}
 								>
-									{selectedLanguage}
+									{supportedLanguages[selectedLanguage].alphabet
+
+										.slice(0, 3)
+										.split("")}{" "}
+									({selectedLanguage})
 								</button>
 								{isLanguageDropdownOpen && (
 									<ul className="pill-list">
