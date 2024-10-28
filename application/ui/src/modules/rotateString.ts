@@ -30,7 +30,19 @@ const ALPHABET_PT: string = "abcdefghijklmnopqrstuvwxyzàáâãçéêíóôõú"
  * However, ä, ö, ü, and ß are not considered separate letters of the alphabet but variations of the existing letters.
  */
 const ALPHABET_DE: string = "abcdefghijklmnopqrstuvwxyzäöüß";
+/**
+ * TODO address the following note from Chat GPT:
+ * The Italian alphabet traditionally has only 21 letters:
+ * a, b, c, d, e, f, g, h, i, l, m, n, o, p, q, r, s, t, u, v, z
+ * The letters j, k, w, x, and y are generally excluded from the traditional Italian alphabet because they are not native to Italian words. However, these letters do appear in borrowed foreign words, names, and scientific terms, so they are recognized and used in modern Italian when needed.
+ */
 const ALPHABET_IT: string = "abcdefghijklmnopqrstuvwxyzàèéìíîòóùú";
+/**
+ * TODO address the following note from Chat GPT:
+ * The Russian alphabet uses the Cyrillic script, which has 33 letters. Here is the Russian alphabet in order:
+ * А, Б, В, Г, Д, Е, Ё, Ж, З, И, Й, К, Л, М, Н, О, П, Р, С, Т, У, Ф, Х, Ц, Ч, Ш, Щ, Ъ, Ы, Ь, Э, Ю, Я
+ * Some letters may look similar to those in the Latin alphabet, but they often represent different sounds. For example, "В" sounds like the English "V" and "Н" sounds like the English "N".
+ */
 const ALPHABET_RU: string = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
 const ALPHABET_EU: string = "abcdefghijklmnopqrstuvwxyzñ";
 const ALPHABET_LV: string = "aābcčdeēfgģhiījkķlļmnņoprsštuūvzž";
