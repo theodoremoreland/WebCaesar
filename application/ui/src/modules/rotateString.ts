@@ -1,7 +1,34 @@
 const ALPHABET_EN: string = "abcdefghijklmnopqrstuvwxyz";
+/**
+ * ? Note from Chat GPT:
+ * The Spanish alphabet is similar to the English alphabet but includes one additional letter: "ñ". Here is the traditional Spanish alphabet in order:
+ * a, b, c, d, e, f, g, h, i, j, k, l, m, n, ñ, o, p, q, r, s, t, u, v, w, x, y, z
+ * Historically, "ch" and "ll" were also considered separate letters in the Spanish alphabet, but in 2010, the Royal Spanish Academy officially removed them as distinct letters, aligning the Spanish alphabet more closely with the standard Latin alphabet plus the "ñ".
+ */
 const ALPHABET_ES: string = "abcdefghijklmnñopqrstuvwxyz";
+/**
+ * TODO address the following note from Chat GPT:
+ * The French alphabet has the exact same letters and order as the English alphabet:
+ * a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+ * While the alphabet is the same, French uses additional accents and special characters in writing, like é, è, ê, ë and ç (cédille), but these are not considered separate letters in the French alphabet.
+ */
 const ALPHABET_FR: string = "abcdefghijklmnopqrstuvwxyzàâæçéèêëîïôœùûüÿ";
+/**
+ * TODO address the following note from Chat GPT:
+ * The Portuguese alphabet has the same 26 letters as the English alphabet. Here is the Portuguese alphabet in order:
+ * a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+ * However, Portuguese also uses various diacritical marks (like accents) on vowels and the ç (c-cedilla), but these do not add extra letters to the alphabet.
+ */
 const ALPHABET_PT: string = "abcdefghijklmnopqrstuvwxyzàáâãçéêíóôõú";
+/**
+ * TODO address the following note from Chat GPT:
+ * The German alphabet has the same 26 letters as the English alphabet. Here it is in order:
+ * a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+ * In addition to these letters, German has a few special characters:
+ * The Umlauted vowels: ä, ö, ü (variants of a, o, and u with umlauts)
+ * The Eszett (ß), also called the "sharp S," which is used in place of a double "s" in certain cases
+ * However, ä, ö, ü, and ß are not considered separate letters of the alphabet but variations of the existing letters.
+ */
 const ALPHABET_DE: string = "abcdefghijklmnopqrstuvwxyzäöüß";
 const ALPHABET_IT: string = "abcdefghijklmnopqrstuvwxyzàèéìíîòóùú";
 const ALPHABET_RU: string = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
