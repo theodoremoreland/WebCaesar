@@ -44,8 +44,26 @@ const ALPHABET_IT: string = "abcdefghijklmnopqrstuvwxyzàèéìíîòóùú";
  * Some letters may look similar to those in the Latin alphabet, but they often represent different sounds. For example, "В" sounds like the English "V" and "Н" sounds like the English "N".
  */
 const ALPHABET_RU: string = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+/**
+ * TODO address the following note from Chat GPT:
+ * The Basque alphabet uses the same 26 letters as the English alphabet, in the same order:
+ * a, b, c, d, e, f, g, h, i, j, k, l, m, n, ñ, o, p, q, r, s, t, u, v, w, x, y, z
+ * While "ñ" is not a separate letter in most Latin alphabets, it is commonly included in Basque. Additionally, Basque has some unique pronunciation rules and uses combinations like "tx," "ts," and "tz" to represent sounds that are distinct in Basque phonetics.
+ */
 const ALPHABET_EU: string = "abcdefghijklmnopqrstuvwxyzñ";
+/**
+ * TODO address the following note from Chat GPT:
+ * The Latvian alphabet has 33 letters and is based on the Latin alphabet with some additional letters that include diacritical marks. Here is the Latvian alphabet in order:
+ * a, ā, b, c, č, d, e, ē, f, g, ģ, h, i, ī, j, k, ķ, l, ļ, m, n, ņ, o, p, r, s, š, t, u, ū, v, z, ž
+ * Notably, the letters q, w, x, and y from the English alphabet are not used in standard Latvian and appear only in foreign words or names.
+ */
 const ALPHABET_LV: string = "aābcčdeēfgģhiījkķlļmnņoprsštuūvzž";
+/**
+ * TODO address the following note from Chat GPT:
+ * The Dutch alphabet has the same 26 letters as the English alphabet, in the same order:
+ * a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+ * Dutch also uses digraphs (combinations of two letters) such as "ij" and "oe" to represent specific sounds, but these are not considered separate letters in the alphabet.
+ */
 const ALPHABET_NL: string = "abcdefghijklmnopqrstuvwxyz";
 export enum SupportedLanguage {
 	English = "English",
