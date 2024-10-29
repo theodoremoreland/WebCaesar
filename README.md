@@ -26,6 +26,7 @@ _This program was created for a homework assignment at LaunchCode's Lc101 (2018)
 -   Tanstack React Query
 -   pyspellchecker
 -   react-toastify
+-   lodash
 
 ## Screenshots
 
