@@ -7,9 +7,6 @@ import { useMutation, useQuery } from "react-query";
 // Toastify
 import { ToastContainer, toast } from "react-toastify";
 
-// Lodash
-import { debounce } from "lodash";
-
 // Custom
 import rotateString, {
 	SupportedLanguage,
@@ -18,10 +15,10 @@ import rotateString, {
 import {
 	copyToClipboard,
 	getLocalStorageData,
-	setLocalStorageData,
 	decryptErrorToastId,
 	decryptSuccessToastId,
 	jokeErrorToastId,
+	debounceSaveToLocalStorage,
 } from "./App.controller";
 
 // HTTP
@@ -192,14 +189,13 @@ const App = (): ReactElement => {
 	}, [decryptData, decryptError]);
 
 	useEffect(() => {
-		const debounceSaveToLocalStorage = debounce(
-			() =>
-				setLocalStorageData(originalText, rotatedText, rot, selectedLanguage),
-			3_500
-		);
-
 		if (originalText !== "" && rotatedText !== "") {
-			debounceSaveToLocalStorage();
+			debounceSaveToLocalStorage(
+				originalText,
+				rotatedText,
+				rot,
+				selectedLanguage
+			);
 		}
 	}, [originalText, rotatedText, rot, selectedLanguage]);
 
@@ -340,7 +336,6 @@ const App = (): ReactElement => {
 									disabled={originalText === "" || isDecryptLoading}
 								>
 									{supportedLanguages[selectedLanguage].alphabet
-
 										.slice(0, 3)
 										.split("")}{" "}
 									({selectedLanguage})

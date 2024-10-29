@@ -1,4 +1,8 @@
+// Third party
 import { toast } from "react-toastify";
+import { debounce } from "lodash";
+
+// Custom
 import { SupportedLanguage } from "./modules/rotateString";
 
 export const copyToastId: string = "copy-toast";
@@ -54,3 +58,10 @@ export const copyToClipboard = async (text: string): Promise<void> => {
 		console.error("Failed to copy: ", err);
 	}
 };
+
+export const debounceSaveToLocalStorage = debounce(
+	(originalText, rotatedText, rot, selectedLanguage) => {
+		setLocalStorageData(originalText, rotatedText, rot, selectedLanguage);
+	},
+	3_500
+);
