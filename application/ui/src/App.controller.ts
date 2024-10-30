@@ -63,5 +63,5 @@ export const debounceSaveToLocalStorage = debounce(
 	(originalText, rotatedText, rot, selectedLanguage) => {
 		setLocalStorageData(originalText, rotatedText, rot, selectedLanguage);
 	},
-	3_500
+	2_500
 );
