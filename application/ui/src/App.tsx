@@ -221,7 +221,7 @@ const App = (): ReactElement => {
 								title={
 									originalText === "" ? "No text to clear" : "Clear text area"
 								}
-								className="pill clear"
+								className="pill"
 								onClick={() => {
 									setOriginalText("");
 									setRotatedText("");
@@ -294,7 +294,7 @@ const App = (): ReactElement => {
 											: "Rotate text by a certain degree"
 									}
 									type="button"
-									className="pill rot"
+									className={`pill ${isRotPopoverOpen ? "open" : ""}`}
 									onClick={() => {
 										setIsRotPopoverOpen(!isRotPopoverOpen);
 										setIsLanguageDropdownOpen(false);
@@ -328,7 +328,7 @@ const App = (): ReactElement => {
 											: "Change language"
 									}
 									type="button"
-									className="pill selected-language"
+									className={`pill ${isLanguageDropdownOpen ? "open" : ""}`}
 									onClick={() => {
 										setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
 										setIsRotPopoverOpen(false);
