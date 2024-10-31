@@ -182,7 +182,7 @@ const CHARACTERS_TO_INDEX_PT: CharactersToIndex = deriveCharactersToIndex(
  * However, ä, ö, ü, and ß are not considered separate letters of the alphabet but variations of the existing letters.
  */
 const INDEX_TO_CHARACTERS_DE: IndexToCharacters = {
-	0: ["a"],
+	0: ["a", "ä"],
 	1: ["b"],
 	2: ["c"],
 	3: ["d"],
@@ -196,7 +196,7 @@ const INDEX_TO_CHARACTERS_DE: IndexToCharacters = {
 	11: ["l"],
 	12: ["m"],
 	13: ["n"],
-	14: ["o"],
+	14: ["o", "ö"],
 	15: ["p"],
 	16: ["q"],
 	17: ["r"],
