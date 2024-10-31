@@ -19,6 +19,7 @@ import {
 	decryptSuccessToastId,
 	jokeErrorToastId,
 	debounceSaveToLocalStorage,
+	getFirstThreeLetters,
 } from "./App.controller";
 
 // HTTP
@@ -70,13 +71,7 @@ const App = (): ReactElement => {
 		const _rot: number = parseInt(e.currentTarget.value);
 
 		setRot(_rot);
-		setRotatedText(
-			rotateString(
-				originalText ?? "",
-				_rot,
-				supportedLanguages[selectedLanguage].alphabet
-			)
-		);
+		setRotatedText(rotateString(originalText ?? "", _rot, selectedLanguage));
 	};
 
 	const handleChangeOriginalText = (
@@ -86,17 +81,11 @@ const App = (): ReactElement => {
 		const _originalText: string = e.currentTarget.value;
 
 		setOriginalText(_originalText);
-		setRotatedText(
-			rotateString(
-				_originalText ?? "",
-				rot,
-				supportedLanguages[selectedLanguage].alphabet
-			)
-		);
+		setRotatedText(rotateString(_originalText ?? "", rot, selectedLanguage));
 	};
 
 	const handleChangeLanguage = (language: SupportedLanguage): void => {
-		const alphabetLength: number = supportedLanguages[language].alphabet.length;
+		const alphabetLength: number = supportedLanguages[language].characterCount;
 		const isRotGreaterThanOrEqualToAlphabetLength: boolean =
 			rot >= alphabetLength;
 		const _rot: number = isRotGreaterThanOrEqualToAlphabetLength
@@ -105,13 +94,7 @@ const App = (): ReactElement => {
 
 		setRot(_rot);
 		setSelectedLanguage(language);
-		setRotatedText(
-			rotateString(
-				originalText ?? "",
-				_rot,
-				supportedLanguages[language].alphabet
-			)
-		);
+		setRotatedText(rotateString(originalText ?? "", _rot, language));
 		setIsLanguageDropdownOpen(false);
 	};
 
@@ -135,13 +118,7 @@ const App = (): ReactElement => {
 				}
 
 				setOriginalText(text);
-				setRotatedText(
-					rotateString(
-						text ?? "",
-						rot,
-						supportedLanguages[selectedLanguage].alphabet
-					)
-				);
+				setRotatedText(rotateString(text ?? "", rot, selectedLanguage));
 			};
 
 			reader.readAsText(file);
@@ -314,7 +291,7 @@ const App = (): ReactElement => {
 										onChange={handleRotate}
 										min={0}
 										max={
-											supportedLanguages[selectedLanguage].alphabet.length - 1
+											supportedLanguages[selectedLanguage].characterCount - 1
 										}
 										disabled={originalText === "" || isDecryptLoading}
 									/>
@@ -335,10 +312,7 @@ const App = (): ReactElement => {
 									}}
 									disabled={originalText === "" || isDecryptLoading}
 								>
-									{supportedLanguages[selectedLanguage].alphabet
-										.slice(0, 3)
-										.split("")}{" "}
-									({selectedLanguage})
+									{getFirstThreeLetters(selectedLanguage)} ({selectedLanguage})
 								</button>
 								{isLanguageDropdownOpen && (
 									<ul className="pill-list">

@@ -11,11 +11,11 @@ export enum SupportedLanguage {
 	Dutch = "Dutch",
 }
 
-interface IndexToCharacters {
+export interface IndexToCharacters {
 	[key: number]: string[];
 }
 
-interface CharactersToIndex {
+export interface CharactersToIndex {
 	[key: string]: number;
 }
 
