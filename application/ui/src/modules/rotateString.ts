@@ -3,13 +3,69 @@ interface AlphabetPosition {
 }
 
 const ALPHABET_EN: string = "abcdefghijklmnopqrstuvwxyz";
+const ALPHABET_POSITIONS_EN: AlphabetPosition = {
+	0: ["a"],
+	1: ["b"],
+	2: ["c"],
+	3: ["d"],
+	4: ["e"],
+	5: ["f"],
+	6: ["g"],
+	7: ["h"],
+	8: ["i"],
+	9: ["j"],
+	10: ["k"],
+	11: ["l"],
+	12: ["m"],
+	13: ["n"],
+	14: ["o"],
+	15: ["p"],
+	16: ["q"],
+	17: ["r"],
+	18: ["s"],
+	19: ["t"],
+	20: ["u"],
+	21: ["v"],
+	22: ["w"],
+	23: ["x"],
+	24: ["y"],
+	25: ["z"],
+};
+const ALPHABET_ES: string = "abcdefghijklmnñopqrstuvwxyz";
 /**
- * ? Note from Chat GPT:
  * The Spanish alphabet is similar to the English alphabet but includes one additional letter: "ñ". Here is the traditional Spanish alphabet in order:
  * a, b, c, d, e, f, g, h, i, j, k, l, m, n, ñ, o, p, q, r, s, t, u, v, w, x, y, z
  * Historically, "ch" and "ll" were also considered separate letters in the Spanish alphabet, but in 2010, the Royal Spanish Academy officially removed them as distinct letters, aligning the Spanish alphabet more closely with the standard Latin alphabet plus the "ñ".
  */
-const ALPHABET_ES: string = "abcdefghijklmnñopqrstuvwxyz";
+const ALPHABET_POSITIONS_ES: AlphabetPosition = {
+	0: ["a"],
+	1: ["b"],
+	2: ["c"],
+	3: ["d"],
+	4: ["e"],
+	5: ["f"],
+	6: ["g"],
+	7: ["h"],
+	8: ["i"],
+	9: ["j"],
+	10: ["k"],
+	11: ["l"],
+	12: ["m"],
+	13: ["n"],
+	14: ["ñ"],
+	15: ["o"],
+	16: ["p"],
+	17: ["q"],
+	18: ["r"],
+	19: ["s"],
+	20: ["t"],
+	21: ["u"],
+	22: ["v"],
+	23: ["w"],
+	24: ["x"],
+	25: ["y"],
+	26: ["z"],
+};
 const ALPHABET_FR: string = "abcdefghijklmnopqrstuvwxyzàâæçéèêëîïôœùûüÿ";
 /**
  *
@@ -117,41 +173,183 @@ const ALPHABET_POSITIONS_DE: AlphabetPosition = {
 	24: ["y"],
 	25: ["z"],
 };
+const ALPHABET_IT: string = "abcdefghijklmnopqrstuvwxyzàèéìíîòóùú";
 /**
- * TODO address the following note from Chat GPT:
  * The Italian alphabet traditionally has only 21 letters:
  * a, b, c, d, e, f, g, h, i, l, m, n, o, p, q, r, s, t, u, v, z
  * The letters j, k, w, x, and y are generally excluded from the traditional Italian alphabet because they are not native to Italian words. However, these letters do appear in borrowed foreign words, names, and scientific terms, so they are recognized and used in modern Italian when needed.
  */
-const ALPHABET_IT: string = "abcdefghijklmnopqrstuvwxyzàèéìíîòóùú";
+const ALPHABET_POSITIONS_IT: AlphabetPosition = {
+	0: ["a"],
+	1: ["b"],
+	2: ["c"],
+	3: ["d"],
+	4: ["e", "è", "é"],
+	5: ["f"],
+	6: ["g"],
+	7: ["h"],
+	8: ["i", "ì", "í", "î"],
+	9: ["l"],
+	10: ["m"],
+	11: ["n"],
+	12: ["o", "ò", "ó"],
+	13: ["p"],
+	14: ["q"],
+	15: ["r"],
+	16: ["s"],
+	17: ["t"],
+	18: ["u", "ù", "ú"],
+	19: ["v"],
+	20: ["z"],
+};
+const ALPHABET_RU: string = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
 /**
- * TODO address the following note from Chat GPT:
  * The Russian alphabet uses the Cyrillic script, which has 33 letters. Here is the Russian alphabet in order:
  * А, Б, В, Г, Д, Е, Ё, Ж, З, И, Й, К, Л, М, Н, О, П, Р, С, Т, У, Ф, Х, Ц, Ч, Ш, Щ, Ъ, Ы, Ь, Э, Ю, Я
  * Some letters may look similar to those in the Latin alphabet, but they often represent different sounds. For example, "В" sounds like the English "V" and "Н" sounds like the English "N".
  */
-const ALPHABET_RU: string = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+const ALPHABET_POSITIONS_RU: AlphabetPosition = {
+	0: ["а"],
+	1: ["б"],
+	2: ["в"],
+	3: ["г"],
+	4: ["д"],
+	5: ["е", "ё"],
+	6: ["ж"],
+	7: ["з"],
+	8: ["и"],
+	9: ["й"],
+	10: ["к"],
+	11: ["л"],
+	12: ["м"],
+	13: ["н"],
+	14: ["о"],
+	15: ["п"],
+	16: ["р"],
+	17: ["с"],
+	18: ["т"],
+	19: ["у"],
+	20: ["ф"],
+	21: ["х"],
+	22: ["ц"],
+	23: ["ч"],
+	24: ["ш"],
+	25: ["щ"],
+	26: ["ъ"],
+	27: ["ы"],
+	28: ["ь"],
+	29: ["э"],
+	30: ["ю"],
+	31: ["я"],
+};
+const ALPHABET_EU: string = "abcdefghijklmnopqrstuvwxyzñ";
 /**
- * TODO address the following note from Chat GPT:
  * The Basque alphabet uses the same 26 letters as the English alphabet, in the same order:
  * a, b, c, d, e, f, g, h, i, j, k, l, m, n, ñ, o, p, q, r, s, t, u, v, w, x, y, z
  * While "ñ" is not a separate letter in most Latin alphabets, it is commonly included in Basque. Additionally, Basque has some unique pronunciation rules and uses combinations like "tx," "ts," and "tz" to represent sounds that are distinct in Basque phonetics.
  */
-const ALPHABET_EU: string = "abcdefghijklmnopqrstuvwxyzñ";
+const ALPHABET_POSITIONS_EU: AlphabetPosition = {
+	0: ["a"],
+	1: ["b"],
+	2: ["c"],
+	3: ["d"],
+	4: ["e"],
+	5: ["f"],
+	6: ["g"],
+	7: ["h"],
+	8: ["i"],
+	9: ["j"],
+	10: ["k"],
+	11: ["l"],
+	12: ["m"],
+	13: ["n", "ñ"],
+	14: ["o"],
+	15: ["p"],
+	16: ["q"],
+	17: ["r"],
+	18: ["s"],
+	19: ["t"],
+	20: ["u"],
+	21: ["v"],
+	22: ["w"],
+	23: ["x"],
+	24: ["y"],
+	25: ["z"],
+};
+const ALPHABET_LV: string = "aābcčdeēfgģhiījkķlļmnņoprsštuūvzž";
 /**
- * TODO address the following note from Chat GPT:
  * The Latvian alphabet has 33 letters and is based on the Latin alphabet with some additional letters that include diacritical marks. Here is the Latvian alphabet in order:
  * a, ā, b, c, č, d, e, ē, f, g, ģ, h, i, ī, j, k, ķ, l, ļ, m, n, ņ, o, p, r, s, š, t, u, ū, v, z, ž
  * Notably, the letters q, w, x, and y from the English alphabet are not used in standard Latvian and appear only in foreign words or names.
  */
-const ALPHABET_LV: string = "aābcčdeēfgģhiījkķlļmnņoprsštuūvzž";
+const ALPHABET_POSITIONS_LV: AlphabetPosition = {
+	0: ["a"],
+	1: ["ā"],
+	2: ["b"],
+	3: ["c", "č"],
+	4: ["d"],
+	5: ["e"],
+	6: ["ē"],
+	7: ["f"],
+	8: ["g"],
+	9: ["ģ"],
+	10: ["h"],
+	11: ["i"],
+	12: ["ī"],
+	13: ["j"],
+	14: ["k"],
+	15: ["ķ"],
+	16: ["l"],
+	17: ["ļ"],
+	18: ["m"],
+	19: ["n"],
+	20: ["ņ"],
+	21: ["o"],
+	22: ["p"],
+	23: ["r"],
+	24: ["s"],
+	25: ["š"],
+	26: ["t"],
+	27: ["u"],
+	28: ["ū"],
+	29: ["v"],
+	30: ["z"],
+	31: ["ž"],
+};
+const ALPHABET_NL: string = "abcdefghijklmnopqrstuvwxyz";
 /**
- * TODO address the following note from Chat GPT:
  * The Dutch alphabet has the same 26 letters as the English alphabet, in the same order:
  * a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
  * Dutch also uses digraphs (combinations of two letters) such as "ij" and "oe" to represent specific sounds, but these are not considered separate letters in the alphabet.
  */
-const ALPHABET_NL: string = "abcdefghijklmnopqrstuvwxyz";
+const ALPHABET_POSITIONS_NL: AlphabetPosition = {
+	0: ["a"],
+	1: ["b"],
+	2: ["c"],
+	3: ["d"],
+	4: ["e"],
+	5: ["f"],
+	6: ["g"],
+	7: ["h"],
+	8: ["i"],
+	9: ["j"],
+	10: ["k"],
+	11: ["l"],
+	12: ["m"],
+	13: ["n"],
+	14: ["o"],
+	15: ["p"],
+	16: ["q"],
+	17: ["r"],
+	18: ["s"],
+	19: ["t"],
+	20: ["u"],
+	21: ["v"],
+	22: ["w"],
+	23: ["x"],
+	24: ["y"],
+	25: ["z"],
+};
 export enum SupportedLanguage {
 	English = "English",
 	Spanish = "Spanish",
