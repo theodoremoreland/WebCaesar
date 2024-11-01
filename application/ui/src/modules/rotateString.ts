@@ -479,6 +479,7 @@ const findCharacterIndex = (
 	return supportedLanguages[language].charactersToIndex[lower] ?? -1;
 };
 
+// TODO support mapping between languages
 const rotateCharacter = (
 	char: string,
 	rot: number,
@@ -507,13 +508,34 @@ const rotateCharacter = (
 export default (
 	text: string,
 	rot: number,
-	language: SupportedLanguage = SupportedLanguage.English
+	sourceLanguage: SupportedLanguage = SupportedLanguage.English,
+	targetLanguage: SupportedLanguage = SupportedLanguage.English
 ): string => {
 	let rotated: string = "";
 
 	for (const char of text) {
-		if (supportedLanguages[language].charactersToIndex[char.toLowerCase()]) {
-			rotated = rotated + rotateCharacter(char, rot, language);
+		// If the character is in the target language, rotate it
+		if (
+			supportedLanguages[targetLanguage].charactersToIndex[char.toLowerCase()]
+		) {
+			rotated = rotated + rotateCharacter(char, rot, targetLanguage);
+		} else if (findCharacterIndex(char, sourceLanguage) === -1) {
+			const sourceCharacterIndex: number = findCharacterIndex(
+				char,
+				sourceLanguage
+			);
+
+			// if the character is not in the target language, but the target language has a character at the same index, use the character at the same index in the target language
+			if (
+				supportedLanguages[targetLanguage].characterCount > sourceCharacterIndex
+			) {
+				rotated +=
+					supportedLanguages[targetLanguage].indexToCharacters[
+						sourceCharacterIndex
+					][0];
+			} else {
+				rotated += char;
+			}
 		} else {
 			rotated += char;
 		}
