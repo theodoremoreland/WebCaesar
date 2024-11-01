@@ -44,13 +44,18 @@ import "./App.css";
  */
 const App = (): ReactElement => {
 	const [rot, setRot] = useState<number>(0);
-	const [selectedLanguage, setSelectedLanguage] = useState<SupportedLanguage>(
+	const [originalLanguage, setOriginalLanguage] = useState<SupportedLanguage>(
+		SupportedLanguage.English
+	);
+	const [rotatedLanguage, setRotatedLanguage] = useState<SupportedLanguage>(
 		SupportedLanguage.English
 	);
 	const [originalText, setOriginalText] = useState<string>("");
 	const [rotatedText, setRotatedText] = useState<string>("");
 	const [isRotPopoverOpen, setIsRotPopoverOpen] = useState<boolean>(false);
-	const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] =
+	const [isOriginalLanguageDropdownOpen, setIsOriginalLanguageDropdownOpen] =
+		useState<boolean>(false);
+	const [isRotatedLanguageDropdownOpen, setIsRotatedLanguageDropdownOpen] =
 		useState<boolean>(false);
 
 	const { data: jokeData, error: jokeError } = useQuery(
@@ -71,7 +76,9 @@ const App = (): ReactElement => {
 		const _rot: number = parseInt(e.currentTarget.value);
 
 		setRot(_rot);
-		setRotatedText(rotateString(originalText ?? "", _rot, selectedLanguage));
+		setRotatedText(
+			rotateString(originalText ?? "", _rot, originalLanguage, rotatedLanguage)
+		);
 	};
 
 	const handleChangeOriginalText = (
@@ -81,10 +88,20 @@ const App = (): ReactElement => {
 		const _originalText: string = e.currentTarget.value;
 
 		setOriginalText(_originalText);
-		setRotatedText(rotateString(_originalText ?? "", rot, selectedLanguage));
+		setRotatedText(
+			rotateString(_originalText ?? "", rot, originalLanguage, rotatedLanguage)
+		);
 	};
 
-	const handleChangeLanguage = (language: SupportedLanguage): void => {
+	const handleChangeOriginalLanguage = (language: SupportedLanguage): void => {
+		setOriginalLanguage(language);
+		setRotatedText(
+			rotateString(originalText ?? "", rot, originalLanguage, language)
+		);
+		setIsOriginalLanguageDropdownOpen(false);
+	};
+
+	const handleChangeRotatedLanguage = (language: SupportedLanguage): void => {
 		const alphabetLength: number = supportedLanguages[language].characterCount;
 		const isRotGreaterThanOrEqualToAlphabetLength: boolean =
 			rot >= alphabetLength;
@@ -93,9 +110,11 @@ const App = (): ReactElement => {
 			: rot;
 
 		setRot(_rot);
-		setSelectedLanguage(language);
-		setRotatedText(rotateString(originalText ?? "", _rot, language));
-		setIsLanguageDropdownOpen(false);
+		setRotatedLanguage(language);
+		setRotatedText(
+			rotateString(originalText ?? "", _rot, originalLanguage, language)
+		);
+		setIsRotatedLanguageDropdownOpen(false);
 	};
 
 	const handleDecrypt = (): void => {
@@ -118,7 +137,9 @@ const App = (): ReactElement => {
 				}
 
 				setOriginalText(text);
-				setRotatedText(rotateString(text ?? "", rot, selectedLanguage));
+				setRotatedText(
+					rotateString(text ?? "", rot, originalLanguage, rotatedLanguage)
+				);
 			};
 
 			reader.readAsText(file);
@@ -126,17 +147,36 @@ const App = (): ReactElement => {
 	};
 
 	useEffect(() => {
-		const { originalText, rotatedText, rot, selectedLanguage } =
-			getLocalStorageData();
+		const {
+			originalText,
+			rotatedText,
+			rot,
+			originalLanguage,
+			rotatedLanguage,
+		} = getLocalStorageData();
 
-		if (originalText && rotatedText && rot && selectedLanguage) {
+		if (
+			originalText &&
+			rotatedText &&
+			rot &&
+			originalLanguage &&
+			rotatedLanguage
+		) {
 			setOriginalText(originalText);
 			setRotatedText(rotatedText);
 			setRot(parseInt(rot));
-			setSelectedLanguage(selectedLanguage as SupportedLanguage);
+			setOriginalLanguage(originalLanguage as SupportedLanguage);
+			setRotatedLanguage(rotatedLanguage as SupportedLanguage);
 		} else if (jokeData) {
 			setOriginalText(jokeData.encrypted_dad_joke);
-			setRotatedText(rotateString(jokeData.encrypted_dad_joke, 0));
+			setRotatedText(
+				rotateString(
+					jokeData.encrypted_dad_joke,
+					0,
+					SupportedLanguage.English,
+					SupportedLanguage.English
+				)
+			);
 			setRot(0);
 		} else if (jokeError) {
 			console.error(String(jokeError));
@@ -171,10 +211,11 @@ const App = (): ReactElement => {
 				originalText,
 				rotatedText,
 				rot,
-				selectedLanguage
+				originalLanguage,
+				rotatedLanguage
 			);
 		}
-	}, [originalText, rotatedText, rot, selectedLanguage]);
+	}, [originalText, rotatedText, rot, originalLanguage, rotatedLanguage]);
 
 	return (
 		<main>
@@ -203,7 +244,8 @@ const App = (): ReactElement => {
 									setOriginalText("");
 									setRotatedText("");
 									setRot(0);
-									setSelectedLanguage(SupportedLanguage.English);
+									setOriginalLanguage(SupportedLanguage.English);
+									setRotatedLanguage(SupportedLanguage.English);
 
 									localStorage.clear();
 								}}
@@ -211,6 +253,39 @@ const App = (): ReactElement => {
 							>
 								Clear
 							</button>
+							<div className="pill-wrapper">
+								<button
+									type="button"
+									className={`pill ${
+										isOriginalLanguageDropdownOpen ? "open" : ""
+									}`}
+									onClick={() => {
+										setIsOriginalLanguageDropdownOpen(
+											!isOriginalLanguageDropdownOpen
+										);
+										setIsRotPopoverOpen(false);
+									}}
+									disabled={originalText === "" || isDecryptLoading}
+								>
+									{getFirstThreeLetters(originalLanguage)} ({originalLanguage})
+								</button>
+								{isOriginalLanguageDropdownOpen && (
+									<ul className="pill-list">
+										{Object.keys(supportedLanguages).map((language) => (
+											<li
+												key={language}
+												onClick={() =>
+													handleChangeOriginalLanguage(
+														language as SupportedLanguage
+													)
+												}
+											>
+												{language}
+											</li>
+										))}
+									</ul>
+								)}
+							</div>
 						</div>
 					</div>
 					<hr />
@@ -274,7 +349,7 @@ const App = (): ReactElement => {
 									className={`pill ${isRotPopoverOpen ? "open" : ""}`}
 									onClick={() => {
 										setIsRotPopoverOpen(!isRotPopoverOpen);
-										setIsLanguageDropdownOpen(false);
+										setIsRotatedLanguageDropdownOpen(false);
 									}}
 									disabled={originalText === "" || isDecryptLoading}
 								>
@@ -290,9 +365,7 @@ const App = (): ReactElement => {
 										autoComplete="off"
 										onChange={handleRotate}
 										min={0}
-										max={
-											supportedLanguages[selectedLanguage].characterCount - 1
-										}
+										max={supportedLanguages[rotatedLanguage].characterCount - 1}
 										disabled={originalText === "" || isDecryptLoading}
 									/>
 								)}
@@ -305,22 +378,28 @@ const App = (): ReactElement => {
 											: "Change language"
 									}
 									type="button"
-									className={`pill ${isLanguageDropdownOpen ? "open" : ""}`}
+									className={`pill ${
+										isRotatedLanguageDropdownOpen ? "open" : ""
+									}`}
 									onClick={() => {
-										setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
+										setIsRotatedLanguageDropdownOpen(
+											!isRotatedLanguageDropdownOpen
+										);
 										setIsRotPopoverOpen(false);
 									}}
 									disabled={originalText === "" || isDecryptLoading}
 								>
-									{getFirstThreeLetters(selectedLanguage)} ({selectedLanguage})
+									{getFirstThreeLetters(rotatedLanguage)} ({rotatedLanguage})
 								</button>
-								{isLanguageDropdownOpen && (
+								{isRotatedLanguageDropdownOpen && (
 									<ul className="pill-list">
 										{Object.keys(supportedLanguages).map((language) => (
 											<li
 												key={language}
 												onClick={() =>
-													handleChangeLanguage(language as SupportedLanguage)
+													handleChangeRotatedLanguage(
+														language as SupportedLanguage
+													)
 												}
 											>
 												{language}

@@ -508,29 +508,30 @@ const rotateCharacter = (
 export default (
 	text: string,
 	rot: number,
-	sourceLanguage: SupportedLanguage = SupportedLanguage.English,
-	targetLanguage: SupportedLanguage = SupportedLanguage.English
+	originalLanguage: SupportedLanguage,
+	rotatedLanguage: SupportedLanguage
 ): string => {
 	let rotated: string = "";
 
 	for (const char of text) {
 		// If the character is in the target language, rotate it
 		if (
-			supportedLanguages[targetLanguage].charactersToIndex[char.toLowerCase()]
+			supportedLanguages[rotatedLanguage].charactersToIndex[char.toLowerCase()]
 		) {
-			rotated = rotated + rotateCharacter(char, rot, targetLanguage);
-		} else if (findCharacterIndex(char, sourceLanguage) === -1) {
+			rotated = rotated + rotateCharacter(char, rot, rotatedLanguage);
+		} else if (findCharacterIndex(char, originalLanguage) === -1) {
 			const sourceCharacterIndex: number = findCharacterIndex(
 				char,
-				sourceLanguage
+				originalLanguage
 			);
 
 			// if the character is not in the target language, but the target language has a character at the same index, use the character at the same index in the target language
 			if (
-				supportedLanguages[targetLanguage].characterCount > sourceCharacterIndex
+				supportedLanguages[rotatedLanguage].characterCount >
+				sourceCharacterIndex
 			) {
 				rotated +=
-					supportedLanguages[targetLanguage].indexToCharacters[
+					supportedLanguages[rotatedLanguage].indexToCharacters[
 						sourceCharacterIndex
 					][0];
 			} else {
