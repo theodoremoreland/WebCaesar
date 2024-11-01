@@ -167,8 +167,7 @@ const App = (): ReactElement => {
 			setRot(parseInt(rot));
 			setOriginalLanguage(originalLanguage as SupportedLanguage);
 			setRotatedLanguage(rotatedLanguage as SupportedLanguage);
-		} else if (jokeData) {
-			setOriginalText(jokeData.encrypted_dad_joke);
+		} else if (jokeData?.encrypted_dad_joke) {
 			setRotatedText(
 				rotateString(
 					jokeData.encrypted_dad_joke,

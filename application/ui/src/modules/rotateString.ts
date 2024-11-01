@@ -518,8 +518,8 @@ export default (
 		if (
 			supportedLanguages[rotatedLanguage].charactersToIndex[char.toLowerCase()]
 		) {
-			rotated = rotated + rotateCharacter(char, rot, rotatedLanguage);
-		} else if (findCharacterIndex(char, originalLanguage) === -1) {
+			rotated += rotateCharacter(char, rot, rotatedLanguage);
+		} else if (findCharacterIndex(char, originalLanguage) !== -1) {
 			const sourceCharacterIndex: number = findCharacterIndex(
 				char,
 				originalLanguage
