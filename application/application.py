@@ -4,6 +4,7 @@ import random
 
 # Third party
 from flask import Flask, request, send_from_directory, make_response
+from flask_cors import CORS
 
 # Custom
 from modules.caesar import rotate_string, decrypt
@@ -11,6 +12,7 @@ from modules.dad_jokes import get_random_dad_joke
 
 application = Flask(__name__, static_folder="ui/dist", static_url_path="/")
 application.config["DEBUG"] = True
+CORS(application)
 
 
 @application.route("/", methods=["GET"])
