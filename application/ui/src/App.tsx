@@ -168,15 +168,8 @@ const App = (): ReactElement => {
 			setOriginalLanguage(originalLanguage as SupportedLanguage);
 			setRotatedLanguage(rotatedLanguage as SupportedLanguage);
 		} else if (jokeData?.encrypted_dad_joke) {
-			setRotatedText(
-				rotateString(
-					jokeData.encrypted_dad_joke,
-					0,
-					SupportedLanguage.English,
-					SupportedLanguage.English
-				)
-			);
-			setRot(0);
+			setOriginalText(jokeData.encrypted_dad_joke);
+			setRotatedText(jokeData.encrypted_dad_joke);
 		} else if (jokeError) {
 			console.error(String(jokeError));
 			toast.error(String(jokeError), { toastId: jokeErrorToastId });
