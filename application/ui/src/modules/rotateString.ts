@@ -505,6 +505,7 @@ const rotateCharacter = (
 	return rotatedCharacter;
 };
 
+// TODO rewrite to optionally throw if character is not in target language
 export default (
 	text: string,
 	rot: number,
