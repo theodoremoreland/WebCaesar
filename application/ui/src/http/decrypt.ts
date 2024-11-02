@@ -1,4 +1,8 @@
+// Third party
 import axios, { AxiosError, AxiosResponse } from "axios";
+
+// Custom
+import { baseUrl } from "./index";
 
 interface DecryptRequest {
 	text: string;
@@ -20,7 +24,7 @@ interface DecryptError {
 export default async ({ text }: DecryptRequest): Promise<DecryptResponse> => {
 	try {
 		const response: AxiosResponse<DecryptResponse> = await axios.post(
-			"/decrypt",
+			`${baseUrl}/decrypt`,
 			{ text }
 		);
 

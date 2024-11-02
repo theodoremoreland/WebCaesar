@@ -1,4 +1,8 @@
+// Third party
 import axios, { AxiosError, AxiosResponse } from "axios";
+
+// Custom
+import { baseUrl } from "./index";
 
 interface JokeResponse {
 	dad_joke: string;
@@ -12,7 +16,7 @@ interface JokeError {
 export default async (): Promise<JokeResponse> => {
 	try {
 		const response: AxiosResponse<JokeResponse> = await axios.get(
-			"/dad_joke"
+			`${baseUrl}/dad_joke`
 		);
 
 		return response.data;
