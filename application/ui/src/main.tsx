@@ -12,13 +12,13 @@ import App from "./App.tsx";
 import "./index.css";
 
 const queryClient = new QueryClient({
-	defaultOptions: { queries: { refetchOnWindowFocus: false } },
+    defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
 createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<QueryClientProvider client={queryClient}>
-			<App />
-		</QueryClientProvider>
-	</StrictMode>
+    <StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <App />
+        </QueryClientProvider>
+    </StrictMode>
 );
