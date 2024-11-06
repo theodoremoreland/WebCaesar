@@ -1,5 +1,5 @@
 // React
-import { ReactElement, useState, useEffect, ChangeEvent } from "react";
+import { ReactElement, useState, useEffect, ChangeEvent, useRef } from "react";
 
 // React Query
 import { useMutation, useQuery } from "react-query";
@@ -57,6 +57,8 @@ const App = (): ReactElement => {
         useState<boolean>(false);
     const [isRotatedLanguageDropdownOpen, setIsRotatedLanguageDropdownOpen] =
         useState<boolean>(false);
+
+    const rotInputRef = useRef<HTMLInputElement | null>(null);
 
     const { data: jokeData, error: jokeError } = useQuery(
         "dad-joke",
@@ -227,6 +229,12 @@ const App = (): ReactElement => {
             );
         }
     }, [originalText, rotatedText, rot, originalLanguage, rotatedLanguage]);
+
+    useEffect(() => {
+        if (isRotPopoverOpen && rotInputRef.current) {
+            rotInputRef.current.focus();
+        }
+    }, [isRotPopoverOpen]);
 
     return (
         <main>
@@ -440,6 +448,7 @@ const App = (): ReactElement => {
                                 </button>
                                 {isRotPopoverOpen && (
                                     <input
+                                        ref={rotInputRef}
                                         title="Rotate text by a certain degree"
                                         type="number"
                                         className="popover"
