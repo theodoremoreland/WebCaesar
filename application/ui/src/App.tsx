@@ -248,33 +248,6 @@ const App = (): ReactElement => {
                             maxLength={30_000}
                         />
                         <div className="pills">
-                            <button
-                                type="button"
-                                title={
-                                    originalText === ""
-                                        ? "No text to clear"
-                                        : "Clear text area"
-                                }
-                                className="pill"
-                                onClick={() => {
-                                    setOriginalText("");
-                                    setRotatedText("");
-                                    setRot(0);
-                                    setOriginalLanguage(
-                                        SupportedLanguage.English
-                                    );
-                                    setRotatedLanguage(
-                                        SupportedLanguage.English
-                                    );
-
-                                    localStorage.clear();
-                                }}
-                                disabled={
-                                    originalText === "" || isDecryptLoading
-                                }
-                            >
-                                Clear
-                            </button>
                             <div className="pill-wrapper">
                                 <button
                                     type="button"
@@ -315,6 +288,33 @@ const App = (): ReactElement => {
                                     </ul>
                                 )}
                             </div>
+                            <button
+                                type="button"
+                                title={
+                                    originalText === ""
+                                        ? "No text to clear"
+                                        : "Clear text area"
+                                }
+                                className="pill"
+                                onClick={() => {
+                                    setOriginalText("");
+                                    setRotatedText("");
+                                    setRot(0);
+                                    setOriginalLanguage(
+                                        SupportedLanguage.English
+                                    );
+                                    setRotatedLanguage(
+                                        SupportedLanguage.English
+                                    );
+
+                                    localStorage.clear();
+                                }}
+                                disabled={
+                                    originalText === "" || isDecryptLoading
+                                }
+                            >
+                                Clear
+                            </button>
                         </div>
                     </div>
                     <hr />
@@ -376,48 +376,6 @@ const App = (): ReactElement => {
                                 <button
                                     title={
                                         originalText === "" || isDecryptLoading
-                                            ? "No text to rotate"
-                                            : "Rotate text by a certain degree"
-                                    }
-                                    type="button"
-                                    className={`pill ${
-                                        isRotPopoverOpen ? "open" : ""
-                                    }`}
-                                    onClick={() => {
-                                        setIsRotPopoverOpen(!isRotPopoverOpen);
-                                        setIsRotatedLanguageDropdownOpen(false);
-                                    }}
-                                    disabled={
-                                        originalText === "" || isDecryptLoading
-                                    }
-                                >
-                                    rot{rot}
-                                </button>
-                                {isRotPopoverOpen && (
-                                    <input
-                                        title="Rotate text by a certain degree"
-                                        type="number"
-                                        className="popover"
-                                        name="rot"
-                                        value={rot}
-                                        autoComplete="off"
-                                        onChange={handleRotate}
-                                        min={0}
-                                        max={
-                                            supportedLanguages[rotatedLanguage]
-                                                .characterCount - 1
-                                        }
-                                        disabled={
-                                            originalText === "" ||
-                                            isDecryptLoading
-                                        }
-                                    />
-                                )}
-                            </div>
-                            <div className="pill-wrapper">
-                                <button
-                                    title={
-                                        originalText === "" || isDecryptLoading
                                             ? "Must write text before changing language"
                                             : "Change language"
                                     }
@@ -457,6 +415,48 @@ const App = (): ReactElement => {
                                             )
                                         )}
                                     </ul>
+                                )}
+                            </div>
+                            <div className="pill-wrapper">
+                                <button
+                                    title={
+                                        originalText === "" || isDecryptLoading
+                                            ? "No text to rotate"
+                                            : "Rotate text by a certain degree"
+                                    }
+                                    type="button"
+                                    className={`pill ${
+                                        isRotPopoverOpen ? "open" : ""
+                                    }`}
+                                    onClick={() => {
+                                        setIsRotPopoverOpen(!isRotPopoverOpen);
+                                        setIsRotatedLanguageDropdownOpen(false);
+                                    }}
+                                    disabled={
+                                        originalText === "" || isDecryptLoading
+                                    }
+                                >
+                                    rot{rot}
+                                </button>
+                                {isRotPopoverOpen && (
+                                    <input
+                                        title="Rotate text by a certain degree"
+                                        type="number"
+                                        className="popover"
+                                        name="rot"
+                                        value={rot}
+                                        autoComplete="off"
+                                        onChange={handleRotate}
+                                        min={0}
+                                        max={
+                                            supportedLanguages[rotatedLanguage]
+                                                .characterCount - 1
+                                        }
+                                        disabled={
+                                            originalText === "" ||
+                                            isDecryptLoading
+                                        }
+                                    />
                                 )}
                             </div>
                         </div>
