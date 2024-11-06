@@ -1,68 +1,69 @@
 @font-face {
-	font-family: custom-thin;
-	src: url("./assets/fonts/Urbanist-Thin.ttf");
+    font-family: custom-thin;
+    src: url("./assets/fonts/Urbanist-Thin.ttf");
 }
 
 @font-face {
-	font-family: custom-light;
-	src: url("./assets/fonts/Urbanist-Light.ttf");
+    font-family: custom-light;
+    src: url("./assets/fonts/Urbanist-Light.ttf");
 }
 
 @font-face {
-	font-family: custom-regular;
-	src: url("./assets/fonts/Urbanist-Regular.ttf");
+    font-family: custom-regular;
+    src: url("./assets/fonts/Urbanist-Regular.ttf");
 }
 
 @font-face {
-	font-family: custom-medium;
-	src: url("./assets/fonts/Urbanist-Medium.ttf");
+    font-family: custom-medium;
+    src: url("./assets/fonts/Urbanist-Medium.ttf");
 }
 
 @font-face {
-	font-family: custom-bold;
-	src: url("./assets/fonts/Urbanist-Bold.ttf");
+    font-family: custom-bold;
+    src: url("./assets/fonts/Urbanist-Bold.ttf");
 }
 
 :root {
-	--primary-color: #101014;
-	--secondary-color: #202024;
-	--primary-highlight-color: #8300b3;
+    --primary-color: #101014;
+    --secondary-color: #202024;
+    --primary-highlight-color: #8300b3;
 
-	--primary-font-color: #ffffff;
+    --primary-font-color: #ffffff;
 
-	--toastify-text-color-light: var(--primary-font-color) !important;
-	--toastify-color-light: var(--secondary-color) !important;
+    --toastify-color-info: var(--primary-highlight-color) !important;
+    --toastify-text-color-light: var(--primary-font-color) !important;
+    --toastify-color-light: var(--secondary-color) !important;
 }
 
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
-	font-family: custom-regular, sans-serif;
-	color: var(--primary-font-color);
-	background-color: var(--primary-color);
+    font-family: custom-regular, sans-serif;
+    color: var(--primary-font-color);
+    background-color: var(--primary-color);
 }
 
 html,
 body,
 #root {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 button:disabled {
-	background-color: #cccccc40 !important;
-	cursor: not-allowed !important;
+    background-color: #cccccc40 !important;
+    cursor: not-allowed !important;
 }
 
 .Toastify__close-button--light {
-	opacity: 0.8 !important;
-	color: var(--primary-font-color) !important;
+    opacity: 0.8 !important;
+    color: var(--primary-font-color) !important;
 }
