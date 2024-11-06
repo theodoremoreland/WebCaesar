@@ -109,8 +109,8 @@ const App = (): ReactElement => {
         language: SupportedLanguage
     ): void => {
         setOriginalLanguage(language);
-        setRotatedText(
-            rotateString(originalText ?? "", rot, originalLanguage, language)
+        setOriginalText(
+            rotateString(originalText ?? "", 0, originalLanguage, language)
         );
         setIsOriginalLanguageDropdownOpen(false);
     };
