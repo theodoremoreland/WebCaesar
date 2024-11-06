@@ -261,8 +261,8 @@ const App = (): ReactElement => {
                                     type="button"
                                     title={
                                         originalText === "" || isDecryptLoading
-                                            ? "Must write text before changing language"
-                                            : "Change language"
+                                            ? "Must write text before changing alphabet"
+                                            : "Change alphabet used"
                                     }
                                     className={`pill ${
                                         isOriginalLanguageDropdownOpen
@@ -389,8 +389,8 @@ const App = (): ReactElement => {
                                 <button
                                     title={
                                         originalText === "" || isDecryptLoading
-                                            ? "Must write text before changing language"
-                                            : "Change language"
+                                            ? "Must write text before changing alphabet"
+                                            : "Change alphabet used"
                                     }
                                     type="button"
                                     className={`pill ${
