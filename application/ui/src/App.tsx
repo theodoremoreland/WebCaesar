@@ -259,6 +259,11 @@ const App = (): ReactElement => {
                             <div className="pill-wrapper">
                                 <button
                                     type="button"
+                                    title={
+                                        originalText === "" || isDecryptLoading
+                                            ? "Must write text before changing language"
+                                            : "Change language"
+                                    }
                                     className={`pill ${
                                         isOriginalLanguageDropdownOpen
                                             ? "open"
