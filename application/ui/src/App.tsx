@@ -39,6 +39,7 @@ import "./App.css";
  * [x]: Can upload text file that will be encrypted and output into text area
  * [x] Can submit for auto detection of encrypted text and decryption
  * TODO: Can rotate text area output degree by degree using a wheel
+ * TODO: Need to validate alphabet / language of imported .txt file
  * [x] Can download textarea output as text file
  * [x] Initializes with encrypted dad joke, then prompts user to experiment with wheel to decrypt
  */
