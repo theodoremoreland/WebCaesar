@@ -27,6 +27,7 @@ _This program was created for a homework assignment at LaunchCode's Lc101 (2018)
 -   pyspellchecker
 -   react-toastify
 -   lodash
+-   black
 
 ## Screenshots
 
