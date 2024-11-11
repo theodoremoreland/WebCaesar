@@ -4,3 +4,5 @@
 **/*_example**
 Dockerfile
 **/node_modules/
+**/*.log**
+**/*.tsbuildinfo**
