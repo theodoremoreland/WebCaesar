@@ -4,3 +4,4 @@
 **/*_example**
 Dockerfile
 **/node_modules/
+**/dist/
