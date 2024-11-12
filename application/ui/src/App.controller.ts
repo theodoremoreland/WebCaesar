@@ -3,7 +3,11 @@ import { toast } from "react-toastify";
 import { debounce } from "lodash";
 
 // Custom
-import { SupportedLanguage, supportedLanguages } from "./modules/rotateString";
+import {
+    findCharacterIndex,
+    SupportedLanguage,
+    supportedLanguages,
+} from "./modules/rotateString";
 
 export const copyToastId: string = "copy-toast";
 export const decryptSuccessToastId: string = "decrypt-success-toast";
@@ -89,4 +93,25 @@ export const getFirstThreeLetters = (
     ];
 
     return firstThreeLetters;
+};
+
+export const validateInput = (
+    input: string,
+    originalLanguage: SupportedLanguage
+): void => {
+    if (input === "") {
+        return;
+    }
+
+    const lastCharacter: string = input.slice(-1);
+
+    if (/[a-zA-Z]/.test(lastCharacter) === false) {
+        return;
+    }
+
+    if (findCharacterIndex(lastCharacter, originalLanguage) === -1) {
+        throw new Error(
+            `${lastCharacter} is not a valid character in ${originalLanguage}`
+        );
+    }
 };
