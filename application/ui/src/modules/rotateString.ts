@@ -470,7 +470,7 @@ export const supportedLanguages: {
     },
 };
 
-const findCharacterIndex = (
+export const findCharacterIndex = (
     character: string,
     language: SupportedLanguage
 ): number => {
