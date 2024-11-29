@@ -41,36 +41,6 @@ def dad_joke_route():
         return make_response({"message": error_message}, 500)
 
 
-@application.route("/encrypt", methods=["POST"])
-def encrypt_route():
-    logger.info(f"Request: {request.method} {request.url}")
-    data = request.json
-
-    try:
-        rot = data["rot"]
-        text = data["text"]
-
-        if text == "" or type(text) != str:
-            raise KeyError("text")
-        if type(rot) != int:
-            raise KeyError("rot")
-
-        encrypted_text = rotate_string(text, rot)
-
-        return json.dumps({"encrypted_text": encrypted_text})
-    except KeyError as e:
-        error_message: str = (
-            f"Invalid key error. Keys: 'rot' (int) and 'text' (non-empty string) must be provided. Invalid key: {e}"
-        )
-
-        logger.exception(e)
-
-        return make_response(
-            {"message": error_message},
-            400,
-        )
-
-
 @application.route("/decrypt", methods=["POST"])
 def decrypt_route():
     logger.info(f"Request: {request.method} {request.url}")
