@@ -1,9 +1,0 @@
-**/__pycache__/
-**/venv/
-**/*.example**
-**/*_example**
-Dockerfile
-**/node_modules/
-**/*.log**
-**/*.tsbuildinfo**
-**/dist/
