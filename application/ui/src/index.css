@@ -30,6 +30,8 @@
 
     --primary-font-color: #ffffff;
 
+    --border-color: #cccccc40;
+
     --toastify-color-info: var(--primary-highlight-color) !important;
     --toastify-text-color-light: var(--primary-font-color) !important;
     --toastify-color-light: var(--secondary-color) !important;
@@ -59,7 +61,7 @@ a {
 }
 
 button:disabled {
-    background-color: #cccccc40 !important;
+    background-color: var(--border-color) !important;
     cursor: not-allowed !important;
 }
 
