@@ -23,6 +23,7 @@ import RotatedTextSection from "./components/RotatedTextSection";
 // Styles
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import LettersDraggable from "./components/LettersDraggable";
 
 /**
  * [x]: Can upload text file that will be encrypted and output into text area
@@ -108,7 +109,10 @@ const App = (): ReactElement => {
                     rotatedLanguage={rotatedLanguage}
                     setRotatedLanguage={setRotatedLanguage}
                 />
-                <div className="rot-wheel-container"></div>
+                <LettersDraggable
+                    originalLanguage={originalLanguage}
+                    rotatedLanguage={rotatedLanguage}
+                />
                 <RotatedTextSection
                     isOtherLoading={isLoading}
                     originalText={originalText}
