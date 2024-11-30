@@ -503,7 +503,7 @@ const App = (): ReactElement => {
                     </div>
                 </section>
             </div>
-            <ToastContainer />
+            <ToastContainer position="top-center" />
         </main>
     );
 };
