@@ -19,11 +19,11 @@ import getDadJoke from "./http/getDadJoke";
 // Components
 import OriginalTextSection from "./components/OriginalTextSection";
 import RotatedTextSection from "./components/RotatedTextSection";
+import LettersDraggable from "./components/LettersDraggable";
 
 // Styles
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import LettersDraggable from "./components/LettersDraggable";
 
 /**
  * [x]: Can upload text file that will be encrypted and output into text area
