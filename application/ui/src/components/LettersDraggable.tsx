@@ -91,6 +91,7 @@ const LettersDraggable = ({
         ...Object.values(supportedLanguages[rotatedLanguage].indexToCharacters),
     ];
 
+    // TODO: rotated characters lists should have empty letters in case of different alphabet lengths
     return (
         <section className="LettersDraggable">
             <ol id="character-list-original" onMouseDown={onMouseDown}>
