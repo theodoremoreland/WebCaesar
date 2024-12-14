@@ -46,7 +46,8 @@ function onMouseUp() {
                 position: e.getBoundingClientRect().top + window.scrollY,
             };
         }),
-        window.innerHeight
+        window.innerHeight,
+        `Center: ${window.innerHeight / 2}`
     );
 }
 
@@ -62,11 +63,7 @@ function onMouseMove(event: MouseEvent) {
     ol.style.transform = `translateY(${y}px)`;
 }
 
-function onMouseDown(event: React.MouseEvent<HTMLOListElement, MouseEvent>) {
-    const ol = event.currentTarget;
-
-    console.log("onMouseDown", ol);
-
+function onMouseDown() {
     document.addEventListener("mousemove", onMouseMove);
 }
 
@@ -74,11 +71,12 @@ const LettersDraggable = ({
     originalLanguage,
     rotatedLanguage,
 }: Props): ReactElement => {
-    const [characterPositions, setCharacterPositions] =
-        useState<CharacterPositions>({
-            original: {},
-            rotated: {},
-        });
+    const [characterPositions] = useState<CharacterPositions>({
+        original: {},
+        rotated: {},
+    });
+
+    console.debug(characterPositions);
 
     const originalCharactersDoubled: string[] = [
         ...Object.values(

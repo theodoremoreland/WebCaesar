@@ -73,11 +73,11 @@ main {
             outline: transparent;
             padding: 0 0.75rem;
             border: none;
-            caret-color: #cb44fc;
+            caret-color: var(--primary-highlight-color-light);
 
             &::selection {
                 color: var(--primary-font-color);
-                background-color: #c831ff;
+                background-color: var(--primary-highlight-color-lighter);
             }
 
             &#rotated-text {
@@ -85,7 +85,7 @@ main {
             }
 
             &#rotated-text:hover {
-                color: #c831ff;
+                color: var(--primary-highlight-color-lighter);
             }
         }
 
@@ -154,7 +154,7 @@ main {
         }
 
         .pill-list li:hover {
-            color: #c831ff;
+            color: var(--primary-highlight-color-lighter);
         }
 
         input.popover {
