@@ -31,6 +31,23 @@ interface Props {
 
 function onMouseUp() {
     document.removeEventListener("mousemove", onMouseMove);
+
+    const ol: HTMLOListElement = document.getElementById(
+        "character-list-original"
+    ) as HTMLOListElement;
+
+    const elements = ol.getElementsByTagName("li");
+
+    console.log(
+        "onMouseUp",
+        [...elements].map((e) => {
+            return {
+                letter: e.innerText,
+                position: e.getBoundingClientRect().top + window.scrollY,
+            };
+        }),
+        window.innerHeight
+    );
 }
 
 function onMouseMove(event: MouseEvent) {
@@ -40,8 +57,6 @@ function onMouseMove(event: MouseEvent) {
     ) as HTMLOListElement;
 
     const y = event.clientY;
-
-    console.log("onMouseMove", y);
 
     ol.style.transition = "transform 0.2s ease";
     ol.style.transform = `translateY(${y}px)`;
