@@ -51,20 +51,26 @@ function onMouseUp() {
     );
 }
 
-function onMouseMove(event: MouseEvent) {
+function onMouseMove(event: MouseEvent, originalMousePosition: number) {
     document.addEventListener("mouseup", onMouseUp);
     const ol = document.getElementById(
         "character-list-original"
     ) as HTMLOListElement;
 
-    const y = event.clientY;
+    // ol.style.transition = "transform 0.2s ease";
 
-    ol.style.transition = "transform 0.2s ease";
-    ol.style.transform = `translateY(${y}px)`;
+    const newMousePosition = event.clientY;
+    const difference = newMousePosition - originalMousePosition;
+
+    ol.style.transform = `translateY(${difference}px)`;
 }
 
-function onMouseDown() {
-    document.addEventListener("mousemove", onMouseMove);
+function onMouseDown(event: MouseEvent) {
+    const originalMousePosition = event.clientY;
+
+    document.addEventListener("mousemove", (event) =>
+        onMouseMove(event, originalMousePosition)
+    );
 }
 
 const LettersDraggable = ({
