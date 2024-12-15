@@ -42,6 +42,44 @@ const LettersDraggable = ({
     const originalMousePosition = useRef<number | null>(null);
     const originalOlTopPosition = useRef<number | null>(null);
 
+    function originalOlRenderBefore() {
+        if (!originalOlRef.current) {
+            return;
+        }
+
+        Object.values(supportedLanguages[originalLanguage].indexToCharacters)
+            .reverse()
+            .forEach((character) => {
+                const element = document.createElement("li");
+                element.innerText = character;
+
+                if (!originalOlRef.current) {
+                    return;
+                }
+
+                originalOlRef.current.prepend(element);
+            });
+    }
+
+    function originalOlRenderAfter() {
+        if (!originalOlRef.current) {
+            return;
+        }
+
+        Object.values(
+            supportedLanguages[originalLanguage].indexToCharacters
+        ).forEach((character) => {
+            const element = document.createElement("li");
+            element.innerText = character;
+
+            if (!originalOlRef.current) {
+                return;
+            }
+
+            originalOlRef.current.appendChild(element);
+        });
+    }
+
     function onOriginalOlMouseDown(event: React.MouseEvent<HTMLOListElement>) {
         if (!originalOlRef.current) {
             return;
@@ -77,7 +115,10 @@ const LettersDraggable = ({
         const newMousePosition = event.clientY;
         const difference = newMousePosition - originalMousePosition.current;
 
-        console.log(originalOlTopPosition.current, difference);
+        if (false) {
+            originalOlRenderBefore();
+            originalOlRenderAfter();
+        }
 
         originalOlRef.current.style.top = `${
             originalOlTopPosition.current + difference
