@@ -89,16 +89,6 @@ const LettersDraggable = ({
         );
         originalMousePosition.current = event.clientY;
 
-        console.log(
-            "onMouseDown",
-            Number(
-                window
-                    .getComputedStyle(originalOlRef.current)
-                    .top.replace("px", "")
-            ),
-            originalOlTopPosition.current
-        );
-
         document.addEventListener("mousemove", onOriginalOlMouseMove);
         document.addEventListener("mouseup", onOriginalOlMouseUp);
     }
@@ -148,6 +138,25 @@ const LettersDraggable = ({
         document.removeEventListener("mouseup", onOriginalOlMouseUp);
     }
 
+    function onOriginalWheelMove(event: React.WheelEvent<HTMLOListElement>) {
+        event.preventDefault();
+
+        if (
+            originalOlRef.current === null ||
+            originalMousePosition.current === null ||
+            originalOlTopPosition.current === null
+        ) {
+            return;
+        }
+
+        const deltaY =
+            event.deltaY > 10 ? 10 : event.deltaY < -10 ? -10 : event.deltaY;
+
+        originalOlRef.current.style.top = `${
+            Number(originalOlRef.current.style.top.replace("px", "")) + deltaY
+        }px`;
+    }
+
     console.debug(characterPositions, originalOlRef.current?.style.top);
 
     const originalCharactersDoubled: string[] = [
@@ -170,6 +179,7 @@ const LettersDraggable = ({
                 ref={originalOlRef}
                 id="character-list-original"
                 onMouseDown={onOriginalOlMouseDown}
+                onWheel={onOriginalWheelMove}
             >
                 {originalCharactersDoubled.map((character, index) => {
                     return <li key={index + character}>{character}</li>;
