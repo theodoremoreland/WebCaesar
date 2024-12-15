@@ -1,28 +1,11 @@
 // React
-import { ReactElement, useRef, useState } from "react";
+import { ReactElement, useRef } from "react";
 
 // Custom
 import { SupportedLanguage, supportedLanguages } from "../modules/rotateString";
 
 // Styles
 import "./LettersDraggable.css";
-
-interface CharacterPositions {
-    original: {
-        [character: string]: {
-            x: number;
-            y: number;
-            index: number;
-        };
-    };
-    rotated: {
-        [character: string]: {
-            x: number;
-            y: number;
-            index: number;
-        };
-    };
-}
 
 interface Props {
     originalLanguage: SupportedLanguage;
@@ -33,14 +16,24 @@ const LettersDraggable = ({
     originalLanguage,
     rotatedLanguage,
 }: Props): ReactElement => {
-    const [characterPositions] = useState<CharacterPositions>({
-        original: {},
-        rotated: {},
-    });
+    const sectionRef = useRef<HTMLElement | null>(null);
     const originalOlRef = useRef<HTMLOListElement | null>(null);
     const rotatedOlRef = useRef<HTMLOListElement | null>(null);
     const originalMousePosition = useRef<number | null>(null);
     const originalOlTopPosition = useRef<number | null>(null);
+
+    const originalCharactersDoubled: string[] = [
+        ...Object.values(
+            supportedLanguages[originalLanguage].indexToCharacters
+        ),
+        ...Object.values(
+            supportedLanguages[originalLanguage].indexToCharacters
+        ),
+    ];
+    const rotatedCharactersDoubled: string[] = [
+        ...Object.values(supportedLanguages[rotatedLanguage].indexToCharacters),
+        ...Object.values(supportedLanguages[rotatedLanguage].indexToCharacters),
+    ];
 
     function originalOlRenderBefore() {
         if (!originalOlRef.current) {
@@ -50,7 +43,7 @@ const LettersDraggable = ({
         Object.values(supportedLanguages[originalLanguage].indexToCharacters)
             .reverse()
             .forEach((character) => {
-                const element = document.createElement("li");
+                const element: HTMLLIElement = document.createElement("li");
                 element.innerText = character;
 
                 if (!originalOlRef.current) {
@@ -84,6 +77,7 @@ const LettersDraggable = ({
         if (!originalOlRef.current) {
             return;
         }
+
         originalOlTopPosition.current = Number(
             window.getComputedStyle(originalOlRef.current).top.replace("px", "")
         );
@@ -157,24 +151,9 @@ const LettersDraggable = ({
         }px`;
     }
 
-    console.debug(characterPositions, originalOlRef.current?.style.top);
-
-    const originalCharactersDoubled: string[] = [
-        ...Object.values(
-            supportedLanguages[originalLanguage].indexToCharacters
-        ),
-        ...Object.values(
-            supportedLanguages[originalLanguage].indexToCharacters
-        ),
-    ];
-    const rotatedCharactersDoubled: string[] = [
-        ...Object.values(supportedLanguages[rotatedLanguage].indexToCharacters),
-        ...Object.values(supportedLanguages[rotatedLanguage].indexToCharacters),
-    ];
-
     // TODO: rotated characters lists should have empty letters in case of different alphabet lengths
     return (
-        <section className="LettersDraggable">
+        <section ref={sectionRef} className="LettersDraggable">
             <ol
                 ref={originalOlRef}
                 id="character-list-original"
