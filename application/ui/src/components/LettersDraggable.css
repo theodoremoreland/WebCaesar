@@ -18,6 +18,7 @@
 
     ol {
         position: relative;
+        top: 0px;
         display: flex;
         flex-direction: column;
         justify-content: center;

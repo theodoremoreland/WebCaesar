@@ -1,5 +1,5 @@
 // React
-import { ReactElement, useState } from "react";
+import { ReactElement, useRef, useState } from "react";
 
 // Custom
 import { SupportedLanguage, supportedLanguages } from "../modules/rotateString";
@@ -29,50 +29,6 @@ interface Props {
     rotatedLanguage: SupportedLanguage;
 }
 
-function onMouseUp() {
-    document.removeEventListener("mousemove", onMouseMove);
-
-    const ol: HTMLOListElement = document.getElementById(
-        "character-list-original"
-    ) as HTMLOListElement;
-
-    const elements = ol.getElementsByTagName("li");
-
-    console.log(
-        "onMouseUp",
-        [...elements].map((e) => {
-            return {
-                letter: e.innerText,
-                position: e.getBoundingClientRect().top + window.scrollY,
-            };
-        }),
-        window.innerHeight,
-        `Center: ${window.innerHeight / 2}`
-    );
-}
-
-function onMouseMove(event: MouseEvent, originalMousePosition: number) {
-    document.addEventListener("mouseup", onMouseUp);
-    const ol = document.getElementById(
-        "character-list-original"
-    ) as HTMLOListElement;
-
-    // ol.style.transition = "transform 0.2s ease";
-
-    const newMousePosition = event.clientY;
-    const difference = newMousePosition - originalMousePosition;
-
-    ol.style.transform = `translateY(${difference}px)`;
-}
-
-function onMouseDown(event: MouseEvent) {
-    const originalMousePosition = event.clientY;
-
-    document.addEventListener("mousemove", (event) =>
-        onMouseMove(event, originalMousePosition)
-    );
-}
-
 const LettersDraggable = ({
     originalLanguage,
     rotatedLanguage,
@@ -81,8 +37,77 @@ const LettersDraggable = ({
         original: {},
         rotated: {},
     });
+    const originalOlRef = useRef<HTMLOListElement | null>(null);
+    const rotatedOlRef = useRef<HTMLOListElement | null>(null);
+    const originalMousePosition = useRef<number | null>(null);
+    const originalOlTopPosition = useRef<number | null>(null);
 
-    console.debug(characterPositions);
+    function onOriginalOlMouseDown(event: React.MouseEvent<HTMLOListElement>) {
+        if (!originalOlRef.current) {
+            return;
+        }
+        originalOlTopPosition.current = Number(
+            window.getComputedStyle(originalOlRef.current).top.replace("px", "")
+        );
+        originalMousePosition.current = event.clientY;
+
+        console.log(
+            "onMouseDown",
+            Number(
+                window
+                    .getComputedStyle(originalOlRef.current)
+                    .top.replace("px", "")
+            ),
+            originalOlTopPosition.current
+        );
+
+        document.addEventListener("mousemove", onOriginalOlMouseMove);
+        document.addEventListener("mouseup", onOriginalOlMouseUp);
+    }
+
+    function onOriginalOlMouseMove(event: MouseEvent) {
+        if (
+            originalOlRef.current === null ||
+            originalMousePosition.current === null ||
+            originalOlTopPosition.current === null
+        ) {
+            return;
+        }
+
+        const newMousePosition = event.clientY;
+        const difference = newMousePosition - originalMousePosition.current;
+
+        console.log(originalOlTopPosition.current, difference);
+
+        originalOlRef.current.style.top = `${
+            originalOlTopPosition.current + difference
+        }px`;
+    }
+
+    function onOriginalOlMouseUp() {
+        document.removeEventListener("mousemove", onOriginalOlMouseMove);
+
+        if (!originalOlRef.current) {
+            return;
+        }
+        // const elements = originalOlRef.current.getElementsByTagName("li");
+
+        // console.log(
+        //     "onMouseUp",
+        //     [...elements].map((e) => {
+        //         return {
+        //             letter: e.innerText,
+        //             position: e.getBoundingClientRect().top + window.scrollY,
+        //         };
+        //     }),
+        //     window.innerHeight,
+        //     `Center: ${window.innerHeight / 2}`
+        // );
+
+        document.removeEventListener("mouseup", onOriginalOlMouseUp);
+    }
+
+    console.debug(characterPositions, originalOlRef.current?.style.top);
 
     const originalCharactersDoubled: string[] = [
         ...Object.values(
@@ -100,12 +125,16 @@ const LettersDraggable = ({
     // TODO: rotated characters lists should have empty letters in case of different alphabet lengths
     return (
         <section className="LettersDraggable">
-            <ol id="character-list-original" onMouseDown={onMouseDown}>
+            <ol
+                ref={originalOlRef}
+                id="character-list-original"
+                onMouseDown={onOriginalOlMouseDown}
+            >
                 {originalCharactersDoubled.map((character, index) => {
                     return <li key={index + character}>{character}</li>;
                 })}
             </ol>
-            <ol id="character-list-rotated">
+            <ol ref={rotatedOlRef} id="character-list-rotated">
                 {rotatedCharactersDoubled.map((character, index) => {
                     return <li key={index + character}>{character}</li>;
                 })}
