@@ -180,6 +180,13 @@ const LettersDraggable = ({
                     return <li key={index + character}>{character}</li>;
                 })}
             </ol>
+            <ul id="character-grid">
+                {Object.values(
+                    supportedLanguages[rotatedLanguage].indexToCharacters
+                ).map((character, index) => {
+                    return <li key={index + character + "grid"}></li>;
+                })}
+            </ul>
         </section>
     );
 };
