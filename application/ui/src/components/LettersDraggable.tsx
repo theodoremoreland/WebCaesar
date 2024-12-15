@@ -149,7 +149,7 @@ const LettersDraggable = ({
             return;
         }
 
-        const deltaY =
+        const deltaY: number =
             event.deltaY > 10 ? 10 : event.deltaY < -10 ? -10 : event.deltaY;
 
         originalOlRef.current.style.top = `${
