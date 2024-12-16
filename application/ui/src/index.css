@@ -26,8 +26,8 @@
 :root {
     --primary-color: #101014;
     --secondary-color: #202024;
+    --tertiary-color: #b3002a;
     --primary-highlight-color: #008897;
-    /* --primary-highlight-color: #b3002a; */
 
     --primary-highlight-color-light: color-mix(
         in srgb,

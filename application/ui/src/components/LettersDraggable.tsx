@@ -45,6 +45,7 @@ const LettersDraggable = ({
             .forEach((character) => {
                 const element: HTMLLIElement = document.createElement("li");
                 element.innerText = character;
+                element.classList.add("virtual");
 
                 if (!originalOlRef.current) {
                     return;
@@ -91,17 +92,30 @@ const LettersDraggable = ({
         if (
             originalOlRef.current === null ||
             originalMousePosition.current === null ||
-            originalOlTopPosition.current === null
+            originalOlTopPosition.current === null ||
+            sectionRef.current === null
         ) {
             return;
         }
 
-        const newMousePosition = event.clientY;
-        const difference = newMousePosition - originalMousePosition.current;
+        const newMousePosition: number = event.clientY;
+        const difference: number =
+            newMousePosition - originalMousePosition.current;
 
-        if (false) {
+        // Get the bounding rectangles of the child and parent elements
+        const childRect: DOMRect =
+            originalOlRef.current.getBoundingClientRect();
+        const parentRect: DOMRect = sectionRef.current.getBoundingClientRect();
+
+        // Calculate the empty space between the bottom of the child and the bottom of the parent
+        const topEmptySpace: number = childRect.top - parentRect.top;
+        const bottomEmptySpace: number = parentRect.bottom - childRect.bottom;
+
+        console.log("topEmptySpace", topEmptySpace);
+        // console.log("bottomEmptySpace", bottomEmptySpace);
+
+        if (difference > 0 && topEmptySpace >= -10) {
             originalOlRenderBefore();
-            originalOlRenderAfter();
         }
 
         originalOlRef.current.style.top = `${
@@ -161,12 +175,36 @@ const LettersDraggable = ({
                 onWheel={onOriginalWheelMove}
             >
                 {originalCharactersDoubled.map((character, index) => {
-                    return <li key={index + character}>{character}</li>;
+                    return (
+                        <li
+                            key={index + character}
+                            className={`${
+                                supportedLanguages[originalLanguage]
+                                    .charactersToIndex[character] === 0
+                                    ? "first"
+                                    : ""
+                            }`}
+                        >
+                            {character}
+                        </li>
+                    );
                 })}
             </ol>
             <ol ref={rotatedOlRef} id="character-list-rotated">
                 {rotatedCharactersDoubled.map((character, index) => {
-                    return <li key={index + character}>{character}</li>;
+                    return (
+                        <li
+                            key={index + character}
+                            className={`${
+                                supportedLanguages[rotatedLanguage]
+                                    .charactersToIndex[character] === 0
+                                    ? "first"
+                                    : ""
+                            }`}
+                        >
+                            {character}
+                        </li>
+                    );
                 })}
             </ol>
             <ul id="character-grid">
