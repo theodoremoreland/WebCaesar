@@ -17,10 +17,13 @@ const LettersDraggable = ({
     rotatedLanguage,
 }: Props): ReactElement => {
     const sectionRef = useRef<HTMLElement | null>(null);
+    const startingMousePositionRef = useRef<number | null>(null);
+
     const originalOlRef = useRef<HTMLOListElement | null>(null);
+    const startingOriginalOlTop = useRef<number | null>(null);
+
     const rotatedOlRef = useRef<HTMLOListElement | null>(null);
-    const originalMousePosition = useRef<number | null>(null);
-    const originalOlTopPosition = useRef<number | null>(null);
+    const startingRotatedOlTop = useRef<number | null>(null);
 
     const originalCharactersDoubled: string[] = [
         ...Object.values(
@@ -79,10 +82,10 @@ const LettersDraggable = ({
             return;
         }
 
-        originalOlTopPosition.current = Number(
+        startingOriginalOlTop.current = Number(
             window.getComputedStyle(originalOlRef.current).top.replace("px", "")
         );
-        originalMousePosition.current = event.clientY;
+        startingMousePositionRef.current = event.clientY;
 
         document.addEventListener("mousemove", onOriginalOlMouseMove);
         document.addEventListener("mouseup", onOriginalOlMouseUp);
@@ -91,8 +94,8 @@ const LettersDraggable = ({
     function onOriginalOlMouseMove(event: MouseEvent) {
         if (
             originalOlRef.current === null ||
-            originalMousePosition.current === null ||
-            originalOlTopPosition.current === null ||
+            startingMousePositionRef.current === null ||
+            startingOriginalOlTop.current === null ||
             sectionRef.current === null
         ) {
             return;
@@ -100,7 +103,7 @@ const LettersDraggable = ({
 
         const newMousePosition: number = event.clientY;
         const difference: number =
-            newMousePosition - originalMousePosition.current;
+            newMousePosition - startingMousePositionRef.current;
 
         // Get the bounding rectangles of the child and parent elements
         const childRect: DOMRect =
@@ -119,7 +122,7 @@ const LettersDraggable = ({
         }
 
         originalOlRef.current.style.top = `${
-            originalOlTopPosition.current + difference
+            startingOriginalOlTop.current + difference
         }px`;
     }
 
@@ -151,8 +154,8 @@ const LettersDraggable = ({
 
         if (
             originalOlRef.current === null ||
-            originalMousePosition.current === null ||
-            originalOlTopPosition.current === null
+            startingMousePositionRef.current === null ||
+            startingOriginalOlTop.current === null
         ) {
             return;
         }
@@ -162,6 +165,63 @@ const LettersDraggable = ({
 
         originalOlRef.current.style.top = `${
             Number(originalOlRef.current.style.top.replace("px", "")) + deltaY
+        }px`;
+    }
+
+    function onRotatedOlMouseDown(event: React.MouseEvent<HTMLOListElement>) {
+        if (!rotatedOlRef.current) {
+            return;
+        }
+
+        startingRotatedOlTop.current = Number(
+            window.getComputedStyle(rotatedOlRef.current).top.replace("px", "")
+        );
+        startingMousePositionRef.current = event.clientY;
+
+        document.addEventListener("mousemove", onRotatedOlMouseMove);
+        document.addEventListener("mouseup", onRotatedOlMouseUp);
+    }
+
+    function onRotatedOlMouseMove(event: MouseEvent) {
+        if (
+            rotatedOlRef.current === null ||
+            startingMousePositionRef.current === null ||
+            startingRotatedOlTop.current === null ||
+            sectionRef.current === null
+        ) {
+            return;
+        }
+
+        const newMousePosition: number = event.clientY;
+        const difference: number =
+            newMousePosition - startingMousePositionRef.current;
+
+        rotatedOlRef.current.style.top = `${
+            startingRotatedOlTop.current + difference
+        }px`;
+    }
+
+    function onRotatedOlMouseUp() {
+        document.removeEventListener("mousemove", onRotatedOlMouseMove);
+        document.removeEventListener("mouseup", onRotatedOlMouseUp);
+    }
+
+    function onRotatedWheelMove(event: React.WheelEvent<HTMLOListElement>) {
+        event.preventDefault();
+
+        if (
+            rotatedOlRef.current === null ||
+            startingMousePositionRef.current === null ||
+            startingRotatedOlTop.current === null
+        ) {
+            return;
+        }
+
+        const deltaY: number =
+            event.deltaY > 10 ? 10 : event.deltaY < -10 ? -10 : event.deltaY;
+
+        rotatedOlRef.current.style.top = `${
+            Number(rotatedOlRef.current.style.top.replace("px", "")) + deltaY
         }px`;
     }
 
@@ -190,7 +250,12 @@ const LettersDraggable = ({
                     );
                 })}
             </ol>
-            <ol ref={rotatedOlRef} id="character-list-rotated">
+            <ol
+                ref={rotatedOlRef}
+                id="character-list-rotated"
+                onMouseDown={onRotatedOlMouseDown}
+                onWheel={onRotatedWheelMove}
+            >
                 {rotatedCharactersDoubled.map((character, index) => {
                     return (
                         <li
