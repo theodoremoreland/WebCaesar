@@ -12,50 +12,71 @@ interface Props {
     rotatedLanguage: SupportedLanguage;
 }
 
+const filled = (array: string[], desiredLength: number): string[] => {
+    const newArray: string[] = [...array];
+
+    while (newArray.length < desiredLength) {
+        newArray.push("");
+    }
+
+    return newArray;
+};
+
+const quintuple = (array: string[]): string[] => {
+    const newArray: string[] = [];
+
+    for (let i = 0; i < 5; i++) {
+        newArray.push(...array);
+    }
+
+    return newArray;
+};
+
 const LettersDraggable = ({
     originalLanguage,
     rotatedLanguage,
 }: Props): ReactElement => {
+    // Global refs
     const sectionRef = useRef<HTMLElement | null>(null);
     const startingMousePositionRef = useRef<number | null>(null);
 
+    // Original characters list refs
     const originalOlRef = useRef<HTMLOListElement | null>(null);
     const startingOriginalOlTop = useRef<number | null>(null);
 
+    // Rotated characters list refs
     const rotatedOlRef = useRef<HTMLOListElement | null>(null);
     const startingRotatedOlTop = useRef<number | null>(null);
 
-    const originalCharactersDoubled: string[] = [
-        ...Object.values(
-            supportedLanguages[originalLanguage].indexToCharacters
-        ),
-        ...Object.values(
-            supportedLanguages[originalLanguage].indexToCharacters
-        ),
-    ];
-    const rotatedCharactersDoubled: string[] = [
-        ...Object.values(supportedLanguages[rotatedLanguage].indexToCharacters),
-        ...Object.values(supportedLanguages[rotatedLanguage].indexToCharacters),
-    ];
+    const lengthOfLongestAlphabet: number = Math.max(
+        supportedLanguages[originalLanguage].characters.length,
+        supportedLanguages[rotatedLanguage].characters.length
+    );
+    const originalCharactersFilled: string[] = filled(
+        supportedLanguages[originalLanguage].characters,
+        lengthOfLongestAlphabet
+    );
+    const rotatedCharactersFilled: string[] = filled(
+        supportedLanguages[rotatedLanguage].characters,
+        lengthOfLongestAlphabet
+    );
 
     function originalOlRenderBefore() {
         if (!originalOlRef.current) {
             return;
         }
 
-        Object.values(supportedLanguages[originalLanguage].indexToCharacters)
-            .reverse()
-            .forEach((character) => {
-                const element: HTMLLIElement = document.createElement("li");
-                element.innerText = character;
-                element.classList.add("virtual");
+        originalCharactersFilled.reverse().forEach((character) => {
+            const element: HTMLLIElement = document.createElement("li");
+            element.innerText = character;
+            element.classList.add("virtual");
 
-                if (!originalOlRef.current) {
-                    return;
-                }
+            if (!originalOlRef.current) {
+                return;
+            }
 
-                originalOlRef.current.prepend(element);
-            });
+            originalOlRef.current.prepend(element);
+        });
     }
 
     function originalOlRenderAfter() {
@@ -63,9 +84,7 @@ const LettersDraggable = ({
             return;
         }
 
-        Object.values(
-            supportedLanguages[originalLanguage].indexToCharacters
-        ).forEach((character) => {
+        originalCharactersFilled.forEach((character) => {
             const element = document.createElement("li");
             element.innerText = character;
 
@@ -234,7 +253,7 @@ const LettersDraggable = ({
                 onMouseDown={onOriginalOlMouseDown}
                 onWheel={onOriginalWheelMove}
             >
-                {originalCharactersDoubled.map((character, index) => {
+                {quintuple(originalCharactersFilled).map((character, index) => {
                     return (
                         <li
                             key={index + character}
@@ -256,7 +275,7 @@ const LettersDraggable = ({
                 onMouseDown={onRotatedOlMouseDown}
                 onWheel={onRotatedWheelMove}
             >
-                {rotatedCharactersDoubled.map((character, index) => {
+                {quintuple(rotatedCharactersFilled).map((character, index) => {
                     return (
                         <li
                             key={index + character}
