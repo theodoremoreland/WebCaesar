@@ -32,6 +32,10 @@ const quadruple = (array: string[]): string[] => {
     return newArray;
 };
 
+const get25Percent = (value: number): number => {
+    return value * 0.25;
+};
+
 const LettersDraggable = ({
     originalLanguage,
     rotatedLanguage,
@@ -127,18 +131,30 @@ const LettersDraggable = ({
         // Get the bounding rectangles of the child and parent elements
         const childRect: DOMRect =
             originalOlRef.current.getBoundingClientRect();
-        const parentRect: DOMRect = sectionRef.current.getBoundingClientRect();
 
+        const newTop: number = startingOriginalOlTop.current + difference;
+        const isWithinResetThreshold: boolean =
+            newTop - get25Percent(childRect.height) >= 10;
         // Calculate the empty space between the bottom of the child and the bottom of the parent
-        const topEmptySpace: number = childRect.top - parentRect.top;
-        const bottomEmptySpace: number = parentRect.bottom - childRect.bottom;
+        // const parentRect: DOMRect = sectionRef.current.getBoundingClientRect();
+        // const topEmptySpace: number = childRect.top - parentRect.top;
+        // const bottomEmptySpace: number = parentRect.bottom - childRect.bottom;
 
-        console.log("topEmptySpace", topEmptySpace);
-        console.log("bottomEmptySpace", bottomEmptySpace);
+        console.log(
+            get25Percent(childRect.height),
 
-        originalOlRef.current.style.top = `${
-            startingOriginalOlTop.current + difference
-        }px`;
+            newTop
+        );
+
+        if (difference > 0 && isWithinResetThreshold) {
+            originalOlRef.current.style.top = `${
+                newTop - get25Percent(childRect.height)
+            }px`;
+        } else {
+            originalOlRef.current.style.top = `${
+                startingOriginalOlTop.current + difference
+            }px`;
+        }
     }
 
     function onOriginalOlMouseUp() {
