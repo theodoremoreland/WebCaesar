@@ -22,10 +22,10 @@ const filled = (array: string[], desiredLength: number): string[] => {
     return newArray;
 };
 
-const quintuple = (array: string[]): string[] => {
+const quadruple = (array: string[]): string[] => {
     const newArray: string[] = [];
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 4; i++) {
         newArray.push(...array);
     }
 
@@ -61,40 +61,40 @@ const LettersDraggable = ({
         lengthOfLongestAlphabet
     );
 
-    function originalOlRenderBefore() {
-        if (!originalOlRef.current) {
-            return;
-        }
+    // function originalOlRenderBefore() {
+    //     if (!originalOlRef.current) {
+    //         return;
+    //     }
 
-        originalCharactersFilled.reverse().forEach((character) => {
-            const element: HTMLLIElement = document.createElement("li");
-            element.innerText = character;
-            element.classList.add("virtual");
+    //     originalCharactersFilled.reverse().forEach((character) => {
+    //         const element: HTMLLIElement = document.createElement("li");
+    //         element.innerText = character;
+    //         element.classList.add("virtual");
 
-            if (!originalOlRef.current) {
-                return;
-            }
+    //         if (!originalOlRef.current) {
+    //             return;
+    //         }
 
-            originalOlRef.current.prepend(element);
-        });
-    }
+    //         originalOlRef.current.prepend(element);
+    //     });
+    // }
 
-    function originalOlRenderAfter() {
-        if (!originalOlRef.current) {
-            return;
-        }
+    // function originalOlRenderAfter() {
+    //     if (!originalOlRef.current) {
+    //         return;
+    //     }
 
-        originalCharactersFilled.forEach((character) => {
-            const element = document.createElement("li");
-            element.innerText = character;
+    //     originalCharactersFilled.forEach((character) => {
+    //         const element = document.createElement("li");
+    //         element.innerText = character;
 
-            if (!originalOlRef.current) {
-                return;
-            }
+    //         if (!originalOlRef.current) {
+    //             return;
+    //         }
 
-            originalOlRef.current.appendChild(element);
-        });
-    }
+    //         originalOlRef.current.appendChild(element);
+    //     });
+    // }
 
     function onOriginalOlMouseDown(event: React.MouseEvent<HTMLOListElement>) {
         if (!originalOlRef.current) {
@@ -134,11 +134,7 @@ const LettersDraggable = ({
         const bottomEmptySpace: number = parentRect.bottom - childRect.bottom;
 
         console.log("topEmptySpace", topEmptySpace);
-        // console.log("bottomEmptySpace", bottomEmptySpace);
-
-        if (difference > 0 && topEmptySpace >= -10) {
-            originalOlRenderBefore();
-        }
+        console.log("bottomEmptySpace", bottomEmptySpace);
 
         originalOlRef.current.style.top = `${
             startingOriginalOlTop.current + difference
@@ -253,7 +249,7 @@ const LettersDraggable = ({
                 onMouseDown={onOriginalOlMouseDown}
                 onWheel={onOriginalWheelMove}
             >
-                {quintuple(originalCharactersFilled).map((character, index) => {
+                {quadruple(originalCharactersFilled).map((character, index) => {
                     return (
                         <li
                             key={index + character}
@@ -275,7 +271,7 @@ const LettersDraggable = ({
                 onMouseDown={onRotatedOlMouseDown}
                 onWheel={onRotatedWheelMove}
             >
-                {quintuple(rotatedCharactersFilled).map((character, index) => {
+                {quadruple(rotatedCharactersFilled).map((character, index) => {
                     return (
                         <li
                             key={index + character}
