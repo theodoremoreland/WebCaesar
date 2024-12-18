@@ -12,14 +12,16 @@ export enum SupportedLanguage {
 }
 
 export interface IndexToCharacters {
-    [key: number]: string[];
+    [index: number]: string[];
 }
 
 export interface CharactersToIndex {
-    [key: string]: number;
+    [character: string]: number;
 }
 
-const deriveCharactersToIndex = (indexToCharacters: IndexToCharacters) => {
+const deriveCharactersToIndex = (
+    indexToCharacters: IndexToCharacters
+): CharactersToIndex => {
     const charactersToIndex: CharactersToIndex = {};
 
     for (const [index, characters] of Object.entries(indexToCharacters)) {
@@ -402,6 +404,10 @@ const CHARACTERS_TO_INDEX_NL: CharactersToIndex = deriveCharactersToIndex(
 
 export const supportedLanguages: {
     [K in SupportedLanguage]: {
+        /** Array of characters from given language. If multiple variants of a character exists
+         * (e.g. "a" and "à"), only the first variant is included in the array.
+         */
+        characters: string[];
         characterCount: number;
         charactersToIndex: CharactersToIndex;
         indexToCharacters: IndexToCharacters;
@@ -409,60 +415,90 @@ export const supportedLanguages: {
     };
 } = {
     English: {
+        characters: Object.values(INDEX_TO_CHARACTERS_EN).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_EN).length,
         charactersToIndex: CHARACTERS_TO_INDEX_EN,
         indexToCharacters: INDEX_TO_CHARACTERS_EN,
         code: "en",
     },
     Spanish: {
+        characters: Object.values(INDEX_TO_CHARACTERS_ES).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_ES).length,
         charactersToIndex: CHARACTERS_TO_INDEX_ES,
         indexToCharacters: INDEX_TO_CHARACTERS_ES,
         code: "es",
     },
     French: {
+        characters: Object.values(INDEX_TO_CHARACTERS_FR).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_FR).length,
         charactersToIndex: CHARACTERS_TO_INDEX_FR,
         indexToCharacters: INDEX_TO_CHARACTERS_FR,
         code: "fr",
     },
     Portuguese: {
+        characters: Object.values(INDEX_TO_CHARACTERS_PT).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_PT).length,
         charactersToIndex: CHARACTERS_TO_INDEX_PT,
         indexToCharacters: INDEX_TO_CHARACTERS_PT,
         code: "pt",
     },
     German: {
+        characters: Object.values(INDEX_TO_CHARACTERS_DE).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_DE).length,
         charactersToIndex: CHARACTERS_TO_INDEX_DE,
         indexToCharacters: INDEX_TO_CHARACTERS_DE,
         code: "de",
     },
     Italian: {
+        characters: Object.values(INDEX_TO_CHARACTERS_IT).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_IT).length,
         charactersToIndex: CHARACTERS_TO_INDEX_IT,
         indexToCharacters: INDEX_TO_CHARACTERS_IT,
         code: "it",
     },
     Russian: {
+        characters: Object.values(INDEX_TO_CHARACTERS_RU).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_RU).length,
         charactersToIndex: CHARACTERS_TO_INDEX_RU,
         indexToCharacters: INDEX_TO_CHARACTERS_RU,
         code: "ru",
     },
     Basque: {
+        characters: Object.values(INDEX_TO_CHARACTERS_EU).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_EU).length,
         charactersToIndex: CHARACTERS_TO_INDEX_EU,
         indexToCharacters: INDEX_TO_CHARACTERS_EU,
         code: "eu",
     },
     Latvian: {
+        characters: Object.values(INDEX_TO_CHARACTERS_LV).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_LV).length,
         charactersToIndex: CHARACTERS_TO_INDEX_LV,
         indexToCharacters: INDEX_TO_CHARACTERS_LV,
         code: "lv",
     },
     Dutch: {
+        characters: Object.values(INDEX_TO_CHARACTERS_NL).map(
+            (chars) => chars[0]
+        ),
         characterCount: Object.keys(INDEX_TO_CHARACTERS_NL).length,
         charactersToIndex: CHARACTERS_TO_INDEX_NL,
         indexToCharacters: INDEX_TO_CHARACTERS_NL,
