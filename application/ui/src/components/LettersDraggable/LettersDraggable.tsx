@@ -16,6 +16,56 @@ interface Props {
     rotatedLanguage: SupportedLanguage;
 }
 
+function onWheelMove(
+    event: React.WheelEvent<HTMLOListElement>,
+    {
+        olRef,
+        startingMousePositionRef,
+        startingOlTop,
+    }: {
+        olRef: React.MutableRefObject<HTMLOListElement | null>;
+        startingMousePositionRef: React.MutableRefObject<number | null>;
+        startingOlTop: React.MutableRefObject<number | null>;
+    }
+) {
+    event.preventDefault();
+
+    if (
+        olRef.current === null ||
+        startingMousePositionRef.current === null ||
+        startingOlTop.current === null
+    ) {
+        return;
+    }
+
+    const deltaY: number =
+        event.deltaY > 10 ? 10 : event.deltaY < -10 ? -10 : event.deltaY;
+
+    // Get the bounding rectangles of the child and parent elements
+    const childRect: DOMRect = olRef.current.getBoundingClientRect();
+
+    const newTop: number =
+        Number(olRef.current.style.top.replace("px", "")) + deltaY;
+    const isWithinResetThresholdScrollingDown: boolean =
+        newTop - get25Percent(childRect.height) >= 10;
+    const isWithinResetThresholdScrollingUp: boolean =
+        newTop + get25Percent(childRect.height) <= 10;
+
+    olRef.current.style.top = `${newTop}px`;
+
+    if (deltaY > 0 && isWithinResetThresholdScrollingDown) {
+        olRef.current.style.top = `${
+            newTop - get25Percent(childRect.height)
+        }px`;
+    } else if (deltaY < 0 && isWithinResetThresholdScrollingUp) {
+        olRef.current.style.top = `${
+            newTop + get25Percent(childRect.height)
+        }px`;
+    } else {
+        olRef.current.style.top = `${newTop}px`;
+    }
+}
+
 const LettersDraggable = ({
     originalLanguage,
     rotatedLanguage,
@@ -121,46 +171,6 @@ const LettersDraggable = ({
         document.removeEventListener("mouseup", onOriginalOlMouseUp);
     }
 
-    function onOriginalWheelMove(event: React.WheelEvent<HTMLOListElement>) {
-        event.preventDefault();
-
-        if (
-            originalOlRef.current === null ||
-            startingMousePositionRef.current === null ||
-            startingOriginalOlTop.current === null
-        ) {
-            return;
-        }
-
-        const deltaY: number =
-            event.deltaY > 10 ? 10 : event.deltaY < -10 ? -10 : event.deltaY;
-
-        // Get the bounding rectangles of the child and parent elements
-        const childRect: DOMRect =
-            originalOlRef.current.getBoundingClientRect();
-
-        const newTop: number =
-            Number(originalOlRef.current.style.top.replace("px", "")) + deltaY;
-        const isWithinResetThresholdScrollingDown: boolean =
-            newTop - get25Percent(childRect.height) >= 10;
-        const isWithinResetThresholdScrollingUp: boolean =
-            newTop + get25Percent(childRect.height) <= 10;
-
-        originalOlRef.current.style.top = `${newTop}px`;
-
-        if (deltaY > 0 && isWithinResetThresholdScrollingDown) {
-            originalOlRef.current.style.top = `${
-                newTop - get25Percent(childRect.height)
-            }px`;
-        } else if (deltaY < 0 && isWithinResetThresholdScrollingUp) {
-            originalOlRef.current.style.top = `${
-                newTop + get25Percent(childRect.height)
-            }px`;
-        } else {
-            originalOlRef.current.style.top = `${newTop}px`;
-        }
-    }
-
     function onRotatedOlMouseDown(event: React.MouseEvent<HTMLOListElement>) {
         if (!rotatedOlRef.current) {
             return;
@@ -199,32 +209,19 @@ const LettersDraggable = ({
         document.removeEventListener("mouseup", onRotatedOlMouseUp);
     }
 
-    function onRotatedWheelMove(event: React.WheelEvent<HTMLOListElement>) {
-        event.preventDefault();
-
-        if (
-            rotatedOlRef.current === null ||
-            startingMousePositionRef.current === null ||
-            startingRotatedOlTop.current === null
-        ) {
-            return;
-        }
-
-        const deltaY: number =
-            event.deltaY > 10 ? 10 : event.deltaY < -10 ? -10 : event.deltaY;
-
-        rotatedOlRef.current.style.top = `${
-            Number(rotatedOlRef.current.style.top.replace("px", "")) + deltaY
-        }px`;
-    }
-
     return (
         <section ref={sectionRef} className="LettersDraggable">
             <ol
                 ref={originalOlRef}
                 id="character-list-original"
                 onMouseDown={onOriginalOlMouseDown}
-                onWheel={onOriginalWheelMove}
+                onWheel={(event) =>
+                    onWheelMove(event, {
+                        olRef: originalOlRef,
+                        startingMousePositionRef,
+                        startingOlTop: startingOriginalOlTop,
+                    })
+                }
             >
                 {quadruple(originalCharactersFilled).map((character, index) => {
                     return (
@@ -246,7 +243,13 @@ const LettersDraggable = ({
                 ref={rotatedOlRef}
                 id="character-list-rotated"
                 onMouseDown={onRotatedOlMouseDown}
-                onWheel={onRotatedWheelMove}
+                onWheel={(event) =>
+                    onWheelMove(event, {
+                        olRef: rotatedOlRef,
+                        startingMousePositionRef,
+                        startingOlTop: startingRotatedOlTop,
+                    })
+                }
             >
                 {quadruple(rotatedCharactersFilled).map((character, index) => {
                     return (
