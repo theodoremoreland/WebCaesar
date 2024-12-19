@@ -1,5 +1,5 @@
 // React
-import { ReactElement, useRef } from "react";
+import { ReactElement, useRef, useCallback } from "react";
 
 // Custom
 import {
@@ -51,7 +51,7 @@ const LettersDraggable = ({
         lengthOfLongestAlphabet
     );
 
-    function onOriginalOlMouseMove(event: MouseEvent) {
+    const onOriginalOlMouseMove = useCallback((event: MouseEvent) => {
         if (
             originalOlRef.current === null ||
             startingMousePositionRef.current === null ||
@@ -88,14 +88,14 @@ const LettersDraggable = ({
                 startingOriginalOlTop.current + difference
             }px`;
         }
-    }
+    }, []);
 
-    function onOriginalOlMouseUp() {
+    const onOriginalOlMouseUp = useCallback(() => {
         document.removeEventListener("mousemove", onOriginalOlMouseMove);
         document.removeEventListener("mouseup", onOriginalOlMouseUp);
-    }
+    }, [onOriginalOlMouseMove]);
 
-    function onRotatedOlMouseMove(event: MouseEvent) {
+    const onRotatedOlMouseMove = useCallback((event: MouseEvent) => {
         if (
             rotatedOlRef.current === null ||
             startingMousePositionRef.current === null ||
@@ -112,12 +112,12 @@ const LettersDraggable = ({
         rotatedOlRef.current.style.top = `${
             startingRotatedOlTop.current + difference
         }px`;
-    }
+    }, []);
 
-    function onRotatedOlMouseUp() {
+    const onRotatedOlMouseUp = useCallback(() => {
         document.removeEventListener("mousemove", onRotatedOlMouseMove);
         document.removeEventListener("mouseup", onRotatedOlMouseUp);
-    }
+    }, [onRotatedOlMouseMove]);
 
     return (
         <section ref={sectionRef} className="LettersDraggable">
