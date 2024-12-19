@@ -65,41 +65,6 @@ const LettersDraggable = ({
         lengthOfLongestAlphabet
     );
 
-    // function originalOlRenderBefore() {
-    //     if (!originalOlRef.current) {
-    //         return;
-    //     }
-
-    //     originalCharactersFilled.reverse().forEach((character) => {
-    //         const element: HTMLLIElement = document.createElement("li");
-    //         element.innerText = character;
-    //         element.classList.add("virtual");
-
-    //         if (!originalOlRef.current) {
-    //             return;
-    //         }
-
-    //         originalOlRef.current.prepend(element);
-    //     });
-    // }
-
-    // function originalOlRenderAfter() {
-    //     if (!originalOlRef.current) {
-    //         return;
-    //     }
-
-    //     originalCharactersFilled.forEach((character) => {
-    //         const element = document.createElement("li");
-    //         element.innerText = character;
-
-    //         if (!originalOlRef.current) {
-    //             return;
-    //         }
-
-    //         originalOlRef.current.appendChild(element);
-    //     });
-    // }
-
     function onOriginalOlMouseDown(event: React.MouseEvent<HTMLOListElement>) {
         if (!originalOlRef.current) {
             return;
@@ -252,7 +217,6 @@ const LettersDraggable = ({
         }px`;
     }
 
-    // TODO: rotated characters lists should have empty letters in case of different alphabet lengths
     return (
         <section ref={sectionRef} className="LettersDraggable">
             <ol
