@@ -66,6 +66,35 @@ function onWheelMove(
     }
 }
 
+function onMouseDown(
+    event: React.MouseEvent<HTMLOListElement>,
+    {
+        olRef,
+        startingMousePositionRef,
+        startingOlTop,
+        onMouseMove,
+        onMouseUp,
+    }: {
+        olRef: React.MutableRefObject<HTMLOListElement | null>;
+        startingMousePositionRef: React.MutableRefObject<number | null>;
+        startingOlTop: React.MutableRefObject<number | null>;
+        onMouseMove: (event: MouseEvent) => void;
+        onMouseUp: () => void;
+    }
+) {
+    if (!olRef.current) {
+        return;
+    }
+
+    startingOlTop.current = Number(
+        window.getComputedStyle(olRef.current).top.replace("px", "")
+    );
+    startingMousePositionRef.current = event.clientY;
+
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+}
+
 const LettersDraggable = ({
     originalLanguage,
     rotatedLanguage,
@@ -94,20 +123,6 @@ const LettersDraggable = ({
         supportedLanguages[rotatedLanguage].characters,
         lengthOfLongestAlphabet
     );
-
-    function onOriginalOlMouseDown(event: React.MouseEvent<HTMLOListElement>) {
-        if (!originalOlRef.current) {
-            return;
-        }
-
-        startingOriginalOlTop.current = Number(
-            window.getComputedStyle(originalOlRef.current).top.replace("px", "")
-        );
-        startingMousePositionRef.current = event.clientY;
-
-        document.addEventListener("mousemove", onOriginalOlMouseMove);
-        document.addEventListener("mouseup", onOriginalOlMouseUp);
-    }
 
     function onOriginalOlMouseMove(event: MouseEvent) {
         if (
@@ -171,20 +186,6 @@ const LettersDraggable = ({
         document.removeEventListener("mouseup", onOriginalOlMouseUp);
     }
 
-    function onRotatedOlMouseDown(event: React.MouseEvent<HTMLOListElement>) {
-        if (!rotatedOlRef.current) {
-            return;
-        }
-
-        startingRotatedOlTop.current = Number(
-            window.getComputedStyle(rotatedOlRef.current).top.replace("px", "")
-        );
-        startingMousePositionRef.current = event.clientY;
-
-        document.addEventListener("mousemove", onRotatedOlMouseMove);
-        document.addEventListener("mouseup", onRotatedOlMouseUp);
-    }
-
     function onRotatedOlMouseMove(event: MouseEvent) {
         if (
             rotatedOlRef.current === null ||
@@ -214,7 +215,15 @@ const LettersDraggable = ({
             <ol
                 ref={originalOlRef}
                 id="character-list-original"
-                onMouseDown={onOriginalOlMouseDown}
+                onMouseDown={(event) =>
+                    onMouseDown(event, {
+                        olRef: originalOlRef,
+                        startingMousePositionRef,
+                        startingOlTop: startingOriginalOlTop,
+                        onMouseMove: onOriginalOlMouseMove,
+                        onMouseUp: onOriginalOlMouseUp,
+                    })
+                }
                 onWheel={(event) =>
                     onWheelMove(event, {
                         olRef: originalOlRef,
@@ -242,7 +251,15 @@ const LettersDraggable = ({
             <ol
                 ref={rotatedOlRef}
                 id="character-list-rotated"
-                onMouseDown={onRotatedOlMouseDown}
+                onMouseDown={(event) =>
+                    onMouseDown(event, {
+                        olRef: rotatedOlRef,
+                        startingMousePositionRef,
+                        startingOlTop: startingRotatedOlTop,
+                        onMouseMove: onRotatedOlMouseMove,
+                        onMouseUp: onRotatedOlMouseUp,
+                    })
+                }
                 onWheel={(event) =>
                     onWheelMove(event, {
                         olRef: rotatedOlRef,
