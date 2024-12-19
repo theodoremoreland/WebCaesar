@@ -133,22 +133,18 @@ const LettersDraggable = ({
             originalOlRef.current.getBoundingClientRect();
 
         const newTop: number = startingOriginalOlTop.current + difference;
-        const isWithinResetThreshold: boolean =
+        const isWithinResetThresholdScrollingDown: boolean =
             newTop - get25Percent(childRect.height) >= 10;
-        // Calculate the empty space between the bottom of the child and the bottom of the parent
-        // const parentRect: DOMRect = sectionRef.current.getBoundingClientRect();
-        // const topEmptySpace: number = childRect.top - parentRect.top;
-        // const bottomEmptySpace: number = parentRect.bottom - childRect.bottom;
+        const isWithinResetThresholdScrollingUp: boolean =
+            newTop + get25Percent(childRect.height) <= 10;
 
-        console.log(
-            get25Percent(childRect.height),
-
-            newTop
-        );
-
-        if (difference > 0 && isWithinResetThreshold) {
+        if (difference > 0 && isWithinResetThresholdScrollingDown) {
             originalOlRef.current.style.top = `${
                 newTop - get25Percent(childRect.height)
+            }px`;
+        } else if (difference < 0 && isWithinResetThresholdScrollingUp) {
+            originalOlRef.current.style.top = `${
+                newTop + get25Percent(childRect.height)
             }px`;
         } else {
             originalOlRef.current.style.top = `${
