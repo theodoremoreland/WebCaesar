@@ -2,7 +2,11 @@
 import { ReactElement, useRef } from "react";
 
 // Custom
-import { SupportedLanguage, supportedLanguages } from "../modules/rotateString";
+import {
+    SupportedLanguage,
+    supportedLanguages,
+} from "../../modules/rotateString";
+import { quadruple, get25Percent, fill } from "./LettersDraggable.controller";
 
 // Styles
 import "./LettersDraggable.css";
@@ -11,30 +15,6 @@ interface Props {
     originalLanguage: SupportedLanguage;
     rotatedLanguage: SupportedLanguage;
 }
-
-const filled = (array: string[], desiredLength: number): string[] => {
-    const newArray: string[] = [...array];
-
-    while (newArray.length < desiredLength) {
-        newArray.push("");
-    }
-
-    return newArray;
-};
-
-const quadruple = (array: string[]): string[] => {
-    const newArray: string[] = [];
-
-    for (let i = 0; i < 4; i++) {
-        newArray.push(...array);
-    }
-
-    return newArray;
-};
-
-const get25Percent = (value: number): number => {
-    return value * 0.25;
-};
 
 const LettersDraggable = ({
     originalLanguage,
@@ -56,11 +36,11 @@ const LettersDraggable = ({
         supportedLanguages[originalLanguage].characters.length,
         supportedLanguages[rotatedLanguage].characters.length
     );
-    const originalCharactersFilled: string[] = filled(
+    const originalCharactersFilled: string[] = fill(
         supportedLanguages[originalLanguage].characters,
         lengthOfLongestAlphabet
     );
-    const rotatedCharactersFilled: string[] = filled(
+    const rotatedCharactersFilled: string[] = fill(
         supportedLanguages[rotatedLanguage].characters,
         lengthOfLongestAlphabet
     );

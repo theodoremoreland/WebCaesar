@@ -19,7 +19,7 @@ import getDadJoke from "./http/getDadJoke";
 // Components
 import OriginalTextSection from "./components/OriginalTextSection";
 import RotatedTextSection from "./components/RotatedTextSection";
-import LettersDraggable from "./components/LettersDraggable";
+import LettersDraggable from "./components/LettersDraggable/LettersDraggable";
 
 // Styles
 import "react-toastify/dist/ReactToastify.css";
