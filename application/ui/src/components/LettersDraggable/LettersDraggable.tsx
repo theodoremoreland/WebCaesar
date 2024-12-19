@@ -135,9 +135,30 @@ const LettersDraggable = ({
         const deltaY: number =
             event.deltaY > 10 ? 10 : event.deltaY < -10 ? -10 : event.deltaY;
 
-        originalOlRef.current.style.top = `${
-            Number(originalOlRef.current.style.top.replace("px", "")) + deltaY
-        }px`;
+        // Get the bounding rectangles of the child and parent elements
+        const childRect: DOMRect =
+            originalOlRef.current.getBoundingClientRect();
+
+        const newTop: number =
+            Number(originalOlRef.current.style.top.replace("px", "")) + deltaY;
+        const isWithinResetThresholdScrollingDown: boolean =
+            newTop - get25Percent(childRect.height) >= 10;
+        const isWithinResetThresholdScrollingUp: boolean =
+            newTop + get25Percent(childRect.height) <= 10;
+
+        originalOlRef.current.style.top = `${newTop}px`;
+
+        if (deltaY > 0 && isWithinResetThresholdScrollingDown) {
+            originalOlRef.current.style.top = `${
+                newTop - get25Percent(childRect.height)
+            }px`;
+        } else if (deltaY < 0 && isWithinResetThresholdScrollingUp) {
+            originalOlRef.current.style.top = `${
+                newTop + get25Percent(childRect.height)
+            }px`;
+        } else {
+            originalOlRef.current.style.top = `${newTop}px`;
+        }
     }
 
     function onRotatedOlMouseDown(event: React.MouseEvent<HTMLOListElement>) {
