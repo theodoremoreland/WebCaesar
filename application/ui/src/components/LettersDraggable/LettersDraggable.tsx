@@ -194,11 +194,11 @@ const LettersDraggable = ({
                 })}
             </ol>
             <ul id="character-grid">
-                {Object.values(
-                    supportedLanguages[rotatedLanguage].indexToCharacters
-                ).map((character, index) => {
-                    return <li key={index + character + "grid"}></li>;
-                })}
+                {quadruple(fill([], lengthOfLongestAlphabet)).map(
+                    (_, index) => {
+                        return <li key={index}></li>;
+                    }
+                )}
             </ul>
         </section>
     );
