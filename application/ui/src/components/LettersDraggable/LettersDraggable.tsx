@@ -1,5 +1,5 @@
 // React
-import { ReactElement, useRef, useCallback } from "react";
+import { ReactElement, useRef, useCallback, useMemo } from "react";
 
 // Custom
 import {
@@ -39,17 +39,29 @@ const LettersDraggable = ({
     const rotatedOlRef = useRef<HTMLOListElement | null>(null);
     const startingRotatedOlTop = useRef<number | null>(null);
 
-    const lengthOfLongestAlphabet: number = Math.max(
-        supportedLanguages[originalLanguage].characters.length,
-        supportedLanguages[rotatedLanguage].characters.length
+    const lengthOfLongestAlphabet: number = useMemo(
+        () =>
+            Math.max(
+                supportedLanguages[originalLanguage].characters.length,
+                supportedLanguages[rotatedLanguage].characters.length
+            ),
+        [originalLanguage, rotatedLanguage]
     );
-    const originalCharactersFilled: string[] = fill(
-        supportedLanguages[originalLanguage].characters,
-        lengthOfLongestAlphabet
+    const originalCharactersFilled: string[] = useMemo(
+        () =>
+            fill(
+                supportedLanguages[originalLanguage].characters,
+                lengthOfLongestAlphabet
+            ),
+        [originalLanguage, lengthOfLongestAlphabet]
     );
-    const rotatedCharactersFilled: string[] = fill(
-        supportedLanguages[rotatedLanguage].characters,
-        lengthOfLongestAlphabet
+    const rotatedCharactersFilled: string[] = useMemo(
+        () =>
+            fill(
+                supportedLanguages[rotatedLanguage].characters,
+                lengthOfLongestAlphabet
+            ),
+        [rotatedLanguage, lengthOfLongestAlphabet]
     );
 
     const onOriginalOlMouseMove = useCallback((event: MouseEvent) => {
