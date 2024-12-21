@@ -12,6 +12,7 @@ import {
     fill,
     onMouseDown,
     onWheelMove,
+    determineLiClassName,
 } from "./LettersDraggable.controller";
 
 // Styles
@@ -164,12 +165,17 @@ const LettersDraggable = ({
                     return (
                         <li
                             key={index + character}
-                            className={`${
+                            className={`${determineLiClassName(
                                 supportedLanguages[originalLanguage]
-                                    .charactersToIndex[character] === 0
-                                    ? "first"
-                                    : ""
-                            }`}
+                                    .charactersToIndex,
+                                supportedLanguages[originalLanguage]
+                                    .characterCount,
+                                character
+                            )}`}
+                            data-original-letter-position={
+                                supportedLanguages[originalLanguage]
+                                    .charactersToIndex[character] + 1
+                            }
                         >
                             {character}
                         </li>
@@ -200,12 +206,17 @@ const LettersDraggable = ({
                     return (
                         <li
                             key={index + character}
-                            className={`${
+                            className={`${determineLiClassName(
                                 supportedLanguages[rotatedLanguage]
-                                    .charactersToIndex[character] === 0
-                                    ? "first"
-                                    : ""
-                            }`}
+                                    .charactersToIndex,
+                                supportedLanguages[rotatedLanguage]
+                                    .characterCount,
+                                character
+                            )}`}
+                            data-original-letter-position={
+                                supportedLanguages[rotatedLanguage]
+                                    .charactersToIndex[character] + 1
+                            }
                         >
                             {character}
                         </li>

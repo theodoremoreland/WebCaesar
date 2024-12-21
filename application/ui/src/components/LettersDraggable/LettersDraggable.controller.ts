@@ -1,3 +1,5 @@
+import { CharactersToIndex } from "../../modules/rotateString";
+
 export const fill = (array: string[], desiredLength: number): string[] => {
     const newArray: string[] = [...array];
 
@@ -115,4 +117,33 @@ export const onMouseDown = (
 
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
+};
+
+const isFirstLetter = (
+    charactersToIndex: CharactersToIndex,
+    character: string
+): boolean => {
+    return charactersToIndex[character] === 0;
+};
+
+const isLastLetter = (
+    charactersToIndex: CharactersToIndex,
+    characterCount: number,
+    character: string
+): boolean => {
+    return charactersToIndex[character] === characterCount - 1;
+};
+
+export const determineLiClassName = (
+    charactersToIndex: CharactersToIndex,
+    characterCount: number,
+    character: string
+) => {
+    if (isFirstLetter(charactersToIndex, character)) {
+        return "first";
+    } else if (isLastLetter(charactersToIndex, characterCount, character)) {
+        return "last";
+    }
+
+    return "";
 };
