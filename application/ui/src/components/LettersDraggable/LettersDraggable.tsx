@@ -2,7 +2,7 @@
 import { ReactElement, useRef, useCallback, useMemo } from "react";
 
 // Custom
-import { supportedLanguages } from "../../modules/rotateString";
+import { languageMetadata } from "../../modules/languageMetadata";
 import {
     quadruple,
     get25Percent,
@@ -42,15 +42,15 @@ const LettersDraggable = ({
     const lengthOfLongestAlphabet: number = useMemo(
         () =>
             Math.max(
-                supportedLanguages[originalLanguage].characters.length,
-                supportedLanguages[rotatedLanguage].characters.length
+                languageMetadata[originalLanguage].characters.length,
+                languageMetadata[rotatedLanguage].characters.length
             ),
         [originalLanguage, rotatedLanguage]
     );
     const originalCharactersFilled: string[] = useMemo(
         () =>
             fill(
-                supportedLanguages[originalLanguage].characters,
+                languageMetadata[originalLanguage].characters,
                 lengthOfLongestAlphabet
             ),
         [originalLanguage, lengthOfLongestAlphabet]
@@ -58,7 +58,7 @@ const LettersDraggable = ({
     const rotatedCharactersFilled: string[] = useMemo(
         () =>
             fill(
-                supportedLanguages[rotatedLanguage].characters,
+                languageMetadata[rotatedLanguage].characters,
                 lengthOfLongestAlphabet
             ),
         [rotatedLanguage, lengthOfLongestAlphabet]
@@ -178,14 +178,14 @@ const LettersDraggable = ({
                         <li
                             key={index + character}
                             className={`${determineLiClassName(
-                                supportedLanguages[originalLanguage]
+                                languageMetadata[originalLanguage]
                                     .charactersToIndex,
-                                supportedLanguages[originalLanguage]
+                                languageMetadata[originalLanguage]
                                     .characterCount,
                                 character
                             )}`}
                             data-original-letter-position={
-                                supportedLanguages[originalLanguage]
+                                languageMetadata[originalLanguage]
                                     .charactersToIndex[character] + 1
                             }
                         >
@@ -219,14 +219,14 @@ const LettersDraggable = ({
                         <li
                             key={index + character}
                             className={`${determineLiClassName(
-                                supportedLanguages[rotatedLanguage]
+                                languageMetadata[rotatedLanguage]
                                     .charactersToIndex,
-                                supportedLanguages[rotatedLanguage]
+                                languageMetadata[rotatedLanguage]
                                     .characterCount,
                                 character
                             )}`}
                             data-original-letter-position={
-                                supportedLanguages[rotatedLanguage]
+                                languageMetadata[rotatedLanguage]
                                     .charactersToIndex[character] + 1
                             }
                         >

@@ -2,7 +2,8 @@
 import { ReactElement, useState, ChangeEvent, useRef, useEffect } from "react";
 
 // Custom
-import rotateString, { supportedLanguages } from "../../modules/rotateString";
+import rotateString from "../../modules/rotateString";
+import { languageMetadata } from "../../modules/languageMetadata";
 import { getFirstThreeLetters, copyToClipboard } from "../../App.controller";
 
 // Types
@@ -50,7 +51,7 @@ const RotatedTextSection = ({
 
     const handleChangeRotatedLanguage = (language: SupportedLanguage): void => {
         const alphabetLength: number =
-            supportedLanguages[language].characterCount;
+            languageMetadata[language].characterCount;
         const isRotGreaterThanOrEqualToAlphabetLength: boolean =
             rot >= alphabetLength;
         const _rot: number = isRotGreaterThanOrEqualToAlphabetLength
@@ -127,7 +128,7 @@ const RotatedTextSection = ({
                         </button>
                         {isRotatedLanguageDropdownOpen && (
                             <ul className="pill-list">
-                                {Object.keys(supportedLanguages).map(
+                                {Object.keys(languageMetadata).map(
                                     (language) => (
                                         <li
                                             key={language}
@@ -173,7 +174,7 @@ const RotatedTextSection = ({
                                 onChange={handleRotate}
                                 min={0}
                                 max={
-                                    supportedLanguages[rotatedLanguage]
+                                    languageMetadata[rotatedLanguage]
                                         .characterCount - 1
                                 }
                                 disabled={originalText === "" || isLoading}

@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 
 // Custom
 import decrypt from "../../http/decrypt";
-import rotateString, { supportedLanguages } from "../../modules/rotateString";
+import { languageMetadata } from "../../modules/languageMetadata";
+import rotateString from "../../modules/rotateString";
 import {
     decryptErrorToastId,
     decryptSuccessToastId,
@@ -185,7 +186,7 @@ const OriginalTextSection = ({
                         </button>
                         {isOriginalLanguageDropdownOpen && (
                             <ul className="pill-list">
-                                {Object.keys(supportedLanguages).map(
+                                {Object.keys(languageMetadata).map(
                                     (language) => (
                                         <li
                                             key={language}

@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 import { debounce } from "lodash";
 
 // Custom
-import { findCharacterIndex, supportedLanguages } from "./modules/rotateString";
+import { findCharacterIndex } from "./modules/rotateString";
+import { languageMetadata } from "./modules/languageMetadata";
 
 // Types
 import { SupportedLanguage } from "./types";
@@ -84,7 +85,7 @@ export const debounceSaveToLocalStorage = debounce(
 export const getFirstThreeLetters = (
     language: SupportedLanguage
 ): [string, string, string] => {
-    const indexToCharacters = supportedLanguages[language].indexToCharacters;
+    const indexToCharacters = languageMetadata[language].indexToCharacters;
     const firstThreeLetters: [string, string, string] = [
         indexToCharacters[0][0],
         indexToCharacters[1][0],
