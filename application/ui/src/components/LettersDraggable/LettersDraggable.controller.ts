@@ -27,21 +27,52 @@ export const get25Percent = (value: number): number => {
     return value * 0.25;
 };
 
-// export const getCenterLetters = () => {
-//         // const elements = originalOlRef.current.getElementsByTagName("li");
+const getClosestToCenter = (
+    elementsWithPosition: { letter: string; position: number }[]
+) => {
+    const center: number = window.innerHeight / 2;
 
-//         // console.log(
-//         //     "onMouseUp",
-//         //     [...elements].map((e) => {
-//         //         return {
-//         //             letter: e.innerText,
-//         //             position: e.getBoundingClientRect().top + window.scrollY,
-//         //         };
-//         //     }),
-//         //     window.innerHeight,
-//         //     `Center: ${window.innerHeight / 2}`
-//         // );
-// }
+    return elementsWithPosition.reduce((prev, curr) => {
+        return Math.abs(curr.position - center) <
+            Math.abs(prev.position - center)
+            ? curr
+            : prev;
+    });
+};
+
+export const getCenterLetters = (
+    originalOlRef: React.MutableRefObject<HTMLOListElement | null>,
+    rotatedOlRef: React.MutableRefObject<HTMLOListElement | null>
+) => {
+    if (!originalOlRef.current || !rotatedOlRef.current) {
+        return;
+    }
+
+    const originalElements: HTMLCollectionOf<HTMLLIElement> =
+        originalOlRef.current.getElementsByTagName("li");
+    const rotatedElements: HTMLCollectionOf<HTMLLIElement> =
+        rotatedOlRef.current.getElementsByTagName("li");
+
+    const originalElementsWithPosition: { letter: string; position: number }[] =
+        [...originalElements].map((e) => {
+            return {
+                letter: e.innerText,
+                position: e.getBoundingClientRect().top + window.scrollY,
+            };
+        });
+    const rotatedElementsWithPosition: { letter: string; position: number }[] =
+        [...rotatedElements].map((e) => {
+            return {
+                letter: e.innerText,
+                position: e.getBoundingClientRect().top + window.scrollY,
+            };
+        });
+
+    console.log(
+        getClosestToCenter(originalElementsWithPosition),
+        getClosestToCenter(rotatedElementsWithPosition)
+    );
+};
 
 export const onWheelMove = (
     event: React.WheelEvent<HTMLOListElement>,

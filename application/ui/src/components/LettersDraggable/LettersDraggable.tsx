@@ -10,6 +10,7 @@ import {
     onMouseDown,
     onWheelMove,
     determineLiClassName,
+    getCenterLetters,
 } from "./LettersDraggable.controller";
 
 // Types
@@ -101,6 +102,8 @@ const LettersDraggable = ({
                 startingOriginalOlTop.current + difference
             }px`;
         }
+
+        getCenterLetters(originalOlRef, rotatedOlRef);
     }, []);
 
     const onOriginalOlMouseUp = useCallback(() => {

@@ -17,7 +17,7 @@
     );
 
     /* Pseudo-element for displaying red line in middle of component */
-    /* &::after {
+    &::after {
         z-index: 99;
         content: "";
         position: absolute;
@@ -27,7 +27,7 @@
         height: 1px;
         background-color: rgb(255, 0, 0);
         transform: translateY(-50%);
-    } */
+    }
 
     ol {
         position: relative;
