@@ -8,6 +8,12 @@ export interface FillObject {
     index: number;
 }
 
+export interface LiPositionMetadata {
+    index: number;
+    letter: string;
+    positionY: number;
+}
+
 export const fill = (array: string[], desiredLength: number): FillObject[] => {
     const newArray: FillObject[] = array.map((value, index) => {
         return { value, index };
@@ -38,8 +44,8 @@ export const get25Percent = (value: number): number => {
 };
 
 const getClosestToCenter = (
-    elementsWithPosition: { letter: string; positionY: number }[]
-) => {
+    elementsWithPosition: LiPositionMetadata[]
+): LiPositionMetadata => {
     const center: number = window.innerHeight / 2;
 
     return elementsWithPosition.reduce((prev, curr) => {
@@ -63,28 +69,28 @@ export const getCenterLetters = (
     const rotatedElements: HTMLCollectionOf<HTMLLIElement> =
         rotatedOlRef.current.getElementsByTagName("li");
 
-    const originalElementsWithPosition: {
-        letter: string;
-        positionY: number;
-    }[] = [...originalElements].map((e) => {
+    const originalElementsWithPosition: LiPositionMetadata[] = [
+        ...originalElements,
+    ].map((e) => {
         return {
-            index: e.dataset.index,
+            index: Number(e.dataset.index),
             letter: e.innerText,
             positionY: e.getBoundingClientRect().top + window.scrollY,
         };
     });
-    const rotatedElementsWithPosition: { letter: string; positionY: number }[] =
-        [...rotatedElements].map((e) => {
-            return {
-                index: e.dataset.index,
-                letter: e.innerText,
-                positionY: e.getBoundingClientRect().top + window.scrollY,
-            };
-        });
+    const rotatedElementsWithPosition: LiPositionMetadata[] = [
+        ...rotatedElements,
+    ].map((e) => {
+        return {
+            index: Number(e.dataset.index),
+            letter: e.innerText,
+            positionY: e.getBoundingClientRect().top + window.scrollY,
+        };
+    });
 
     console.log(
-        getClosestToCenter(originalElementsWithPosition),
-        getClosestToCenter(rotatedElementsWithPosition)
+        getClosestToCenter(originalElementsWithPosition).index -
+            getClosestToCenter(rotatedElementsWithPosition).index
     );
 };
 
