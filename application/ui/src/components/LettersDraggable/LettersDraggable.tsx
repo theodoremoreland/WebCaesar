@@ -43,8 +43,8 @@ const LettersDraggable = ({
     const lengthOfLongestAlphabet: number = useMemo(
         () =>
             Math.max(
-                languageMetadata[originalLanguage].characters.length,
-                languageMetadata[rotatedLanguage].characters.length
+                languageMetadata[originalLanguage].characterCount,
+                languageMetadata[rotatedLanguage].characterCount
             ),
         [originalLanguage, rotatedLanguage]
     );
