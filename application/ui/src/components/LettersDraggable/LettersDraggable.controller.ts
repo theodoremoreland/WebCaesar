@@ -1,3 +1,6 @@
+import isFirstLetter from "../../utils/isFirstLetter";
+import isLastLetter from "../../utils/isLastLetter";
+
 import { CharactersToIndex } from "../../types";
 
 export const fill = (array: string[], desiredLength: number): string[] => {
@@ -117,21 +120,6 @@ export const onMouseDown = (
 
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
-};
-
-const isFirstLetter = (
-    charactersToIndex: CharactersToIndex,
-    character: string
-): boolean => {
-    return charactersToIndex[character] === 0;
-};
-
-const isLastLetter = (
-    charactersToIndex: CharactersToIndex,
-    characterCount: number,
-    character: string
-): boolean => {
-    return charactersToIndex[character] === characterCount - 1;
 };
 
 export const determineLiClassName = (

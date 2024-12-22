@@ -12,8 +12,10 @@ import rotateString from "../../modules/rotateString";
 import {
     decryptErrorToastId,
     decryptSuccessToastId,
-    getFirstThreeLetters,
 } from "../../App.controller";
+
+// Utils
+import { getFirstThreeLetters } from "../../utils";
 
 // Types
 import { SupportedLanguage } from "../../types";

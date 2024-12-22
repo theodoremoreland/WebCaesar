@@ -4,7 +4,10 @@ import { ReactElement, useState, ChangeEvent, useRef, useEffect } from "react";
 // Custom
 import rotateString from "../../modules/rotateString";
 import { languageMetadata } from "../../modules/languageMetadata";
-import { getFirstThreeLetters, copyToClipboard } from "../../App.controller";
+import { copyToClipboard } from "../../App.controller";
+
+// Utils
+import { getFirstThreeLetters } from "../../utils";
 
 // Types
 import { SupportedLanguage } from "../../types";
