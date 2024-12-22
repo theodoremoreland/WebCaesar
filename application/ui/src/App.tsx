@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import { ToastContainer, toast } from "react-toastify";
 
 // Custom
-import { SupportedLanguage } from "./modules/rotateString";
+import { SupportedLanguage } from "./types";
 import {
     getLocalStorageData,
     jokeErrorToastId,

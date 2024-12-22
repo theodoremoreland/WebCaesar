@@ -3,11 +3,10 @@ import { toast } from "react-toastify";
 import { debounce } from "lodash";
 
 // Custom
-import {
-    findCharacterIndex,
-    SupportedLanguage,
-    supportedLanguages,
-} from "./modules/rotateString";
+import { findCharacterIndex, supportedLanguages } from "./modules/rotateString";
+
+// Types
+import { SupportedLanguage } from "./types";
 
 export const copyToastId: string = "copy-toast";
 export const decryptSuccessToastId: string = "decrypt-success-toast";

@@ -2,11 +2,11 @@
 import { ReactElement, useState, ChangeEvent, useRef, useEffect } from "react";
 
 // Custom
-import rotateString, {
-    SupportedLanguage,
-    supportedLanguages,
-} from "../../modules/rotateString";
+import rotateString, { supportedLanguages } from "../../modules/rotateString";
 import { getFirstThreeLetters, copyToClipboard } from "../../App.controller";
+
+// Types
+import { SupportedLanguage } from "../../types";
 
 // Images
 import DownloadIcon from "../../assets/images/download.svg?react";

@@ -2,10 +2,7 @@
 import { ReactElement, useRef, useCallback, useMemo } from "react";
 
 // Custom
-import {
-    SupportedLanguage,
-    supportedLanguages,
-} from "../../modules/rotateString";
+import { supportedLanguages } from "../../modules/rotateString";
 import {
     quadruple,
     get25Percent,
@@ -14,6 +11,9 @@ import {
     onWheelMove,
     determineLiClassName,
 } from "./LettersDraggable.controller";
+
+// Types
+import { SupportedLanguage } from "../../types";
 
 // Styles
 import "./LettersDraggable.css";

@@ -1,4 +1,4 @@
-import { CharactersToIndex } from "../../modules/rotateString";
+import { CharactersToIndex } from "../../types";
 
 export const fill = (array: string[], desiredLength: number): string[] => {
     const newArray: string[] = [...array];

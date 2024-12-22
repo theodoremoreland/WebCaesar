@@ -7,15 +7,15 @@ import { toast } from "react-toastify";
 
 // Custom
 import decrypt from "../../http/decrypt";
-import rotateString, {
-    SupportedLanguage,
-    supportedLanguages,
-} from "../../modules/rotateString";
+import rotateString, { supportedLanguages } from "../../modules/rotateString";
 import {
     decryptErrorToastId,
     decryptSuccessToastId,
     getFirstThreeLetters,
 } from "../../App.controller";
+
+// Types
+import { SupportedLanguage } from "../../types";
 
 // Images
 import UploadIcon from "../../assets/images/upload_file.svg?react";
