@@ -17,8 +17,8 @@ import {
 import getDadJoke from "./http/getDadJoke";
 
 // Components
-import OriginalTextSection from "./components/OriginalTextSection";
-import RotatedTextSection from "./components/RotatedTextSection";
+import OriginalTextSection from "./components/TextSection/OriginalTextSection";
+import RotatedTextSection from "./components/TextSection/RotatedTextSection";
 import LettersDraggable from "./components/LettersDraggable/LettersDraggable";
 
 // Styles

@@ -6,20 +6,23 @@ import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 
 // Custom
-import decrypt from "../http/decrypt";
+import decrypt from "../../http/decrypt";
 import rotateString, {
     SupportedLanguage,
     supportedLanguages,
-} from "../modules/rotateString";
+} from "../../modules/rotateString";
 import {
     decryptErrorToastId,
     decryptSuccessToastId,
     getFirstThreeLetters,
-} from "../App.controller";
+} from "../../App.controller";
 
 // Images
-import UploadIcon from "../assets/images/upload_file.svg?react";
-import RotateAutoIcon from "../assets/images/rotate_auto.svg?react";
+import UploadIcon from "../../assets/images/upload_file.svg?react";
+import RotateAutoIcon from "../../assets/images/rotate_auto.svg?react";
+
+// Styles
+import "./TextSection.css";
 
 interface Props {
     /**

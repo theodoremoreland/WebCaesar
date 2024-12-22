@@ -5,11 +5,14 @@ import { ReactElement, useState, ChangeEvent, useRef, useEffect } from "react";
 import rotateString, {
     SupportedLanguage,
     supportedLanguages,
-} from "../modules/rotateString";
-import { getFirstThreeLetters, copyToClipboard } from "../App.controller";
+} from "../../modules/rotateString";
+import { getFirstThreeLetters, copyToClipboard } from "../../App.controller";
 
 // Images
-import DownloadIcon from "../assets/images/download.svg?react";
+import DownloadIcon from "../../assets/images/download.svg?react";
+
+// Styles
+import "./TextSection.css";
 
 interface Props {
     /**
