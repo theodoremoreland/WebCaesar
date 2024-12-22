@@ -64,7 +64,7 @@
                     right: 0;
                     width: 100%;
                     height: 100%;
-                    content: attr(data-original-letter-position);
+                    content: attr(data-index-plus-one);
                     color: var(--primary-font-color);
                     font-size: 0.6rem;
                     text-align: right;

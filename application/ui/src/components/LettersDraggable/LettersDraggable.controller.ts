@@ -3,18 +3,28 @@ import isLastLetter from "../../utils/isLastLetter";
 
 import { CharactersToIndex } from "../../types";
 
-export const fill = (array: string[], desiredLength: number): string[] => {
-    const newArray: string[] = [...array];
+export interface FillObject {
+    value: string;
+    index: number;
+}
+
+export const fill = (array: string[], desiredLength: number): FillObject[] => {
+    const newArray: FillObject[] = array.map((value, index) => {
+        return { value, index };
+    });
 
     while (newArray.length < desiredLength) {
-        newArray.push("");
+        newArray.push({
+            value: "",
+            index: newArray.length,
+        });
     }
 
     return newArray;
 };
 
-export const quadruple = (array: string[]): string[] => {
-    const newArray: string[] = [];
+export const quadruple = <T>(array: T[]): T[] => {
+    const newArray: T[] = [];
 
     for (let i = 0; i < 4; i++) {
         newArray.push(...array);
@@ -28,13 +38,13 @@ export const get25Percent = (value: number): number => {
 };
 
 const getClosestToCenter = (
-    elementsWithPosition: { letter: string; position: number }[]
+    elementsWithPosition: { letter: string; positionY: number }[]
 ) => {
     const center: number = window.innerHeight / 2;
 
     return elementsWithPosition.reduce((prev, curr) => {
-        return Math.abs(curr.position - center) <
-            Math.abs(prev.position - center)
+        return Math.abs(curr.positionY - center) <
+            Math.abs(prev.positionY - center)
             ? curr
             : prev;
     });
@@ -53,18 +63,22 @@ export const getCenterLetters = (
     const rotatedElements: HTMLCollectionOf<HTMLLIElement> =
         rotatedOlRef.current.getElementsByTagName("li");
 
-    const originalElementsWithPosition: { letter: string; position: number }[] =
-        [...originalElements].map((e) => {
-            return {
-                letter: e.innerText,
-                position: e.getBoundingClientRect().top + window.scrollY,
-            };
-        });
-    const rotatedElementsWithPosition: { letter: string; position: number }[] =
+    const originalElementsWithPosition: {
+        letter: string;
+        positionY: number;
+    }[] = [...originalElements].map((e) => {
+        return {
+            index: e.dataset.index,
+            letter: e.innerText,
+            positionY: e.getBoundingClientRect().top + window.scrollY,
+        };
+    });
+    const rotatedElementsWithPosition: { letter: string; positionY: number }[] =
         [...rotatedElements].map((e) => {
             return {
+                index: e.dataset.index,
                 letter: e.innerText,
-                position: e.getBoundingClientRect().top + window.scrollY,
+                positionY: e.getBoundingClientRect().top + window.scrollY,
             };
         });
 

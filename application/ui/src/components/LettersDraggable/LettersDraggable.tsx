@@ -11,6 +11,7 @@ import {
     onWheelMove,
     determineLiClassName,
     getCenterLetters,
+    FillObject,
 } from "./LettersDraggable.controller";
 
 // Types
@@ -48,7 +49,7 @@ const LettersDraggable = ({
             ),
         [originalLanguage, rotatedLanguage]
     );
-    const originalCharactersFilled: string[] = useMemo(
+    const originalCharactersFilled: FillObject[] = useMemo(
         () =>
             fill(
                 languageMetadata[originalLanguage].characters,
@@ -56,7 +57,7 @@ const LettersDraggable = ({
             ),
         [originalLanguage, lengthOfLongestAlphabet]
     );
-    const rotatedCharactersFilled: string[] = useMemo(
+    const rotatedCharactersFilled: FillObject[] = useMemo(
         () =>
             fill(
                 languageMetadata[rotatedLanguage].characters,
@@ -176,26 +177,26 @@ const LettersDraggable = ({
                     })
                 }
             >
-                {quadruple(originalCharactersFilled).map((character, index) => {
-                    return (
-                        <li
-                            key={index + character}
-                            className={`${determineLiClassName(
-                                languageMetadata[originalLanguage]
-                                    .charactersToIndex,
-                                languageMetadata[originalLanguage]
-                                    .characterCount,
-                                character
-                            )}`}
-                            data-original-letter-position={
-                                languageMetadata[originalLanguage]
-                                    .charactersToIndex[character] + 1
-                            }
-                        >
-                            {character}
-                        </li>
-                    );
-                })}
+                {quadruple(originalCharactersFilled).map(
+                    (fillObject, index) => {
+                        return (
+                            <li
+                                key={index + fillObject.value}
+                                className={`${determineLiClassName(
+                                    languageMetadata[originalLanguage]
+                                        .charactersToIndex,
+                                    languageMetadata[originalLanguage]
+                                        .characterCount,
+                                    fillObject.value
+                                )}`}
+                                data-index={fillObject.index}
+                                data-index-plus-one={fillObject.index + 1}
+                            >
+                                {fillObject.value}
+                            </li>
+                        );
+                    }
+                )}
             </ol>
             <ol
                 ref={rotatedOlRef}
@@ -217,23 +218,21 @@ const LettersDraggable = ({
                     })
                 }
             >
-                {quadruple(rotatedCharactersFilled).map((character, index) => {
+                {quadruple(rotatedCharactersFilled).map((fillObject, index) => {
                     return (
                         <li
-                            key={index + character}
+                            key={index + fillObject.value}
                             className={`${determineLiClassName(
                                 languageMetadata[rotatedLanguage]
                                     .charactersToIndex,
                                 languageMetadata[rotatedLanguage]
                                     .characterCount,
-                                character
+                                fillObject.value
                             )}`}
-                            data-original-letter-position={
-                                languageMetadata[rotatedLanguage]
-                                    .charactersToIndex[character] + 1
-                            }
+                            data-index={fillObject.index}
+                            data-index-plus-one={fillObject.index + 1}
                         >
-                            {character}
+                            {fillObject.value}
                         </li>
                     );
                 })}
