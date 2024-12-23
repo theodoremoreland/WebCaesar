@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { debounce } from "lodash";
 
 // Custom
-import { findCharacterIndex } from "./modules/rotateString";
+import findCharacterIndex from "./utils/findCharacterIndex";
 
 // Types
 import { SupportedLanguage } from "./types";
