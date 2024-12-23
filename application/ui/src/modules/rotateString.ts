@@ -13,8 +13,6 @@ export const findCharacterIndex = (
     return languageMetadata[language].charactersToIndex[lower] ?? -1;
 };
 
-// TODO support mapping between languages
-// ! Need to fix bug, is not correctly rotating first letter
 const rotateCharacter = (
     char: string,
     rot: number,
@@ -66,16 +64,23 @@ export default (
                 originalLanguage
             );
 
-            // if the character is not in the rotated language, but the rotated language has a character at the same index, use the character at the same index in the rotated language
+            // if the character is only in the original language, find the character of the same index in the rotated language then rotate the corresponding character
             if (
                 languageMetadata[rotatedLanguage].characterCount >
                 sourceCharacterIndex
             ) {
-                rotated +=
+                const correspondingCharacterInRotatedLanguage: string =
                     languageMetadata[rotatedLanguage].indexToCharacters[
                         sourceCharacterIndex
                     ][0];
+
+                rotated += rotateCharacter(
+                    correspondingCharacterInRotatedLanguage,
+                    rot,
+                    rotatedLanguage
+                );
             } else {
+                // Else don't rotate the character
                 rotated += char;
             }
         } else {
