@@ -175,7 +175,12 @@ const RotatedTextSection = ({
                                 value={rot}
                                 autoComplete="off"
                                 onChange={handleRotate}
-                                min={0}
+                                min={
+                                    0 -
+                                    (languageMetadata[rotatedLanguage]
+                                        .characterCount -
+                                        1)
+                                }
                                 max={
                                     languageMetadata[rotatedLanguage]
                                         .characterCount - 1
