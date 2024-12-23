@@ -27,14 +27,14 @@ import "./App.css";
 
 /**
  * [x]: Can upload text file that will be encrypted and output into text area
- * [x] Can submit for auto detection of encrypted text and decryption
+ * [x] Can submit for auto decryption
  * TODO: Can rotate text area output degree by degree using a wheel
- * TODO: Need to validate alphabet / language of imported .txt file
  * [x] Can download textarea output as text file
- * [x] Initializes with encrypted dad joke, then prompts user to experiment with wheel to decrypt
+ * [x] Initializes with encrypted dad joke
  */
 const App = (): ReactElement => {
     const [rot, setRot] = useState<number>(0);
+    const [isPositiveRotation, setIsPositiveRotation] = useState<boolean>(true);
     const [originalLanguage, setOriginalLanguage] = useState<SupportedLanguage>(
         SupportedLanguage.English
     );
@@ -112,6 +112,8 @@ const App = (): ReactElement => {
                 <LettersDraggable
                     originalLanguage={originalLanguage}
                     rotatedLanguage={rotatedLanguage}
+                    isPositiveRotation={isPositiveRotation}
+                    setIsPositiveRotation={setIsPositiveRotation}
                 />
                 <RotatedTextSection
                     isOtherLoading={isLoading}

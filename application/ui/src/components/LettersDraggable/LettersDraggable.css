@@ -37,9 +37,19 @@
         justify-content: center;
         align-items: center;
         list-style: none;
+        color: var(--primary-font-color);
         margin: 0;
         padding: 0;
         cursor: grab;
+        transition: background-color 0.2s ease-in-out;
+
+        &.positive {
+            background-color: var(--primary-highlight-color);
+        }
+
+        &.negative {
+            background-color: var(--secondary-highlight-color);
+        }
 
         &:hover {
             filter: brightness(1.1);
@@ -49,9 +59,7 @@
             position: relative;
             width: 3rem;
             height: 3rem;
-            color: var(--primary-font-color);
             text-align: center;
-            background-color: var(--primary-highlight-color);
             padding: 0.5rem;
             user-select: none;
 

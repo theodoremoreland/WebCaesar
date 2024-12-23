@@ -23,11 +23,15 @@ import "./LettersDraggable.css";
 interface Props {
     originalLanguage: SupportedLanguage;
     rotatedLanguage: SupportedLanguage;
+    isPositiveRotation: boolean;
+    setIsPositiveRotation: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const LettersDraggable = ({
     originalLanguage,
     rotatedLanguage,
+    isPositiveRotation,
+    setIsPositiveRotation,
 }: Props): ReactElement => {
     // Global refs
     const sectionRef = useRef<HTMLElement | null>(null);
@@ -148,6 +152,8 @@ const LettersDraggable = ({
                 startingRotatedOlTop.current + difference
             }px`;
         }
+
+        getCenterLetters(originalOlRef, rotatedOlRef);
     }, []);
 
     const onRotatedOlMouseUp = useCallback(() => {
@@ -160,6 +166,10 @@ const LettersDraggable = ({
             <ol
                 ref={originalOlRef}
                 id="character-list-original"
+                className={`character-list ${
+                    isPositiveRotation ? "positive" : "negative"
+                }`}
+                onDoubleClick={() => setIsPositiveRotation(!isPositiveRotation)}
                 onMouseDown={(event) =>
                     onMouseDown(event, {
                         olRef: originalOlRef,
@@ -201,6 +211,10 @@ const LettersDraggable = ({
             <ol
                 ref={rotatedOlRef}
                 id="character-list-rotated"
+                className={`character-list ${
+                    isPositiveRotation ? "positive" : "negative"
+                }`}
+                onDoubleClick={() => setIsPositiveRotation(!isPositiveRotation)}
                 onMouseDown={(event) =>
                     onMouseDown(event, {
                         olRef: rotatedOlRef,

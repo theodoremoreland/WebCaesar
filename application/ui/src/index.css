@@ -28,6 +28,7 @@
     --secondary-color: #202024;
     --tertiary-color: #b3002a;
     --primary-highlight-color: #008897;
+    --secondary-highlight-color: #ff5a5f;
 
     --primary-highlight-color-light: color-mix(
         in srgb,
