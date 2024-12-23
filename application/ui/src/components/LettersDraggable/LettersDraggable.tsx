@@ -2,7 +2,7 @@
 import { ReactElement, useRef, useCallback, useMemo } from "react";
 
 // Custom
-import { languageMetadata } from "../../modules/languageMetadata";
+import { languageMetadata } from "../../constants/languageMetadata";
 import {
     quadruple,
     get25Percent,

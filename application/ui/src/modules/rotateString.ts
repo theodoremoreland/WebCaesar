@@ -1,5 +1,5 @@
 // Custom
-import { languageMetadata } from "./languageMetadata";
+import { languageMetadata } from "../constants/languageMetadata";
 
 // Types
 import { SupportedLanguage } from "../types";

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 // Custom
 import decrypt from "../../http/decrypt";
-import { languageMetadata } from "../../modules/languageMetadata";
+import { languageMetadata } from "../../constants/languageMetadata";
 import rotateString from "../../modules/rotateString";
 import {
     decryptErrorToastId,

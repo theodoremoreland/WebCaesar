@@ -1,4 +1,4 @@
-import { languageMetadata } from "../modules/languageMetadata";
+import { languageMetadata } from "../constants/languageMetadata";
 
 import { SupportedLanguage } from "../types";
 
