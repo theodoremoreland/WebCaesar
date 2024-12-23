@@ -1,17 +1,9 @@
 // Custom
+import findCharacterIndex from "../utils/findCharacterIndex";
 import { languageMetadata } from "../constants/languageMetadata";
 
 // Types
 import { SupportedLanguage } from "../types";
-
-export const findCharacterIndex = (
-    character: string,
-    language: SupportedLanguage
-): number => {
-    const lower: string = character.toLowerCase();
-
-    return languageMetadata[language].charactersToIndex[lower] ?? -1;
-};
 
 const rotateCharacter = (
     char: string,
