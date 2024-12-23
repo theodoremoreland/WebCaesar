@@ -4,7 +4,7 @@ import { ReactElement, useState, ChangeEvent, useRef, useEffect } from "react";
 // Custom
 import rotateString from "../../modules/rotateString";
 import { languageMetadata } from "../../constants/languageMetadata";
-import { copyToClipboard } from "../../App.controller";
+import { copyToClipboard } from "./TextSection.controller";
 
 // Utils
 import { getFirstThreeLetters } from "../../utils";

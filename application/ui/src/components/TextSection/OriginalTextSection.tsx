@@ -12,7 +12,7 @@ import rotateString from "../../modules/rotateString";
 import {
     decryptErrorToastId,
     decryptSuccessToastId,
-} from "../../App.controller";
+} from "./TextSection.controller";
 
 // Utils
 import { getFirstThreeLetters } from "../../utils";
