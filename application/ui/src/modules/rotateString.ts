@@ -57,7 +57,7 @@ export default (
         if (
             languageMetadata[rotatedLanguage].charactersToIndex[
                 char.toLowerCase()
-            ]
+            ] !== undefined
         ) {
             rotated += rotateCharacter(char, rot, rotatedLanguage);
         } else if (findCharacterIndex(char, originalLanguage) !== -1) {
