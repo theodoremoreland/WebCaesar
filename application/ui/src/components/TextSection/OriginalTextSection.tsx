@@ -133,6 +133,7 @@ const OriginalTextSection = ({
         if (decryptData) {
             setRot(decryptData.rot);
             setRotatedText(decryptData.result);
+            setRotatedLanguage(decryptData.language as SupportedLanguage);
 
             toast.success(
                 `Detected ${decryptData.language} with ${Math.ceil(
@@ -148,7 +149,7 @@ const OriginalTextSection = ({
                 toastId: decryptErrorToastId,
             });
         }
-    }, [decryptData, decryptError, setRot, setRotatedText]);
+    }, [decryptData, decryptError, setRot, setRotatedText, setRotatedLanguage]);
 
     return (
         <section id="original-textarea-section" className="textarea-section">
