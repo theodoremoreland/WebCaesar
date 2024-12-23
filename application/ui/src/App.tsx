@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { ToastContainer, toast } from "react-toastify";
 
 // Custom
+import togglePrimaryHighlightColor from "./utils/togglePrimaryHighlightColor";
 import { SupportedLanguage } from "./types";
 import {
     getLocalStorageData,
@@ -93,6 +94,10 @@ const App = (): ReactElement => {
             );
         }
     }, [originalText, rotatedText, rot, originalLanguage, rotatedLanguage]);
+
+    useEffect(() => {
+        togglePrimaryHighlightColor(isPositiveRotation);
+    }, [isPositiveRotation]);
 
     return (
         <main>

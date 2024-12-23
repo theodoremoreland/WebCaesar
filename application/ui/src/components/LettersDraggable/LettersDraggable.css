@@ -38,18 +38,11 @@
         align-items: center;
         list-style: none;
         color: var(--primary-font-color);
+        background-color: var(--primary-highlight-color);
         margin: 0;
         padding: 0;
         cursor: grab;
         transition: background-color 0.2s ease-in-out;
-
-        &.positive {
-            background-color: var(--primary-highlight-color);
-        }
-
-        &.negative {
-            background-color: var(--secondary-highlight-color);
-        }
 
         &:hover {
             filter: brightness(1.1);
