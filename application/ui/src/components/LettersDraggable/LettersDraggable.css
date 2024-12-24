@@ -43,10 +43,6 @@
         padding: 0;
         cursor: grab;
 
-        &:hover {
-            filter: brightness(1.1);
-        }
-
         li {
             position: relative;
             width: 3rem;
