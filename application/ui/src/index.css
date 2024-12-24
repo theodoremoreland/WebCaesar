@@ -30,7 +30,7 @@
     --quaternary-color: #ff5a5f;
 
     --font-color: var(--tertiary-color);
-    --border-color: #cccccc40;
+    --border-color: #fee71552;
     --highlight-font-color: var(--primary-color);
     --highlight-color: var(--secondary-color);
     --highlight-color-light: color-mix(
@@ -51,7 +51,7 @@
 
 * {
     box-sizing: border-box;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color, border-color 0.3s ease-in-out;
 }
 
 html {

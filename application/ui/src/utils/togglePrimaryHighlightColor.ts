@@ -2,8 +2,14 @@ export default (isPositiveRotation: boolean): void => {
     const root: HTMLElement = document.documentElement;
 
     if (isPositiveRotation) {
-        root.style.setProperty("--highlight-color", "var(--secondary-color)");
+        root.style.setProperty("--primary-color", "#101820");
+        root.style.setProperty("--secondary-color", "#fee715");
+        root.style.setProperty("--font-color", "var(--tertiary-color)");
+        root.style.setProperty("--border-color", "#fee71552");
     } else {
-        root.style.setProperty("--highlight-color", "var(--quaternary-color)");
+        root.style.setProperty("--primary-color", "#fee715");
+        root.style.setProperty("--secondary-color", "#101820");
+        root.style.setProperty("--font-color", "var(--secondary-color)");
+        root.style.setProperty("--border-color", "#101820a6");
     }
 };
