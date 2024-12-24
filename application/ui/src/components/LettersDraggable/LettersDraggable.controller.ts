@@ -59,7 +59,12 @@ const getClosestToCenter = (
 export const getCenterLetters = (
     originalOlRef: React.MutableRefObject<HTMLOListElement | null>,
     rotatedOlRef: React.MutableRefObject<HTMLOListElement | null>
-) => {
+):
+    | {
+          original: LiPositionMetadata;
+          rotated: LiPositionMetadata;
+      }
+    | undefined => {
     if (!originalOlRef.current || !rotatedOlRef.current) {
         return;
     }
@@ -88,10 +93,10 @@ export const getCenterLetters = (
         };
     });
 
-    console.log(
-        getClosestToCenter(originalElementsWithPosition).index -
-            getClosestToCenter(rotatedElementsWithPosition).index
-    );
+    return {
+        original: getClosestToCenter(originalElementsWithPosition),
+        rotated: getClosestToCenter(rotatedElementsWithPosition),
+    };
 };
 
 export const onWheelMove = (

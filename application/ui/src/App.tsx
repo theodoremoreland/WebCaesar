@@ -115,6 +115,8 @@ const App = (): ReactElement => {
                     setRotatedLanguage={setRotatedLanguage}
                 />
                 <LettersDraggable
+                    rot={rot}
+                    setRot={setRot}
                     originalLanguage={originalLanguage}
                     rotatedLanguage={rotatedLanguage}
                     isPositiveRotation={isPositiveRotation}
