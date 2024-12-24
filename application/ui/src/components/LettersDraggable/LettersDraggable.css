@@ -4,7 +4,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0.25rem;
+    gap: 2px;
     font-size: 1.5rem;
     overflow-y: hidden;
     height: 100%;
@@ -91,8 +91,7 @@
             width: 100%;
             height: 3rem;
             text-align: center;
-            border-top: 1px solid var(--primary-color);
-            border-bottom: 1px solid var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
         }
     }
 }
