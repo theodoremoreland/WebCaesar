@@ -42,7 +42,6 @@
         margin: 0;
         padding: 0;
         cursor: grab;
-        transition: background-color 0.2s ease-in-out;
 
         &:hover {
             filter: brightness(1.1);
