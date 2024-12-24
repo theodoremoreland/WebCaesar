@@ -177,6 +177,7 @@ const LettersDraggable = ({
                 className={`character-list ${
                     isPositiveRotation ? "positive" : "negative"
                 }`}
+                title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
                 onDoubleClick={() => setIsPositiveRotation(!isPositiveRotation)}
                 onMouseDown={(event) =>
                     onMouseDown(event, {
@@ -222,6 +223,7 @@ const LettersDraggable = ({
                 className={`character-list ${
                     isPositiveRotation ? "positive" : "negative"
                 }`}
+                title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
                 onDoubleClick={() => setIsPositiveRotation(!isPositiveRotation)}
                 onMouseDown={(event) =>
                     onMouseDown(event, {
