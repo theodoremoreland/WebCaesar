@@ -26,9 +26,12 @@
 :root {
     --primary-color: #101014;
     --secondary-color: #202024;
-    --tertiary-color: #b3002a;
-    --primary-highlight-color: #008897;
-    --secondary-highlight-color: #ff5a5f;
+    --tertiary-color: #008897;
+    --quaternary-color: #ff5a5f;
+    --quinary-color: #ffaa00;
+
+    --primary-highlight-color: var(--tertiary-color);
+    --secondary-highlight-color: var(--quaternary-color);
 
     --primary-highlight-color-light: color-mix(
         in srgb,
