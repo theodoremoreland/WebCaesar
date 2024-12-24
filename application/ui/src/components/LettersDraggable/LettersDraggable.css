@@ -94,4 +94,18 @@
             border-bottom: 2px solid var(--primary-color);
         }
     }
+
+    .icons {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+
+        .icon {
+            fill: var(--highlight-color);
+        }
+    }
 }

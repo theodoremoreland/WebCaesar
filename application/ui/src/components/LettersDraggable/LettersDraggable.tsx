@@ -17,6 +17,10 @@ import {
 // Types
 import { SupportedLanguage } from "../../types";
 
+// Images
+import SwipeVerticalIcon from "../../assets/images/swipe_vertical.svg?react";
+import TouchDoubleIcon from "../../assets/images/touch_double.svg?react";
+
 // Styles
 import "./LettersDraggable.css";
 
@@ -163,6 +167,10 @@ const LettersDraggable = ({
 
     return (
         <section ref={sectionRef} className="LettersDraggable">
+            <div className="icons">
+                <SwipeVerticalIcon className="icon swipe-vertical" />
+                <TouchDoubleIcon className="icon touch-double" />
+            </div>
             <ol
                 ref={originalOlRef}
                 id="character-list-original"
@@ -251,6 +259,10 @@ const LettersDraggable = ({
                     );
                 })}
             </ol>
+            <div className="icons">
+                <SwipeVerticalIcon className="icon swipe-vertical" />
+                <TouchDoubleIcon className="icon touch-double" />
+            </div>
             <ul id="character-grid">
                 {quadruple(fill([], lengthOfLongestAlphabet)).map(
                     (_, index) => {
