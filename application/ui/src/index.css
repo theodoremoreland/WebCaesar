@@ -44,9 +44,9 @@
         white
     );
 
-    --toastify-color-info: var(--highlight-color) !important;
-    --toastify-text-color-light: var(--font-color) !important;
-    --toastify-color-light: var(--secondary-color) !important;
+    --toastify-color-info: var(--primary-color) !important;
+    --toastify-text-color-light: var(--secondary-color) !important;
+    --toastify-color-light: var(--primary-color) !important;
 }
 
 * {
