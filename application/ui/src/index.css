@@ -24,32 +24,28 @@
 }
 
 :root {
-    --primary-color: #101014;
-    --secondary-color: #202024;
-    --tertiary-color: #008897;
+    --primary-color: #101820;
+    --secondary-color: #fee715;
+    --tertiary-color: #ffffff;
     --quaternary-color: #ff5a5f;
-    --quinary-color: #ffaa00;
 
-    --primary-highlight-color: var(--tertiary-color);
-    --secondary-highlight-color: var(--quaternary-color);
-
-    --primary-highlight-color-light: color-mix(
-        in srgb,
-        var(--primary-highlight-color) 75%,
-        white
-    );
-    --primary-highlight-color-lighter: color-mix(
-        in srgb,
-        var(--primary-highlight-color) 80%,
-        white
-    );
-
-    --primary-font-color: #ffffff;
-
+    --font-color: var(--tertiary-color);
     --border-color: #cccccc40;
+    --highlight-font-color: var(--primary-color);
+    --highlight-color: var(--secondary-color);
+    --highlight-color-light: color-mix(
+        in srgb,
+        var(--highlight-color) 75%,
+        white
+    );
+    --highlight-color-lighter: color-mix(
+        in srgb,
+        var(--highlight-color) 80%,
+        white
+    );
 
-    --toastify-color-info: var(--primary-highlight-color) !important;
-    --toastify-text-color-light: var(--primary-font-color) !important;
+    --toastify-color-info: var(--highlight-color) !important;
+    --toastify-text-color-light: var(--font-color) !important;
     --toastify-color-light: var(--secondary-color) !important;
 }
 
@@ -60,7 +56,7 @@
 
 html {
     font-family: custom-regular, sans-serif;
-    color: var(--primary-font-color);
+    color: var(--font-color);
     background-color: var(--primary-color);
 }
 
@@ -84,5 +80,5 @@ button:disabled {
 
 .Toastify__close-button--light {
     opacity: 0.8 !important;
-    color: var(--primary-font-color) !important;
+    color: var(--font-color) !important;
 }

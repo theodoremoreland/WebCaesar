@@ -6,7 +6,7 @@
     align-items: center;
     width: 40%;
     height: 100%;
-    color: var(--primary-font-color);
+    color: var(--font-color);
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 6px;
@@ -14,7 +14,7 @@
         rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
     &#original-textarea-section:focus-within {
-        border-color: var(--primary-highlight-color);
+        border-color: var(--highlight-color);
     }
 
     &#rotated-textarea-section:focus-within {
@@ -53,11 +53,11 @@
             outline: transparent;
             padding: 0 0.75rem;
             border: none;
-            caret-color: var(--primary-highlight-color-light);
+            caret-color: var(--highlight-color-light);
 
             &::selection {
-                color: var(--primary-font-color);
-                background-color: var(--primary-highlight-color-lighter);
+                color: var(--font-color);
+                background-color: var(--highlight-color-lighter);
             }
 
             &#rotated-text {
@@ -65,7 +65,7 @@
             }
 
             &#rotated-text:hover {
-                color: var(--primary-highlight-color-lighter);
+                color: var(--highlight-color-lighter);
             }
         }
 
@@ -96,9 +96,9 @@
             padding: 0.65rem 1.2rem;
             border: none;
             border-radius: 1.2rem;
-            color: var(--primary-font-color);
             font-size: 1.05rem;
-            background-color: var(--secondary-color);
+            color: var(--highlight-font-color);
+            background-color: var(--highlight-color);
         }
 
         .pill:hover,
@@ -108,7 +108,7 @@
 
         .pill.open {
             opacity: 0.8;
-            background-color: var(--primary-highlight-color);
+            background-color: var(--highlight-color);
         }
 
         .pill-list {
@@ -123,7 +123,7 @@
             list-style: none;
             padding: 0.7rem 1rem;
             margin: 0;
-            color: var(--primary-font-color);
+            color: var(--font-color);
             background-color: var(--secondary-color);
             box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
                 rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -134,7 +134,7 @@
         }
 
         .pill-list li:hover {
-            color: var(--primary-highlight-color-lighter);
+            color: var(--highlight-color-lighter);
         }
 
         input.popover {
@@ -149,12 +149,12 @@
             background-color: var(--secondary-color);
             box-shadow: #0000001a 0 1px 3px, #0000000f 0 1px 2px;
             border: none;
-            color: var(--primary-font-color);
+            color: var(--font-color);
             font-size: 1rem;
         }
 
         input.popover:focus {
-            outline: 1px solid var(--primary-highlight-color);
+            outline: 1px solid var(--highlight-color);
         }
     }
 
@@ -185,8 +185,8 @@
             padding: 0.5rem 1rem;
             border: none;
             border-radius: 4px;
-            background-color: var(--primary-highlight-color);
-            color: var(--primary-font-color);
+            color: var(--highlight-font-color);
+            background-color: var(--highlight-color);
             font-size: 1rem;
             cursor: pointer;
 
@@ -210,6 +210,7 @@
             }
 
             .icon {
+                fill: var(--highlight-font-color);
                 width: 1.34rem;
                 height: 1.34rem;
             }
@@ -219,7 +220,7 @@
 
 @keyframes border-fade-out {
     from {
-        border-color: var(--primary-highlight-color);
+        border-color: var(--highlight-color);
     }
 
     to {
