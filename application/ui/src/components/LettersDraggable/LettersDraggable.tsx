@@ -210,7 +210,10 @@ const LettersDraggable = ({
 
     return (
         <section ref={sectionRef} className="LettersDraggable">
-            <div className="icons">
+            <div
+                className="icons"
+                title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
+            >
                 <SwipeVerticalIcon className="icon swipe-vertical" />
                 <TouchDoubleIcon className="icon touch-double" />
             </div>
@@ -304,7 +307,10 @@ const LettersDraggable = ({
                     );
                 })}
             </ol>
-            <div className="icons">
+            <div
+                className="icons"
+                title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
+            >
                 <SwipeVerticalIcon className="icon swipe-vertical" />
                 <TouchDoubleIcon className="icon touch-double" />
             </div>
