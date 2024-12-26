@@ -1,7 +1,7 @@
-export default (isPositiveRotation: boolean): void => {
+export default (isAnchoredLeft: boolean): void => {
     const root: HTMLElement = document.documentElement;
 
-    if (isPositiveRotation) {
+    if (isAnchoredLeft) {
         root.style.setProperty("--primary-color", "#101820");
         root.style.setProperty("--secondary-color", "#fee715");
         root.style.setProperty("--font-color", "var(--tertiary-color)");
