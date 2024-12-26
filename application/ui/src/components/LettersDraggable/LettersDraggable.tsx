@@ -102,7 +102,7 @@ const LettersDraggable = ({
 
             const ogIndex = og.index;
             const rgIndex = rg.index;
-            const newRot = ogIndex - rgIndex;
+            const newRot = Math.abs(ogIndex - rgIndex) * -1;
 
             if (newRot !== rot) {
                 setRot(newRot);
