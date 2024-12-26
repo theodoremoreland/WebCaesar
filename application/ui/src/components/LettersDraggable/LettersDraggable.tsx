@@ -85,23 +85,16 @@ const LettersDraggable = ({
             return;
         }
 
-        if (isPositiveRotation) {
-            const og = centerLetters.original;
-            const rg = centerLetters.rotated;
+        const ogIndex = centerLetters.original.index;
+        const rgIndex = centerLetters.rotated.index;
 
-            const ogIndex = og.index;
-            const rgIndex = rg.index;
+        if (isPositiveRotation) {
             const newRot = rgIndex - ogIndex;
 
             if (newRot !== rot) {
                 setRot(newRot);
             }
         } else {
-            const og = centerLetters.original;
-            const rg = centerLetters.rotated;
-
-            const ogIndex = og.index;
-            const rgIndex = rg.index;
             const newRot = Math.abs(ogIndex - rgIndex) * -1;
 
             if (newRot !== rot) {
