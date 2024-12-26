@@ -36,7 +36,7 @@ import "./App.css";
  */
 const App = (): ReactElement => {
     const [rot, setRot] = useState<number>(0);
-    const [isAnchoredLeft, setIsAnchoredLeft] = useState<boolean>(true);
+    const [isRotPositive, setIsRotPositive] = useState<boolean>(true);
     const [originalLanguage, setOriginalLanguage] = useState<SupportedLanguage>(
         SupportedLanguage.English
     );
@@ -108,8 +108,8 @@ const App = (): ReactElement => {
     }, [originalText, rotatedText, rot, originalLanguage, rotatedLanguage]);
 
     useEffect(() => {
-        togglePrimaryHighlightColor(isAnchoredLeft);
-    }, [isAnchoredLeft]);
+        togglePrimaryHighlightColor(isRotPositive);
+    }, [isRotPositive]);
 
     useEffect(() => {
         handleRotate();
@@ -134,8 +134,8 @@ const App = (): ReactElement => {
                     setRot={setRot}
                     originalLanguage={originalLanguage}
                     rotatedLanguage={rotatedLanguage}
-                    isAnchoredLeft={isAnchoredLeft}
-                    setIsAnchoredLeft={setIsAnchoredLeft}
+                    isRotPositive={isRotPositive}
+                    setIsRotPositive={setIsRotPositive}
                 />
                 <RotatedTextSection
                     isOtherLoading={isLoading}

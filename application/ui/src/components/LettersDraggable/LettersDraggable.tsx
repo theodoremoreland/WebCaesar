@@ -20,7 +20,6 @@ import { SupportedLanguage } from "../../types";
 // Images
 import SwipeVerticalIcon from "../../assets/images/swipe_vertical.svg?react";
 import TouchDoubleIcon from "../../assets/images/touch_double.svg?react";
-import AnchorIcon from "../../assets/images/anchor.svg?react";
 
 // Styles
 import "./LettersDraggable.css";
@@ -28,16 +27,16 @@ import "./LettersDraggable.css";
 interface Props {
     originalLanguage: SupportedLanguage;
     rotatedLanguage: SupportedLanguage;
-    isAnchoredLeft: boolean;
-    setIsAnchoredLeft: React.Dispatch<React.SetStateAction<boolean>>;
+    isRotPositive: boolean;
+    setIsRotPositive: React.Dispatch<React.SetStateAction<boolean>>;
     setRot: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const LettersDraggable = ({
     originalLanguage,
     rotatedLanguage,
-    isAnchoredLeft,
-    setIsAnchoredLeft,
+    isRotPositive,
+    setIsRotPositive,
     setRot,
 }: Props): ReactElement => {
     // Global refs
@@ -87,15 +86,24 @@ const LettersDraggable = ({
         const ogIndex = centerLetters.original.index;
         const rgIndex = centerLetters.rotated.index;
 
-        if (isAnchoredLeft) {
+        if (isRotPositive) {
             const newRot = rgIndex - ogIndex;
 
-            setRot(newRot);
+            if (newRot < 0) {
+                setRot(newRot + lengthOfLongestAlphabet);
+            } else {
+                setRot(newRot);
+            }
         } else {
-            const newRot = ogIndex - rgIndex;
-            setRot(newRot);
+            const newRot = rgIndex - ogIndex;
+
+            if (newRot > 0) {
+                setRot(newRot - lengthOfLongestAlphabet);
+            } else {
+                setRot(newRot);
+            }
         }
-    }, [isAnchoredLeft, setRot]);
+    }, [isRotPositive, setRot, lengthOfLongestAlphabet]);
 
     const onOriginalOlMouseMove = useCallback(
         (event: MouseEvent) => {
@@ -197,7 +205,6 @@ const LettersDraggable = ({
 
     return (
         <section ref={sectionRef} className="LettersDraggable">
-            {isAnchoredLeft && <AnchorIcon className="anchor icon left" />}
             <div
                 className="icons"
                 title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
@@ -209,10 +216,10 @@ const LettersDraggable = ({
                 ref={originalOlRef}
                 id="character-list-original"
                 className={`character-list ${
-                    isAnchoredLeft ? "positive" : "negative"
+                    isRotPositive ? "positive" : "negative"
                 }`}
                 title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
-                onDoubleClick={() => setIsAnchoredLeft(!isAnchoredLeft)}
+                onDoubleClick={() => setIsRotPositive(!isRotPositive)}
                 onMouseDown={(event) =>
                     onMouseDown(event, {
                         olRef: originalOlRef,
@@ -255,10 +262,10 @@ const LettersDraggable = ({
                 ref={rotatedOlRef}
                 id="character-list-rotated"
                 className={`character-list ${
-                    isAnchoredLeft ? "positive" : "negative"
+                    isRotPositive ? "positive" : "negative"
                 }`}
                 title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
-                onDoubleClick={() => setIsAnchoredLeft(!isAnchoredLeft)}
+                onDoubleClick={() => setIsRotPositive(!isRotPositive)}
                 onMouseDown={(event) =>
                     onMouseDown(event, {
                         olRef: rotatedOlRef,
@@ -309,7 +316,6 @@ const LettersDraggable = ({
                     }
                 )}
             </ul>
-            {!isAnchoredLeft && <AnchorIcon className="anchor icon right" />}
         </section>
     );
 };
