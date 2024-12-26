@@ -103,9 +103,22 @@
         align-items: center;
         gap: 1rem;
         padding: 1rem;
+    }
 
-        .icon {
-            fill: var(--highlight-color);
-        }
+    .icon {
+        fill: var(--highlight-color);
+    }
+
+    .anchor {
+        position: absolute;
+        bottom: 4rem;
+    }
+
+    .anchor.left {
+        left: 1rem;
+    }
+
+    .anchor.right {
+        right: 1rem;
     }
 }

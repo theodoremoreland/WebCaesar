@@ -20,6 +20,7 @@ import { SupportedLanguage } from "../../types";
 // Images
 import SwipeVerticalIcon from "../../assets/images/swipe_vertical.svg?react";
 import TouchDoubleIcon from "../../assets/images/touch_double.svg?react";
+import AnchorIcon from "../../assets/images/anchor.svg?react";
 
 // Styles
 import "./LettersDraggable.css";
@@ -203,6 +204,7 @@ const LettersDraggable = ({
 
     return (
         <section ref={sectionRef} className="LettersDraggable">
+            {!isPositiveRotation && <AnchorIcon className="icon anchor left" />}
             <div
                 className="icons"
                 title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
@@ -314,6 +316,7 @@ const LettersDraggable = ({
                     }
                 )}
             </ul>
+            {isPositiveRotation && <AnchorIcon className="icon anchor right" />}
         </section>
     );
 };
