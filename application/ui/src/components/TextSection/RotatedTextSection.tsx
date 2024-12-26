@@ -2,7 +2,6 @@
 import { ReactElement, useState, ChangeEvent, useRef, useEffect } from "react";
 
 // Custom
-import rotateString from "../../modules/rotateString";
 import { languageMetadata } from "../../constants/languageMetadata";
 import { copyToClipboard } from "./TextSection.controller";
 
@@ -27,10 +26,8 @@ interface Props {
     rotatedText: string;
     rot: number;
     setRot: (rot: number) => void;
-    originalLanguage: SupportedLanguage;
     rotatedLanguage: SupportedLanguage;
     setRotatedLanguage: (language: SupportedLanguage) => void;
-    setRotatedText: (text: string) => void;
 }
 
 const RotatedTextSection = ({
@@ -39,10 +36,8 @@ const RotatedTextSection = ({
     rotatedText,
     rot,
     setRot,
-    originalLanguage,
     rotatedLanguage,
     setRotatedLanguage,
-    setRotatedText,
 }: Props): ReactElement => {
     const [isRotatedLanguageDropdownOpen, setIsRotatedLanguageDropdownOpen] =
         useState<boolean>(false);
@@ -63,9 +58,6 @@ const RotatedTextSection = ({
 
         setRot(_rot);
         setRotatedLanguage(language);
-        setRotatedText(
-            rotateString(originalText ?? "", _rot, originalLanguage, language)
-        );
         setIsRotatedLanguageDropdownOpen(false);
     };
 
@@ -75,14 +67,6 @@ const RotatedTextSection = ({
         const _rot: number = parseInt(e.currentTarget.value);
 
         setRot(_rot);
-        setRotatedText(
-            rotateString(
-                originalText ?? "",
-                _rot,
-                originalLanguage,
-                rotatedLanguage
-            )
-        );
     };
 
     useEffect(() => {

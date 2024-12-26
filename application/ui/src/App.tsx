@@ -1,11 +1,12 @@
 // React
-import { ReactElement, useState, useEffect } from "react";
+import { ReactElement, useState, useEffect, useCallback } from "react";
 
 // Third party
 import { useQuery } from "react-query";
 import { ToastContainer, toast } from "react-toastify";
 
 // Custom
+import rotateString from "./modules/rotateString";
 import togglePrimaryHighlightColor from "./utils/togglePrimaryHighlightColor";
 import { SupportedLanguage } from "./types";
 import {
@@ -29,7 +30,7 @@ import "./App.css";
 /**
  * [x]: Can upload text file that will be encrypted and output into text area
  * [x] Can submit for auto decryption
- * TODO: Can rotate text area output degree by degree using a wheel
+ * TODO: Can rotate text area output degree by degree using a interactive slider
  * [x] Can download textarea output as text file
  * [x] Initializes with encrypted dad joke
  */
@@ -52,6 +53,17 @@ const App = (): ReactElement => {
     } = useQuery("dad-joke", getDadJoke, { retry: false });
 
     const isLoading: boolean = isFetchingDadJoke; // Here in case we need to add more loading states
+
+    const handleRotate = useCallback((): void => {
+        setRotatedText(
+            rotateString(
+                originalText ?? "",
+                rot,
+                originalLanguage,
+                rotatedLanguage
+            )
+        );
+    }, [originalText, rot, originalLanguage, rotatedLanguage]);
 
     useEffect(() => {
         const {
@@ -99,6 +111,10 @@ const App = (): ReactElement => {
         togglePrimaryHighlightColor(isPositiveRotation);
     }, [isPositiveRotation]);
 
+    useEffect(() => {
+        handleRotate();
+    }, [handleRotate]);
+
     return (
         <main>
             <div className="content">
@@ -128,10 +144,8 @@ const App = (): ReactElement => {
                     rotatedText={rotatedText}
                     rot={rot}
                     setRot={setRot}
-                    originalLanguage={originalLanguage}
                     rotatedLanguage={rotatedLanguage}
                     setRotatedLanguage={setRotatedLanguage}
-                    setRotatedText={setRotatedText}
                 />
             </div>
             <ToastContainer position="top-center" />

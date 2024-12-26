@@ -89,7 +89,7 @@ const LettersDraggable = ({
         const rgIndex = centerLetters.rotated.index;
 
         if (isPositiveRotation) {
-            const newRot = rgIndex - ogIndex;
+            const newRot = Math.abs(ogIndex - rgIndex) * 1;
 
             if (newRot !== rot) {
                 setRot(newRot);
