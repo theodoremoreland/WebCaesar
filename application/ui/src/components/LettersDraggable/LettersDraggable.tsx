@@ -1,5 +1,5 @@
 // React
-import { ReactElement, useRef, useCallback, useMemo } from "react";
+import { ReactElement, useRef, useCallback, useMemo, useEffect } from "react";
 
 // Custom
 import { languageMetadata } from "../../constants/languageMetadata";
@@ -84,10 +84,10 @@ const LettersDraggable = ({
         }
 
         const ogIndex = centerLetters.original.index;
-        const rgIndex = centerLetters.rotated.index;
+        const rtIndex = centerLetters.rotated.index;
 
         if (isRotPositive) {
-            const newRot = rgIndex - ogIndex;
+            const newRot = rtIndex - ogIndex;
 
             if (newRot < 0) {
                 setRot(newRot + lengthOfLongestAlphabet);
@@ -95,7 +95,7 @@ const LettersDraggable = ({
                 setRot(newRot);
             }
         } else {
-            const newRot = rgIndex - ogIndex;
+            const newRot = rtIndex - ogIndex;
 
             if (newRot > 0) {
                 setRot(newRot - lengthOfLongestAlphabet);
@@ -202,6 +202,10 @@ const LettersDraggable = ({
         document.removeEventListener("mousemove", onRotatedOlMouseMove);
         document.removeEventListener("mouseup", onRotatedOlMouseUp);
     }, [onRotatedOlMouseMove]);
+
+    useEffect(() => {
+        updateRot();
+    }, [isRotPositive, updateRot]);
 
     return (
         <section ref={sectionRef} className="LettersDraggable">
