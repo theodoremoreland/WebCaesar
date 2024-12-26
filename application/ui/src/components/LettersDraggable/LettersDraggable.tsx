@@ -30,7 +30,6 @@ interface Props {
     rotatedLanguage: SupportedLanguage;
     isAnchoredLeft: boolean;
     setIsAnchoredLeft: React.Dispatch<React.SetStateAction<boolean>>;
-    rot: number;
     setRot: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -39,7 +38,6 @@ const LettersDraggable = ({
     rotatedLanguage,
     isAnchoredLeft,
     setIsAnchoredLeft,
-    rot,
     setRot,
 }: Props): ReactElement => {
     // Global refs
@@ -92,17 +90,12 @@ const LettersDraggable = ({
         if (isAnchoredLeft) {
             const newRot = rgIndex - ogIndex;
 
-            if (newRot !== rot) {
-                setRot(newRot);
-            }
+            setRot(newRot);
         } else {
             const newRot = ogIndex - rgIndex;
-
-            if (newRot !== rot) {
-                setRot(newRot);
-            }
+            setRot(newRot);
         }
-    }, [isAnchoredLeft, rot, setRot]);
+    }, [isAnchoredLeft, setRot]);
 
     const onOriginalOlMouseMove = useCallback(
         (event: MouseEvent) => {
