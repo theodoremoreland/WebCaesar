@@ -68,6 +68,8 @@ Assumes the following:
 -   You have Node `v22.8.0` or greater installed
 -   You are at the root of this project and are using a UNIX style command line environment when referencing the CLI commands below
 
+Confirm that no other application is using port `5000` as port `5000` is needed for the Flask server. If you need to run Flask on an alternative port, you can modify the last line in the `application/application.py`.
+
 Open terminal at root of this project then run the following command to build the ui:
 
 ```
