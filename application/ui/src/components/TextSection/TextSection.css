@@ -89,6 +89,7 @@
         }
 
         .pill {
+            position: relative;
             cursor: pointer;
             display: flex;
             flex-direction: row;
@@ -105,12 +106,27 @@
 
         .pill:hover,
         .pill:active {
-            filter: brightness(1.3);
+            filter: brightness(1.25);
         }
 
         .pill.open {
             opacity: 0.8;
             background-color: var(--highlight-color);
+        }
+
+        .pill.inverse {
+            color: var(--highlight-color);
+            background-color: var(--highlight-font-color);
+            padding: 0.65rem 2rem;
+            border: 1px solid var(--border-color);
+
+            .icon {
+                position: absolute;
+                top: 5%;
+                right: 10%;
+                fill: var(--highlight-color);
+                width: 1rem;
+            }
         }
 
         .pill-list {
@@ -125,7 +141,7 @@
             list-style: none;
             padding: 0.7rem 1rem;
             margin: 0;
-            color: var(--font-color);
+            color: var(--primary-color);
             background-color: var(--secondary-color);
             box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
                 rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
@@ -136,7 +152,7 @@
         }
 
         .pill-list li:hover {
-            color: var(--highlight-color-lighter);
+            font-style: oblique;
         }
 
         input.popover {
@@ -193,7 +209,7 @@
             cursor: pointer;
 
             &:hover {
-                filter: brightness(1.1);
+                filter: brightness(1.25);
             }
 
             &:active {

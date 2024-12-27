@@ -108,17 +108,4 @@
     .icon {
         fill: var(--highlight-color);
     }
-
-    .anchor {
-        position: absolute;
-        bottom: 4rem;
-    }
-
-    .anchor.left {
-        left: 1rem;
-    }
-
-    .anchor.right {
-        right: 1rem;
-    }
 }

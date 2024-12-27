@@ -1,9 +1,12 @@
 // React
-import { ReactElement, useState, ChangeEvent, useRef, useEffect } from "react";
+import { ReactElement, useState } from "react";
 
 // Custom
 import { languageMetadata } from "../../constants/languageMetadata";
 import { copyToClipboard } from "./TextSection.controller";
+
+// Components
+import RotInfo from "../Modal/RotInfo/RotInfo";
 
 // Utils
 import { getFirstThreeLetters } from "../../utils";
@@ -13,6 +16,7 @@ import { SupportedLanguage } from "../../types";
 
 // Images
 import DownloadIcon from "../../assets/images/download.svg?react";
+import InfoIcon from "../../assets/images/info.svg?react";
 
 // Styles
 import "./TextSection.css";
@@ -41,9 +45,8 @@ const RotatedTextSection = ({
 }: Props): ReactElement => {
     const [isRotatedLanguageDropdownOpen, setIsRotatedLanguageDropdownOpen] =
         useState<boolean>(false);
-    const [isRotPopoverOpen, setIsRotPopoverOpen] = useState<boolean>(false);
-
-    const rotInputRef = useRef<HTMLInputElement | null>(null);
+    const [isRotInfoModalOpen, setIsRotInfoModalOpen] =
+        useState<boolean>(false);
 
     const isLoading: boolean = isOtherLoading; // Here in case we need to add more loading states
 
@@ -61,22 +64,11 @@ const RotatedTextSection = ({
         setIsRotatedLanguageDropdownOpen(false);
     };
 
-    const handleRotate = (e: ChangeEvent<HTMLInputElement>): void => {
-        e.preventDefault();
-
-        const _rot: number = parseInt(e.currentTarget.value);
-
-        setRot(_rot);
-    };
-
-    useEffect(() => {
-        if (isRotPopoverOpen && rotInputRef.current) {
-            rotInputRef.current.focus();
-        }
-    }, [isRotPopoverOpen]);
-
     return (
         <section id="rotated-textarea-section" className="textarea-section">
+            {isRotInfoModalOpen && (
+                <RotInfo handleClose={() => setIsRotInfoModalOpen(false)} />
+            )}
             <label htmlFor="rotated-text">Rotated text</label>
             <div className="textarea-container">
                 <textarea
@@ -106,7 +98,6 @@ const RotatedTextSection = ({
                                 setIsRotatedLanguageDropdownOpen(
                                     !isRotatedLanguageDropdownOpen
                                 );
-                                setIsRotPopoverOpen(false);
                             }}
                             disabled={originalText === "" || isLoading}
                         >
@@ -134,44 +125,16 @@ const RotatedTextSection = ({
                     </div>
                     <div className="pill-wrapper">
                         <button
-                            title={
-                                originalText === "" || isLoading
-                                    ? "No text to rotate"
-                                    : "Rotate text by a certain degree"
-                            }
                             type="button"
-                            className={`pill ${isRotPopoverOpen ? "open" : ""}`}
+                            className="pill inverse"
                             onClick={() => {
-                                setIsRotPopoverOpen(!isRotPopoverOpen);
                                 setIsRotatedLanguageDropdownOpen(false);
+                                setIsRotInfoModalOpen(true);
                             }}
-                            disabled={originalText === "" || isLoading}
                         >
-                            rot{rot}
+                            <span>rot{rot}</span>
+                            <InfoIcon className="icon" />
                         </button>
-                        {isRotPopoverOpen && (
-                            <input
-                                ref={rotInputRef}
-                                title="Rotate text by a certain degree"
-                                type="number"
-                                className="popover"
-                                name="rot"
-                                value={rot}
-                                autoComplete="off"
-                                onChange={handleRotate}
-                                min={
-                                    0 -
-                                    (languageMetadata[rotatedLanguage]
-                                        .characterCount -
-                                        1)
-                                }
-                                max={
-                                    languageMetadata[rotatedLanguage]
-                                        .characterCount - 1
-                                }
-                                disabled={originalText === "" || isLoading}
-                            />
-                        )}
                     </div>
                 </div>
             </div>

@@ -30,7 +30,7 @@ import "./App.css";
 /**
  * [x]: Can upload text file that will be encrypted and output into text area
  * [x] Can submit for auto decryption
- * TODO: Can rotate text area output degree by degree using a interactive slider
+ * [x] Can rotate text area output degree by degree using a interactive slider
  * [x] Can download textarea output as text file
  * [x] Initializes with encrypted dad joke
  */
