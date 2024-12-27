@@ -57,11 +57,6 @@
             border: none;
             caret-color: var(--highlight-color-light);
 
-            &::selection {
-                color: var(--font-color);
-                background-color: var(--highlight-color-lighter);
-            }
-
             &#rotated-text {
                 cursor: copy;
             }

@@ -98,6 +98,8 @@ Start application:
 python application.py
 ```
 
+Visit: http://localhost:5000 to use the application.
+
 ## Screenshots
 
 WIP

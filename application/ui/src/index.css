@@ -53,6 +53,11 @@
     box-sizing: border-box;
     transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out,
         color 0.5s ease-in-out, fill 0.5s ease-in-out;
+
+    &::selection {
+        color: var(--primary-color);
+        background-color: var(--secondary-color);
+    }
 }
 
 html {

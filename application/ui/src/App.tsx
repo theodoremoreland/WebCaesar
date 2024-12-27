@@ -27,13 +27,6 @@ import LettersDraggable from "./components/LettersDraggable/LettersDraggable";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-/**
- * [x]: Can upload text file that will be encrypted and output into text area
- * [x] Can submit for auto decryption
- * [x] Can rotate text area output degree by degree using a interactive slider
- * [x] Can download textarea output as text file
- * [x] Initializes with encrypted dad joke
- */
 const App = (): ReactElement => {
     const [rot, setRot] = useState<number>(0);
     const [isRotPositive, setIsRotPositive] = useState<boolean>(true);
