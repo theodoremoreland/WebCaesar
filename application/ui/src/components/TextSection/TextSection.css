@@ -62,7 +62,7 @@
             }
 
             &#rotated-text:hover {
-                color: var(--highlight-color-lighter);
+                opacity: 0.6;
             }
         }
 
