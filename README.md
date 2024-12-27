@@ -1,5 +1,7 @@
 # Web Caesar
 
+<img src="presentation/thumbnail.webp" width="650">
+
 ## Table of contents
 
 -   [Overview](#overview)
@@ -8,6 +10,8 @@
     -   [Run on Docker](#run-on-docker)
     -   [Run on Windows](#run-on-windows)
 -   [Screenshots](#screenshots)
+    -   [Desktop](#desktop)
+    -   [Mobile](#mobile)
 
 ## Overview
 
@@ -97,3 +101,7 @@ python application.py
 ## Screenshots
 
 WIP
+
+### Desktop
+
+### Mobile
