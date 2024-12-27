@@ -67,7 +67,10 @@ const RotatedTextSection = ({
     return (
         <section id="rotated-textarea-section" className="textarea-section">
             {isRotInfoModalOpen && (
-                <RotInfo handleClose={() => setIsRotInfoModalOpen(false)} />
+                <RotInfo
+                    title={`rot ${rot}`}
+                    handleClose={() => setIsRotInfoModalOpen(false)}
+                />
             )}
             <label htmlFor="rotated-text">Rotated text</label>
             <div className="textarea-container">
@@ -132,7 +135,7 @@ const RotatedTextSection = ({
                                 setIsRotInfoModalOpen(true);
                             }}
                         >
-                            <span>rot{rot}</span>
+                            <span>rot {rot}</span>
                             <InfoIcon className="icon" />
                         </button>
                     </div>

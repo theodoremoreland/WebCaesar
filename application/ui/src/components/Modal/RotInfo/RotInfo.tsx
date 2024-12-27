@@ -3,27 +3,29 @@ import { ReactElement } from "react";
 import Modal from "../Modal";
 
 // Images
+import letterDrag from "../../../assets/images/letter_drag.gif";
 
 interface Props {
+    title: string;
     handleClose: () => void;
 }
 
-const RotInfo = ({ handleClose }: Props): ReactElement => {
+const RotInfo = ({ title, handleClose }: Props): ReactElement => {
     return (
-        <Modal title="Change Rotation" handleClose={handleClose}>
+        <Modal title={title} handleClose={handleClose}>
             <div>
                 <article>
                     <h3>How to change the rotation</h3>
+                    <img src={letterDrag} alt="" />
                     <p>
-                        To change the rotation (rot), use the columns in the
-                        middle of the page. The columns can be dragged
-                        vertically to change the rot.
+                        To change the rotation (rot), use the two letter columns
+                        in the middle of the page. Each column can be dragged or
+                        scrolled vertically to change the rotation amount.
                         <br />
                         <br />
-                        The left column is the original language, and the right
-                        column is the rotated language. The rot will be applied
-                        to the original language and output in the rotated
-                        language.
+                        The left column represents letters in the original text
+                        and the right column represents letters in the rotated
+                        text.
                         <br />
                         <br />
                         The rot can be positive or negative, but is positive by

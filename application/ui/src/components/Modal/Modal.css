@@ -67,6 +67,10 @@
             margin: 0 5px;
         }
 
+        img {
+            max-height: 225px;
+        }
+
         .close-button {
             position: absolute;
             top: 0;
@@ -102,6 +106,8 @@
         .custom-modal-title {
             font-family: custom-bold;
             font-size: 2em;
+            margin: 0;
+            padding: 0;
         }
 
         .custom-modal-content {
