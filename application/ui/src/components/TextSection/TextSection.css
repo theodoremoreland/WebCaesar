@@ -148,6 +148,7 @@
 
         .pill-list li:hover {
             font-style: oblique;
+            scale: 1.05;
         }
 
         input.popover {
