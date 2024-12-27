@@ -191,3 +191,52 @@ export const determineLiClassName = (
 
     return "";
 };
+
+export const moveListOnMouseMove = (
+    event: MouseEvent,
+    {
+        olRef,
+        startingMousePositionRef,
+        startingOlTop,
+        sectionRef,
+    }: {
+        olRef: React.MutableRefObject<HTMLOListElement | null>;
+        startingMousePositionRef: React.MutableRefObject<number | null>;
+        startingOlTop: React.MutableRefObject<number | null>;
+        sectionRef: React.MutableRefObject<HTMLElement | null>;
+    }
+) => {
+    if (
+        olRef.current === null ||
+        startingMousePositionRef.current === null ||
+        startingOlTop.current === null ||
+        sectionRef.current === null
+    ) {
+        return;
+    }
+
+    const newMousePosition: number = event.clientY;
+    const difference: number =
+        newMousePosition - startingMousePositionRef.current;
+
+    // Get the bounding rectangles of the child and parent elements
+    const childRect: DOMRect = olRef.current.getBoundingClientRect();
+
+    const newTop: number = startingOlTop.current + difference;
+    const isWithinResetThresholdScrollingDown: boolean =
+        newTop - get25Percent(childRect.height) >= 10;
+    const isWithinResetThresholdScrollingUp: boolean =
+        newTop + get25Percent(childRect.height) <= 10;
+
+    if (difference > 0 && isWithinResetThresholdScrollingDown) {
+        olRef.current.style.top = `${
+            newTop - get25Percent(childRect.height)
+        }px`;
+    } else if (difference < 0 && isWithinResetThresholdScrollingUp) {
+        olRef.current.style.top = `${
+            newTop + get25Percent(childRect.height)
+        }px`;
+    } else {
+        olRef.current.style.top = `${startingOlTop.current + difference}px`;
+    }
+};

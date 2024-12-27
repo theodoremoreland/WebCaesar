@@ -5,13 +5,13 @@ import { ReactElement, useRef, useCallback, useMemo, useEffect } from "react";
 import { languageMetadata } from "../../constants/languageMetadata";
 import {
     quadruple,
-    get25Percent,
     fill,
     onMouseDown,
     onWheelMove,
     determineLiClassName,
     getCenterLetters,
     FillObject,
+    moveListOnMouseMove,
 } from "./LettersDraggable.controller";
 
 // Types
@@ -107,43 +107,12 @@ const LettersDraggable = ({
 
     const onOriginalOlMouseMove = useCallback(
         (event: MouseEvent) => {
-            if (
-                originalOlRef.current === null ||
-                startingMousePositionRef.current === null ||
-                startingOriginalOlTop.current === null ||
-                sectionRef.current === null
-            ) {
-                return;
-            }
-
-            const newMousePosition: number = event.clientY;
-            const difference: number =
-                newMousePosition - startingMousePositionRef.current;
-
-            // Get the bounding rectangles of the child and parent elements
-            const childRect: DOMRect =
-                originalOlRef.current.getBoundingClientRect();
-
-            const newTop: number = startingOriginalOlTop.current + difference;
-            const isWithinResetThresholdScrollingDown: boolean =
-                newTop - get25Percent(childRect.height) >= 10;
-            const isWithinResetThresholdScrollingUp: boolean =
-                newTop + get25Percent(childRect.height) <= 10;
-
-            if (difference > 0 && isWithinResetThresholdScrollingDown) {
-                originalOlRef.current.style.top = `${
-                    newTop - get25Percent(childRect.height)
-                }px`;
-            } else if (difference < 0 && isWithinResetThresholdScrollingUp) {
-                originalOlRef.current.style.top = `${
-                    newTop + get25Percent(childRect.height)
-                }px`;
-            } else {
-                originalOlRef.current.style.top = `${
-                    startingOriginalOlTop.current + difference
-                }px`;
-            }
-
+            moveListOnMouseMove(event, {
+                olRef: originalOlRef,
+                startingMousePositionRef,
+                startingOlTop: startingOriginalOlTop,
+                sectionRef,
+            });
             updateRot();
         },
         [updateRot]
@@ -156,43 +125,12 @@ const LettersDraggable = ({
 
     const onRotatedOlMouseMove = useCallback(
         (event: MouseEvent) => {
-            if (
-                rotatedOlRef.current === null ||
-                startingMousePositionRef.current === null ||
-                startingRotatedOlTop.current === null ||
-                sectionRef.current === null
-            ) {
-                return;
-            }
-
-            const newMousePosition: number = event.clientY;
-            const difference: number =
-                newMousePosition - startingMousePositionRef.current;
-
-            // Get the bounding rectangles of the child and parent elements
-            const childRect: DOMRect =
-                rotatedOlRef.current.getBoundingClientRect();
-
-            const newTop: number = startingRotatedOlTop.current + difference;
-            const isWithinResetThresholdScrollingDown: boolean =
-                newTop - get25Percent(childRect.height) >= 10;
-            const isWithinResetThresholdScrollingUp: boolean =
-                newTop + get25Percent(childRect.height) <= 10;
-
-            if (difference > 0 && isWithinResetThresholdScrollingDown) {
-                rotatedOlRef.current.style.top = `${
-                    newTop - get25Percent(childRect.height)
-                }px`;
-            } else if (difference < 0 && isWithinResetThresholdScrollingUp) {
-                rotatedOlRef.current.style.top = `${
-                    newTop + get25Percent(childRect.height)
-                }px`;
-            } else {
-                rotatedOlRef.current.style.top = `${
-                    startingRotatedOlTop.current + difference
-                }px`;
-            }
-
+            moveListOnMouseMove(event, {
+                olRef: rotatedOlRef,
+                startingMousePositionRef,
+                startingOlTop: startingRotatedOlTop,
+                sectionRef,
+            });
             updateRot();
         },
         [updateRot]
