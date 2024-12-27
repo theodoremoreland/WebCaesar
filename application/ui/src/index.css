@@ -30,7 +30,7 @@
     --quaternary-color: #ff5a5f;
 
     --font-color: var(--tertiary-color);
-    --border-color: #fee71552;
+    --border-color: #fee71599;
     --highlight-font-color: var(--primary-color);
     --highlight-color: var(--secondary-color);
     --highlight-color-light: color-mix(

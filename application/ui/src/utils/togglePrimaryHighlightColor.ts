@@ -5,7 +5,7 @@ export default (isRotPositive: boolean): void => {
         root.style.setProperty("--primary-color", "#0d1117");
         root.style.setProperty("--secondary-color", "#fee715");
         root.style.setProperty("--font-color", "var(--tertiary-color)");
-        root.style.setProperty("--border-color", "#fee71552");
+        root.style.setProperty("--border-color", "#fee71599");
     } else {
         root.style.setProperty("--primary-color", "#fee715");
         root.style.setProperty("--secondary-color", "#0d1117");
