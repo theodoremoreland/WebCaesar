@@ -30,8 +30,8 @@
         background-color: var(--primary-color);
         background: radial-gradient(
             circle farthest-corner at top left,
-            var(--primary-color) 3%,
-            var(--secondary-color) 70%
+            var(--primary-color) 4%,
+            var(--secondary-color) 99%
         );
         overflow-x: hidden;
         overflow-y: auto;
@@ -40,7 +40,7 @@
         a:visited,
         a:hover,
         a:active {
-            color: var(--secondary-highlight-color);
+            color: var(--secondary-color);
             text-decoration: none;
         }
 
@@ -60,8 +60,8 @@
             gap: 0.5em;
             padding: 1em;
             border: 1px solid var(--border-color);
-            color: var(--primary-font-color);
-            background-color: var(--primary-highlight-color);
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
         }
 
         li {
@@ -70,6 +70,23 @@
 
         button {
             margin: 0 5px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: medium;
+            padding: 0.5rem 1rem;
+            color: var(--primary-color);
+            background-color: var(--secondary-color);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                filter: brightness(1.25);
+            }
         }
 
         .custom-modal-header {
