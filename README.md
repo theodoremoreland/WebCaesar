@@ -1,7 +1,6 @@
 # Web Caesar
 
 <img src="presentation/thumbnail.webp" width="650">
-<img src="presentation/thumbnail-2.webp" width="650">
 
 ## Table of contents
 
