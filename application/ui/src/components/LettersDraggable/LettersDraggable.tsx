@@ -171,13 +171,14 @@ const LettersDraggable = ({
                         onMouseUp: onOriginalOlMouseUp,
                     })
                 }
-                onWheel={(event) =>
+                onWheel={(event) => {
                     onWheelMove(event, {
                         olRef: originalOlRef,
                         startingMousePositionRef,
                         startingOlTop: startingOriginalOlTop,
-                    })
-                }
+                    });
+                    updateRot();
+                }}
             >
                 {quadruple(originalCharactersFilled).map(
                     (fillObject, index) => {
@@ -217,13 +218,14 @@ const LettersDraggable = ({
                         onMouseUp: onRotatedOlMouseUp,
                     })
                 }
-                onWheel={(event) =>
+                onWheel={(event) => {
                     onWheelMove(event, {
                         olRef: rotatedOlRef,
                         startingMousePositionRef,
                         startingOlTop: startingRotatedOlTop,
-                    })
-                }
+                    });
+                    updateRot();
+                }}
             >
                 {quadruple(rotatedCharactersFilled).map((fillObject, index) => {
                     return (
