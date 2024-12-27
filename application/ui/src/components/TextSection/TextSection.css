@@ -34,6 +34,20 @@
         font-size: 1.45rem;
     }
 
+    .clickaway {
+        z-index: 100;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
     .textarea-container {
         position: relative;
         display: flex;
@@ -105,6 +119,7 @@
         }
 
         .pill.open {
+            z-index: 101;
             opacity: 0.8;
             background-color: var(--highlight-color);
         }
@@ -125,6 +140,7 @@
         }
 
         .pill-list {
+            z-index: 102;
             position: absolute;
             bottom: 125%;
             left: -0.65rem;

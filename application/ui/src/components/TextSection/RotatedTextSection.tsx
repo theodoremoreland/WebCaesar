@@ -72,6 +72,12 @@ const RotatedTextSection = ({
                     handleClose={() => setIsRotInfoModalOpen(false)}
                 />
             )}
+            {isRotatedLanguageDropdownOpen && (
+                <div
+                    className="clickaway"
+                    onClick={() => setIsRotatedLanguageDropdownOpen(false)}
+                ></div>
+            )}
             <label htmlFor="rotated-text">Rotated text</label>
             <div className="textarea-container">
                 <textarea

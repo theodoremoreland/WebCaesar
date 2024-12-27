@@ -153,6 +153,12 @@ const OriginalTextSection = ({
 
     return (
         <section id="original-textarea-section" className="textarea-section">
+            {isOriginalLanguageDropdownOpen && (
+                <div
+                    className="clickaway"
+                    onClick={() => setIsOriginalLanguageDropdownOpen(false)}
+                ></div>
+            )}
             <label htmlFor="original-text">Original text</label>
             <div className="textarea-container">
                 <textarea
