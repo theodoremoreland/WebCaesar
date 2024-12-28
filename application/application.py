@@ -12,7 +12,7 @@ from modules.dad_jokes import get_random_dad_joke
 from modules.logger import logger
 
 application = Flask(__name__, static_folder="ui/dist", static_url_path="/")
-application.config["DEBUG"] = True
+application.config["DEBUG"] = False
 
 CORS(application)
 
