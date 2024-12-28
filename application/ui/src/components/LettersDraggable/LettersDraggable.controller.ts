@@ -99,30 +99,63 @@ export const getCenterLetters = (
     };
 };
 
+export const calculateRot = ({
+    originalOlRef,
+    rotatedOlRef,
+    isRotPositive,
+    lengthOfLongestAlphabet,
+}: {
+    originalOlRef: React.MutableRefObject<HTMLOListElement | null>;
+    rotatedOlRef: React.MutableRefObject<HTMLOListElement | null>;
+    isRotPositive: boolean;
+    lengthOfLongestAlphabet: number;
+}): number | undefined => {
+    const centerLetters = getCenterLetters(originalOlRef, rotatedOlRef);
+
+    if (!centerLetters) {
+        return;
+    }
+
+    const ogIndex: number = centerLetters.original.index;
+    const rtIndex: number = centerLetters.rotated.index;
+
+    if (isRotPositive) {
+        const newRot: number = rtIndex - ogIndex;
+
+        if (newRot < 0) {
+            return newRot + lengthOfLongestAlphabet;
+        } else {
+            return newRot;
+        }
+    } else {
+        const newRot: number = rtIndex - ogIndex;
+
+        if (newRot > 0) {
+            return newRot - lengthOfLongestAlphabet;
+        } else {
+            return newRot;
+        }
+    }
+};
+
 export const onWheelMove = (
     event: React.WheelEvent<HTMLOListElement>,
     {
         olRef,
-        startingMousePositionRef,
-        startingOlTop,
     }: {
         olRef: React.MutableRefObject<HTMLOListElement | null>;
-        startingMousePositionRef: React.MutableRefObject<number | null>;
-        startingOlTop: React.MutableRefObject<number | null>;
     }
 ) => {
-    event.preventDefault();
-
-    if (
-        olRef.current === null ||
-        startingMousePositionRef.current === null ||
-        startingOlTop.current === null
-    ) {
+    if (olRef.current === null) {
         return;
     }
 
     const deltaY: number =
-        event.deltaY > 10 ? 10 : event.deltaY < -10 ? -10 : event.deltaY;
+        event.nativeEvent.deltaY > 10
+            ? 6
+            : event.nativeEvent.deltaY < -10
+            ? -6
+            : event.nativeEvent.deltaY;
 
     // Get the bounding rectangles of the child and parent elements
     const childRect: DOMRect = olRef.current.getBoundingClientRect();

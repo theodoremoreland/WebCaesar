@@ -30,6 +30,7 @@ import "./App.css";
 const App = (): ReactElement => {
     const [rot, setRot] = useState<number>(0);
     const [isRotPositive, setIsRotPositive] = useState<boolean>(true);
+    const [isAutoRotating, setIsAutoRotating] = useState<boolean>(false);
     const [originalLanguage, setOriginalLanguage] = useState<SupportedLanguage>(
         SupportedLanguage.English
     );
@@ -123,13 +124,17 @@ const App = (): ReactElement => {
                     rotatedLanguage={rotatedLanguage}
                     setRotatedLanguage={setRotatedLanguage}
                     setIsRotPositive={setIsRotPositive}
+                    setIsAutoRotating={setIsAutoRotating}
                 />
                 <LettersDraggable
+                    rot={rot}
                     setRot={setRot}
                     originalLanguage={originalLanguage}
                     rotatedLanguage={rotatedLanguage}
                     isRotPositive={isRotPositive}
                     setIsRotPositive={setIsRotPositive}
+                    isAutoRotating={isAutoRotating}
+                    setIsAutoRotating={setIsAutoRotating}
                 />
                 <RotatedTextSection
                     isOtherLoading={isLoading}

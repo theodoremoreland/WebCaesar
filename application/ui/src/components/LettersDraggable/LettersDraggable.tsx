@@ -9,9 +9,9 @@ import {
     onMouseDown,
     onWheelMove,
     determineLiClassName,
-    getCenterLetters,
     FillObject,
     moveListOnMouseMove,
+    calculateRot,
 } from "./LettersDraggable.controller";
 
 // Types
@@ -29,7 +29,10 @@ interface Props {
     rotatedLanguage: SupportedLanguage;
     isRotPositive: boolean;
     setIsRotPositive: React.Dispatch<React.SetStateAction<boolean>>;
+    rot: number;
     setRot: React.Dispatch<React.SetStateAction<number>>;
+    isAutoRotating: boolean;
+    setIsAutoRotating: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const LettersDraggable = ({
@@ -37,7 +40,10 @@ const LettersDraggable = ({
     rotatedLanguage,
     isRotPositive,
     setIsRotPositive,
+    rot,
     setRot,
+    isAutoRotating,
+    setIsAutoRotating,
 }: Props): ReactElement => {
     // Global refs
     const sectionRef = useRef<HTMLElement | null>(null);
@@ -77,31 +83,15 @@ const LettersDraggable = ({
     );
 
     const updateRot = useCallback(() => {
-        const centerLetters = getCenterLetters(originalOlRef, rotatedOlRef);
+        const newRot: number | undefined = calculateRot({
+            originalOlRef,
+            rotatedOlRef,
+            isRotPositive,
+            lengthOfLongestAlphabet,
+        });
 
-        if (!centerLetters) {
-            return;
-        }
-
-        const ogIndex = centerLetters.original.index;
-        const rtIndex = centerLetters.rotated.index;
-
-        if (isRotPositive) {
-            const newRot = rtIndex - ogIndex;
-
-            if (newRot < 0) {
-                setRot(newRot + lengthOfLongestAlphabet);
-            } else {
-                setRot(newRot);
-            }
-        } else {
-            const newRot = rtIndex - ogIndex;
-
-            if (newRot > 0) {
-                setRot(newRot - lengthOfLongestAlphabet);
-            } else {
-                setRot(newRot);
-            }
+        if (newRot !== undefined) {
+            setRot(newRot);
         }
     }, [isRotPositive, setRot, lengthOfLongestAlphabet]);
 
@@ -145,6 +135,66 @@ const LettersDraggable = ({
         updateRot();
     }, [isRotPositive, updateRot]);
 
+    // TODO: Refactor, this is terrible
+    useEffect(() => {
+        try {
+            if (isAutoRotating) {
+                const deltaY: number = 100;
+                let newRot: undefined | number = calculateRot({
+                    originalOlRef,
+                    rotatedOlRef,
+                    isRotPositive: true,
+                    lengthOfLongestAlphabet,
+                });
+                let tries: number = 0;
+
+                while (newRot !== rot && tries < 10_000) {
+                    onWheelMove(
+                        {
+                            nativeEvent: new WheelEvent("wheel", { deltaY }),
+                            preventDefault: () => {},
+                        } as React.WheelEvent<HTMLOListElement>,
+                        {
+                            olRef: originalOlRef,
+                        }
+                    );
+
+                    newRot = calculateRot({
+                        originalOlRef,
+                        rotatedOlRef,
+                        isRotPositive: true,
+                        lengthOfLongestAlphabet,
+                    });
+
+                    tries++;
+                }
+
+                onWheelMove(
+                    {
+                        nativeEvent: new WheelEvent("wheel", { deltaY }),
+                        preventDefault: () => {},
+                    } as React.WheelEvent<HTMLOListElement>,
+                    {
+                        olRef: originalOlRef,
+                    }
+                );
+                onWheelMove(
+                    {
+                        nativeEvent: new WheelEvent("wheel", { deltaY }),
+                        preventDefault: () => {},
+                    } as React.WheelEvent<HTMLOListElement>,
+                    {
+                        olRef: originalOlRef,
+                    }
+                );
+
+                setIsAutoRotating(false);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }, [isAutoRotating, setIsAutoRotating, rot, lengthOfLongestAlphabet]);
+
     return (
         <section ref={sectionRef} className="LettersDraggable">
             <div
@@ -174,8 +224,6 @@ const LettersDraggable = ({
                 onWheel={(event) => {
                     onWheelMove(event, {
                         olRef: originalOlRef,
-                        startingMousePositionRef,
-                        startingOlTop: startingOriginalOlTop,
                     });
                     updateRot();
                 }}
@@ -221,8 +269,6 @@ const LettersDraggable = ({
                 onWheel={(event) => {
                     onWheelMove(event, {
                         olRef: rotatedOlRef,
-                        startingMousePositionRef,
-                        startingOlTop: startingRotatedOlTop,
                     });
                     updateRot();
                 }}

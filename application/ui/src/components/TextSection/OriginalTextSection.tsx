@@ -42,6 +42,7 @@ interface Props {
     rotatedLanguage: SupportedLanguage;
     setRotatedLanguage: (language: SupportedLanguage) => void;
     setIsRotPositive: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsAutoRotating: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const OriginalTextSection = ({
@@ -56,6 +57,7 @@ const OriginalTextSection = ({
     rotatedLanguage,
     setRotatedLanguage,
     setIsRotPositive,
+    setIsAutoRotating,
 }: Props): ReactElement => {
     const [isOriginalLanguageDropdownOpen, setIsOriginalLanguageDropdownOpen] =
         useState<boolean>(false);
@@ -137,6 +139,7 @@ const OriginalTextSection = ({
             setRot(decryptData.rot);
             setRotatedText(decryptData.result);
             setRotatedLanguage(decryptData.language as SupportedLanguage);
+            setIsAutoRotating(true);
 
             toast.success(
                 `Detected ${decryptData.language} with ${Math.ceil(
@@ -152,7 +155,14 @@ const OriginalTextSection = ({
                 toastId: decryptErrorToastId,
             });
         }
-    }, [decryptData, decryptError, setRot, setRotatedText, setRotatedLanguage]);
+    }, [
+        decryptData,
+        decryptError,
+        setRot,
+        setRotatedText,
+        setRotatedLanguage,
+        setIsAutoRotating,
+    ]);
 
     return (
         <section id="original-textarea-section" className="textarea-section">
