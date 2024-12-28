@@ -25,7 +25,7 @@ def index():
 
 
 @application.route("/dad_joke", methods=["GET"])
-def dad_joke_route():
+def dad_joke():
     logger.info(f"Request: {request.method} {request.url}")
 
     try:
@@ -42,7 +42,7 @@ def dad_joke_route():
 
 
 @application.route("/decrypt", methods=["POST"])
-def decrypt_route():
+def decrypt():
     logger.info(f"Request: {request.method} {request.url}")
     data = request.json
 
