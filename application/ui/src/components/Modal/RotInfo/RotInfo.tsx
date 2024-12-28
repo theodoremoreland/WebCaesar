@@ -16,7 +16,9 @@ const RotInfo = ({ title, handleClose }: Props): ReactElement => {
             <div>
                 <article>
                     <h3>How to change the rotation</h3>
-                    <img src={letterDrag} alt="" />
+                    <div className="img-container">
+                        <img src={letterDrag} alt="" />
+                    </div>
                     <p>
                         To change the rotation (rot), use the two letter columns
                         in the middle of the page. Each column can be dragged or
