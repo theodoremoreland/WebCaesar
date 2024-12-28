@@ -18,14 +18,14 @@ CORS(application)
 
 
 @application.route("/", methods=["GET"])
-def index():
+def index_route():
     logger.info(f"Request: {request.method} {request.url}")
 
     return send_from_directory("ui/dist", "index.html")
 
 
 @application.route("/dad_joke", methods=["GET"])
-def dad_joke():
+def dad_joke_route():
     logger.info(f"Request: {request.method} {request.url}")
 
     try:
@@ -42,7 +42,7 @@ def dad_joke():
 
 
 @application.route("/decrypt", methods=["POST"])
-def decrypt():
+def decrypt_route():
     logger.info(f"Request: {request.method} {request.url}")
     data = request.json
 
