@@ -41,6 +41,7 @@ interface Props {
     setOriginalLanguage: (language: SupportedLanguage) => void;
     rotatedLanguage: SupportedLanguage;
     setRotatedLanguage: (language: SupportedLanguage) => void;
+    setIsRotPositive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const OriginalTextSection = ({
@@ -54,6 +55,7 @@ const OriginalTextSection = ({
     setOriginalLanguage,
     rotatedLanguage,
     setRotatedLanguage,
+    setIsRotPositive,
 }: Props): ReactElement => {
     const [isOriginalLanguageDropdownOpen, setIsOriginalLanguageDropdownOpen] =
         useState<boolean>(false);
@@ -96,6 +98,7 @@ const OriginalTextSection = ({
 
     const handleDecrypt = (): void => {
         if (originalText) {
+            setIsRotPositive(true);
             decryptMutate({ text: originalText });
         }
     };
