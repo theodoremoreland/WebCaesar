@@ -75,14 +75,29 @@ const App = (): ReactElement => {
             originalLanguage &&
             rotatedLanguage
         ) {
+            const savedRot: number = parseInt(rot);
+
+            if (isNaN(savedRot)) {
+                console.error("Invalid rot value in local storage");
+                toast.error("Invalid rot value in local storage", {
+                    toastId: jokeErrorToastId,
+                });
+
+                return;
+            }
+
             setOriginalText(originalText);
             setRotatedText(rotatedText);
-            setRot(parseInt(rot));
+            setRot(savedRot);
             setOriginalLanguage(originalLanguage as SupportedLanguage);
             setRotatedLanguage(rotatedLanguage as SupportedLanguage);
 
-            if (parseInt(rot) < 0) {
+            if (savedRot < 0) {
                 setIsRotPositive(false);
+            }
+
+            if (savedRot !== 0) {
+                setIsAutoRotating(true);
             }
         } else if (jokeData?.encrypted_dad_joke) {
             setOriginalText(jokeData.encrypted_dad_joke);
