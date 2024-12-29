@@ -142,20 +142,28 @@ export const onWheelMove = (
     event: React.WheelEvent<HTMLOListElement>,
     {
         olRef,
+        isAutomated,
     }: {
         olRef: React.MutableRefObject<HTMLOListElement | null>;
+        /**
+         * If the wheel event is being automated programmatically
+         */
+        isAutomated?: boolean;
     }
 ) => {
     if (olRef.current === null) {
         return;
     }
 
-    const deltaY: number =
-        event.nativeEvent.deltaY > 10
-            ? 6
-            : event.nativeEvent.deltaY < -10
-            ? -6
-            : event.nativeEvent.deltaY;
+    let deltaY: number;
+
+    if (isAutomated) {
+        // Use the actual value provided if wheel event is being automated programmatically
+        deltaY = event.nativeEvent.deltaY;
+    } else {
+        // Move in increments of 6 or -6 if the user is scrolling
+        deltaY = event.deltaY > 10 ? 6 : event.deltaY < -10 ? -6 : event.deltaY;
+    }
 
     // Get the bounding rectangles of the child and parent elements
     const childRect: DOMRect = olRef.current.getBoundingClientRect();

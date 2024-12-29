@@ -139,7 +139,14 @@ const LettersDraggable = ({
     useEffect(() => {
         try {
             if (isAutoRotating) {
-                const deltaY: number = 100;
+                const originalOlRect: DOMRect | undefined =
+                    originalOlRef.current?.getBoundingClientRect();
+                const originalOlHeight: number = originalOlRect?.height ?? 0;
+                // Attempt to move the list by half the size of a single letter in the list
+                // This is to ensure the letter is aligned horizontally flush (assuming the list is not scrolled prior)
+                const deltaY: number =
+                    originalOlHeight / 4 / lengthOfLongestAlphabet;
+
                 let newRot: undefined | number = calculateRot({
                     originalOlRef,
                     rotatedOlRef,
@@ -156,6 +163,8 @@ const LettersDraggable = ({
                         } as React.WheelEvent<HTMLOListElement>,
                         {
                             olRef: originalOlRef,
+                            // Assume an automated event only if the original list has a height
+                            isAutomated: originalOlHeight > 0,
                         }
                     );
 
@@ -168,25 +177,6 @@ const LettersDraggable = ({
 
                     tries++;
                 }
-
-                onWheelMove(
-                    {
-                        nativeEvent: new WheelEvent("wheel", { deltaY }),
-                        preventDefault: () => {},
-                    } as React.WheelEvent<HTMLOListElement>,
-                    {
-                        olRef: originalOlRef,
-                    }
-                );
-                onWheelMove(
-                    {
-                        nativeEvent: new WheelEvent("wheel", { deltaY }),
-                        preventDefault: () => {},
-                    } as React.WheelEvent<HTMLOListElement>,
-                    {
-                        olRef: originalOlRef,
-                    }
-                );
 
                 setIsAutoRotating(false);
             }
