@@ -5,6 +5,7 @@
 ## Table of contents
 
 -   [Overview](#overview)
+    -   [Supported Languages](#supported-languages-include)
 -   [Technologies Used](#technologies-used)
 -   [How to run locally](#how-to-run-locally)
     -   [Run on Docker](#run-on-docker)
@@ -15,9 +16,27 @@
 
 ## Overview
 
-Encrypt and decrypt text using Caesar's cipher. Supports multiple languages.
+This web application allows the user to encrypt and decrypt text using Caesar's Cipher. The application supports the following features:
 
-_This program was created for a homework assignment at LaunchCode's Lc101 (2018)._
+-   Upload text as `.txt` file
+-   Download text as `.txt` file
+-   Automatically decrypt Caesar Cipher encrypted text (works across multiple languages)
+-   Manually decrypt or encrypt text (works across multiple languages)
+
+### Supported languages include:
+
+-   English
+-   Spanish
+-   French
+-   Portuguese
+-   German
+-   Italian
+-   Russian
+-   Basque
+-   Latvian
+-   Dutch
+
+_This program was created for a homework assignment at LaunchCode's Lc101 (2018) that I have since then updated._
 
 ## Technologies Used
 
