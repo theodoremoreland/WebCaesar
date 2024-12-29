@@ -16,7 +16,7 @@
 
 ## Overview
 
-This web application allows the user to encrypt and decrypt text using Caesar's Cipher. The application supports the following features:
+This web application allows the user to encrypt and decrypt text using Caesar's Cipher, starting with a randomly selected dad joke. The application supports the following features:
 
 -   Upload text as `.txt` file
 -   Download text as `.txt` file
@@ -36,7 +36,7 @@ This web application allows the user to encrypt and decrypt text using Caesar's 
 -   Latvian
 -   Dutch
 
-_This program was created for a homework assignment at LaunchCode's Lc101 (2018) that I have since then updated._
+_This program was originally created for a homework assignment at LaunchCode's Lc101 (2018). I have since then updated this project._
 
 ## Technologies Used
 
