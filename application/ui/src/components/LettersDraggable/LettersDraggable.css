@@ -127,7 +127,13 @@
         justify-content: center;
         align-items: center;
         gap: 1rem;
-        padding: 1rem;
+        padding: 2px;
+    }
+
+    @media screen and (min-width: 1000px) {
+        & .icons {
+            padding: 1rem;
+        }
     }
 
     .icon {

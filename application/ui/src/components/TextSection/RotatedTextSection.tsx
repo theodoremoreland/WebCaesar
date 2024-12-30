@@ -170,7 +170,7 @@ const RotatedTextSection = ({
                         }
                         disabled={rotatedText === "" || isLoading}
                     >
-                        <DownloadIcon className="icon" />{" "}
+                        <DownloadIcon className="icon" />
                         <span className="text">Download result</span>
                     </button>
                 </a>
