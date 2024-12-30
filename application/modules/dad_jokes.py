@@ -21,9 +21,9 @@ DAD_JOKES: List[str] = [
     "Orion's Belt is a huge waist of space.",
     "To the guy who invented zero: Thanks for nothing!",
     "What's brown and sticky? A stick.",
-    "Today, my son asked 'Can I have a book mark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
     "There are only two things I don't eat for breakfast: Lunch and dinner.",
     "What do you call a fake dad? A faux pas.",
+    "Today, my son asked 'Can I have a book mark?' and I burst into tears. 11 years old and he still doesn't know my name is Brian.",
 ]
 
 
