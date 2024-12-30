@@ -289,13 +289,22 @@ const LettersDraggable = ({
                 <SwipeVerticalIcon className="icon swipe-vertical" />
                 <TouchDoubleIcon className="icon touch-double" />
             </div>
-            <ul id="character-grid">
-                {quadruple(fill([], lengthOfLongestAlphabet)).map(
-                    (_, index) => {
-                        return <li key={index}></li>;
-                    }
-                )}
-            </ul>
+            <div id="overlay">
+                <ul className="character-grid">
+                    {quadruple(fill([], lengthOfLongestAlphabet)).map(
+                        (_, index) => {
+                            return <li key={index}></li>;
+                        }
+                    )}
+                </ul>
+                <ul className="character-grid">
+                    {quadruple(fill([], lengthOfLongestAlphabet)).map(
+                        (_, index) => {
+                            return <li key={index}></li>;
+                        }
+                    )}
+                </ul>
+            </div>
         </section>
     );
 };
