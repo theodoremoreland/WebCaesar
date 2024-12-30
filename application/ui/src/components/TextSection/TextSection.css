@@ -169,7 +169,7 @@
             border: 1px solid var(--border-color);
 
             .icon {
-                visibility: hidden;
+                display: none;
                 position: absolute;
                 top: 5%;
                 right: 10%;
@@ -183,7 +183,7 @@
                 }
 
                 .icon {
-                    visibility: visible;
+                    display: inline;
                     width: 1rem;
                 }
             }
@@ -248,6 +248,7 @@
     }
 
     .buttons {
+        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -262,6 +263,7 @@
             justify-content: center;
             align-items: center;
             gap: 0.25rem;
+            width: 47%;
             font-family: custom-medium;
             padding: 0.25rem 0.65rem;
             border: none;
@@ -275,7 +277,8 @@
                 & {
                     gap: 0.35rem;
                     font-size: 1rem;
-                    padding: 0.5rem 1rem;
+                    padding: 0.65rem 1rem;
+                    width: auto;
                 }
             }
 
