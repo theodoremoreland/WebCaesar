@@ -68,7 +68,7 @@ const RotatedTextSection = ({
         <section id="rotated-textarea-section" className="textarea-section">
             {isRotInfoModalOpen && (
                 <RotInfo
-                    title={`rot ${rot}`}
+                    title={`Caesar's Cipher`}
                     handleClose={() => setIsRotInfoModalOpen(false)}
                 />
             )}
