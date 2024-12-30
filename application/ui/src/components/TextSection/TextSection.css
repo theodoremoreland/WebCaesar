@@ -124,11 +124,29 @@
             color: var(--highlight-font-color);
             background-color: var(--highlight-color);
 
+            .icon {
+                fill: var(--primary-color);
+                width: 1rem;
+                height: 1rem;
+            }
+
+            .text {
+                display: none;
+            }
+
             @media screen and (min-width: 1000px) {
                 & {
                     gap: 0.35rem;
                     font-size: 1rem;
                     padding: 0.65rem 1.2rem;
+                }
+
+                & .icon {
+                    display: none;
+                }
+
+                & .text {
+                    display: inline;
                 }
             }
         }
@@ -290,6 +308,16 @@
                 & .icon {
                     width: 1.34rem;
                     height: 1.34rem;
+                }
+            }
+
+            .text {
+                display: none;
+            }
+
+            @media screen and (min-width: 1000px) {
+                & .text {
+                    display: inline;
                 }
             }
         }

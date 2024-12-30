@@ -17,6 +17,7 @@ import { SupportedLanguage } from "../../types";
 // Images
 import DownloadIcon from "../../assets/images/download.svg?react";
 import InfoIcon from "../../assets/images/info.svg?react";
+import LanguageIcon from "../../assets/images/language.svg?react";
 
 // Styles
 import "./TextSection.css";
@@ -110,8 +111,11 @@ const RotatedTextSection = ({
                             }}
                             disabled={originalText === "" || isLoading}
                         >
-                            {getFirstThreeLetters(rotatedLanguage)} (
-                            {rotatedLanguage})
+                            <LanguageIcon className="icon" />
+                            <span className="text">
+                                {getFirstThreeLetters(rotatedLanguage)} (
+                                {rotatedLanguage})
+                            </span>
                         </button>
                         {isRotatedLanguageDropdownOpen && (
                             <ul className="pill-list">
@@ -141,7 +145,8 @@ const RotatedTextSection = ({
                                 setIsRotInfoModalOpen(true);
                             }}
                         >
-                            <span>rot {rot}</span>
+                            <span className="text">rot </span>
+                            <span>{rot}</span>
                             <InfoIcon className="icon" />
                         </button>
                     </div>
@@ -166,7 +171,7 @@ const RotatedTextSection = ({
                         disabled={rotatedText === "" || isLoading}
                     >
                         <DownloadIcon className="icon" />{" "}
-                        <span>Download result</span>
+                        <span className="text">Download result</span>
                     </button>
                 </a>
             </div>

@@ -23,6 +23,8 @@ import { SupportedLanguage } from "../../types";
 // Images
 import UploadIcon from "../../assets/images/upload_file.svg?react";
 import RotateAutoIcon from "../../assets/images/rotate_auto.svg?react";
+import LanguageIcon from "../../assets/images/language.svg?react";
+import DeleteIcon from "../../assets/images/delete.svg?react";
 
 // Styles
 import "./TextSection.css";
@@ -203,8 +205,11 @@ const OriginalTextSection = ({
                             }}
                             disabled={originalText === "" || isLoading}
                         >
-                            {getFirstThreeLetters(originalLanguage)} (
-                            {originalLanguage})
+                            <LanguageIcon className="icon" />
+                            <span className="text">
+                                {getFirstThreeLetters(originalLanguage)} (
+                                {originalLanguage})
+                            </span>
                         </button>
                         {isOriginalLanguageDropdownOpen && (
                             <ul className="pill-list">
@@ -244,7 +249,8 @@ const OriginalTextSection = ({
                         }}
                         disabled={originalText === "" || isLoading}
                     >
-                        Clear
+                        <DeleteIcon className="icon" />
+                        <span className="text">Clear</span>
                     </button>
                 </div>
             </div>
@@ -257,7 +263,7 @@ const OriginalTextSection = ({
                     disabled={isLoading}
                 >
                     <UploadIcon className="icon" />
-                    <span>Upload text file</span>
+                    <span className="text">Upload text file</span>
                     <input
                         className="hidden"
                         title="Upload .txt file"
@@ -278,7 +284,7 @@ const OriginalTextSection = ({
                     disabled={originalText === "" || isLoading}
                 >
                     <RotateAutoIcon className="icon" />
-                    <span>Auto rotate</span>
+                    <span className="text">Auto rotate</span>
                 </button>
             </div>
         </section>
