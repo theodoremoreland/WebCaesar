@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     gap: 2px;
-    font-size: 1.5rem;
+    font-size: 1rem;
     overflow-y: hidden;
     height: 100%;
     mask-image: linear-gradient(
@@ -15,6 +15,27 @@
         rgba(0, 0, 0, 1) 80%,
         rgba(0, 0, 0, 0)
     );
+
+    @media screen and (min-width: 1000px) {
+        & {
+            font-size: 1.5rem;
+        }
+    }
+
+    li {
+        position: relative;
+        width: 2.2rem;
+        height: 2.2rem;
+        text-align: center;
+        padding: 0.5rem;
+    }
+
+    @media screen and (min-width: 1000px) {
+        & li {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
 
     #overlay {
         z-index: 2;
@@ -43,11 +64,6 @@
             user-select: none;
 
             li {
-                position: relative;
-                width: 3rem;
-                height: 3rem;
-                text-align: center;
-                padding: 0.5rem;
                 border-bottom: 2px solid var(--primary-color);
             }
         }
@@ -83,11 +99,6 @@
             rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
         li {
-            position: relative;
-            width: 3rem;
-            height: 3rem;
-            text-align: center;
-            padding: 0.5rem;
             user-select: none;
 
             &.first,
@@ -120,6 +131,15 @@
     }
 
     .icon {
+        width: 1rem;
+        height: 1rem;
         fill: var(--highlight-color);
+    }
+
+    @media screen and (min-width: 1000px) {
+        & .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
     }
 }

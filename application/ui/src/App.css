@@ -6,7 +6,13 @@ main {
     width: 100%;
     height: 100%;
     font: 16px sans-serif;
-    padding: 25px;
+    padding: 15px;
+}
+
+@media screen and (min-width: 1000px) {
+    main {
+        padding: 25px;
+    }
 }
 
 .content {
