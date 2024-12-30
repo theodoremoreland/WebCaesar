@@ -64,6 +64,12 @@ html {
     font-family: custom-regular, sans-serif;
     color: var(--font-color);
     background-color: var(--primary-color);
+    background: linear-gradient(
+        110deg,
+        var(--secondary-color) -300%,
+        var(--primary-color) 50%,
+        var(--secondary-color) 300%
+    );
 }
 
 html,
