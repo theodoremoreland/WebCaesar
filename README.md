@@ -73,7 +73,7 @@ When the app initially loads, the Original Text and Rotated Text are populated w
 
 The rotation defaults to `0`, from this point the user can either drag one of the two letter columns to rotate the text manually, click the `Auto Detect` button to decrypt and rotate the text via server, or replace the text with their own text.
 
-A `.txt` file can be uploaded to the Original Text by clicking the `Upload file` button. Rotated Text can be downloaded as a `.txt` file by clicking the `Download result`. Text in the Rotated Text can be clicked to copy to the clipboard.
+A `.txt` file can be uploaded to the Original Text by clicking the `Upload text file` button. Rotated Text can be downloaded as a `.txt` file by clicking the `Download result`. Text in the Rotated Text can be clicked to copy to the clipboard.
 
 The alphabet used for Original Text and Rotated Text can be changed by clicking their corresponding `Language icon/button`.
 
