@@ -219,6 +219,35 @@ export const onMouseDown = (
     document.addEventListener("mouseup", onMouseUp);
 };
 
+export const onTouchStart = (
+    event: React.TouchEvent<HTMLOListElement>,
+    {
+        olRef,
+        startingMousePositionRef,
+        startingOlTop,
+        onTouchMove,
+        onTouchEnd,
+    }: {
+        olRef: React.MutableRefObject<HTMLOListElement | null>;
+        startingMousePositionRef: React.MutableRefObject<number | null>;
+        startingOlTop: React.MutableRefObject<number | null>;
+        onTouchMove: (event: TouchEvent) => void;
+        onTouchEnd: () => void;
+    }
+) => {
+    if (!olRef.current) {
+        return;
+    }
+
+    startingOlTop.current = Number(
+        window.getComputedStyle(olRef.current).top.replace("px", "")
+    );
+    startingMousePositionRef.current = event.touches[0].clientY;
+
+    document.addEventListener("touchmove", onTouchMove);
+    document.addEventListener("touchend", onTouchEnd);
+};
+
 export const determineLiClassName = (
     charactersToIndex: CharactersToIndex,
     characterCount: number,
@@ -257,6 +286,55 @@ export const moveListOnMouseMove = (
     }
 
     const newMousePosition: number = event.clientY;
+    const difference: number =
+        newMousePosition - startingMousePositionRef.current;
+
+    // Get the bounding rectangles of the child and parent elements
+    const childRect: DOMRect = olRef.current.getBoundingClientRect();
+
+    const newTop: number = startingOlTop.current + difference;
+    const isWithinResetThresholdScrollingDown: boolean =
+        newTop - get25Percent(childRect.height) >= 10;
+    const isWithinResetThresholdScrollingUp: boolean =
+        newTop + get25Percent(childRect.height) <= 10;
+
+    if (difference > 0 && isWithinResetThresholdScrollingDown) {
+        olRef.current.style.top = `${
+            newTop - get25Percent(childRect.height)
+        }px`;
+    } else if (difference < 0 && isWithinResetThresholdScrollingUp) {
+        olRef.current.style.top = `${
+            newTop + get25Percent(childRect.height)
+        }px`;
+    } else {
+        olRef.current.style.top = `${startingOlTop.current + difference}px`;
+    }
+};
+
+export const moveListOnTouchMove = (
+    event: TouchEvent,
+    {
+        olRef,
+        startingMousePositionRef,
+        startingOlTop,
+        sectionRef,
+    }: {
+        olRef: React.MutableRefObject<HTMLOListElement | null>;
+        startingMousePositionRef: React.MutableRefObject<number | null>;
+        startingOlTop: React.MutableRefObject<number | null>;
+        sectionRef: React.MutableRefObject<HTMLElement | null>;
+    }
+) => {
+    if (
+        olRef.current === null ||
+        startingMousePositionRef.current === null ||
+        startingOlTop.current === null ||
+        sectionRef.current === null
+    ) {
+        return;
+    }
+
+    const newMousePosition: number = event.touches[0].clientY;
     const difference: number =
         newMousePosition - startingMousePositionRef.current;
 

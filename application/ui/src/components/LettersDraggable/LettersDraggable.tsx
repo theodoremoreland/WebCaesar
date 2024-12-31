@@ -8,6 +8,8 @@ import {
     fill,
     onMouseDown,
     onWheelMove,
+    onTouchStart,
+    moveListOnTouchMove,
     determineLiClassName,
     FillObject,
     moveListOnMouseMove,
@@ -108,10 +110,28 @@ const LettersDraggable = ({
         [updateRot]
     );
 
+    const onOriginalOlTouchMove = useCallback(
+        (event: TouchEvent) => {
+            moveListOnTouchMove(event, {
+                olRef: originalOlRef,
+                startingMousePositionRef,
+                startingOlTop: startingOriginalOlTop,
+                sectionRef,
+            });
+            updateRot();
+        },
+        [updateRot]
+    );
+
     const onOriginalOlMouseUp = useCallback(() => {
         document.removeEventListener("mousemove", onOriginalOlMouseMove);
         document.removeEventListener("mouseup", onOriginalOlMouseUp);
     }, [onOriginalOlMouseMove]);
+
+    const onOriginalOlTouchEnd = useCallback(() => {
+        document.removeEventListener("touchmove", onOriginalOlTouchMove);
+        document.removeEventListener("touchend", onOriginalOlTouchEnd);
+    }, [onOriginalOlTouchMove]);
 
     const onRotatedOlMouseMove = useCallback(
         (event: MouseEvent) => {
@@ -126,10 +146,28 @@ const LettersDraggable = ({
         [updateRot]
     );
 
+    const onRotatedOlTouchMove = useCallback(
+        (event: TouchEvent) => {
+            moveListOnTouchMove(event, {
+                olRef: rotatedOlRef,
+                startingMousePositionRef,
+                startingOlTop: startingRotatedOlTop,
+                sectionRef,
+            });
+            updateRot();
+        },
+        [updateRot]
+    );
+
     const onRotatedOlMouseUp = useCallback(() => {
         document.removeEventListener("mousemove", onRotatedOlMouseMove);
         document.removeEventListener("mouseup", onRotatedOlMouseUp);
     }, [onRotatedOlMouseMove]);
+
+    const onRotatedOlTouchEnd = useCallback(() => {
+        document.removeEventListener("touchmove", onRotatedOlTouchMove);
+        document.removeEventListener("touchend", onRotatedOlTouchEnd);
+    }, [onRotatedOlTouchMove]);
 
     useEffect(() => {
         updateRot();
@@ -211,6 +249,15 @@ const LettersDraggable = ({
                         onMouseUp: onOriginalOlMouseUp,
                     })
                 }
+                onTouchStart={(event) => {
+                    onTouchStart(event, {
+                        olRef: originalOlRef,
+                        startingMousePositionRef,
+                        startingOlTop: startingOriginalOlTop,
+                        onTouchMove: onOriginalOlTouchMove,
+                        onTouchEnd: onOriginalOlTouchEnd,
+                    });
+                }}
                 onWheel={(event) => {
                     onWheelMove(event, {
                         olRef: originalOlRef,
@@ -256,6 +303,15 @@ const LettersDraggable = ({
                         onMouseUp: onRotatedOlMouseUp,
                     })
                 }
+                onTouchStart={(event) => {
+                    onTouchStart(event, {
+                        olRef: rotatedOlRef,
+                        startingMousePositionRef,
+                        startingOlTop: startingRotatedOlTop,
+                        onTouchMove: onRotatedOlTouchMove,
+                        onTouchEnd: onRotatedOlTouchEnd,
+                    });
+                }}
                 onWheel={(event) => {
                     onWheelMove(event, {
                         olRef: rotatedOlRef,
