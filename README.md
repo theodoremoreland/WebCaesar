@@ -5,8 +5,11 @@
 ## Table of contents
 
 -   [Overview](#overview)
-    -   [Supported Languages](#supported-languages-include)
--   [Technologies Used](#technologies-used)
+    -   [Caesar's Cipher](#caesars-cipher)
+    -   [Features](#features)
+        -   [Supported Languages](#supported-languages-include)
+    -   [How to use](#how-to-use)
+-   [Technologies used](#technologies-used)
 -   [How to run locally](#how-to-run-locally)
     -   [Run on Docker](#run-on-docker)
     -   [Run on Windows](#run-on-windows)
@@ -76,7 +79,7 @@ The alphabet used for Original Text and Rotated Text can be changed by clicking 
 
 _This program was originally created for a homework assignment at LaunchCode's Lc101 (2018). I have since then updated this project._
 
-## Technologies Used
+## Technologies used
 
 -   Python
 -   TypeScript
