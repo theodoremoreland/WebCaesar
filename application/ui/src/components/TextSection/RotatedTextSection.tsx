@@ -69,7 +69,7 @@ const RotatedTextSection = ({
         <section id="rotated-textarea-section" className="textarea-section">
             {isRotInfoModalOpen && (
                 <RotInfo
-                    title={`Caesar's Cipher`}
+                    title={``}
                     handleClose={() => setIsRotInfoModalOpen(false)}
                 />
             )}
@@ -170,7 +170,7 @@ const RotatedTextSection = ({
                         }
                         disabled={rotatedText === "" || isLoading}
                     >
-                        <DownloadIcon className="icon" />
+                        <DownloadIcon id="download-icon" className="icon" />
                         <span className="text">Download result</span>
                     </button>
                 </a>
