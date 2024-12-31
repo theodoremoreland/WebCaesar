@@ -16,14 +16,42 @@
 
 ## Overview
 
-This web application allows the user to encrypt and decrypt text using Caesar's Cipher, starting with a randomly selected dad joke. The application supports the following features:
+This web application allows the user to encrypt and decrypt text using Caesar's Cipher, starting with a randomly selected dad joke.
+
+### Caesar's Cipher
+
+Caesar's Cipher is a type of substitution cipher in which each letter in the plaintext is shifted (or rotated) a certain number of places down or up the alphabet.
+
+For example, with a rotation of 3:
+
+-   `A` would be replaced by `D`
+-   `B` would become `E`
+-   `C` would become `F`
+-   etc...
+
+The method is named after _Julius Caesar_, who used it in his private correspondence.
+
+Here's a simple example:
+
+-   Original text: `HELLO`
+-   Rotation: `3`
+-   Rotated text: `KHOOR`
+
+To decrypt the message, you would rotate the letters back by the same number.
+
+### Features
+
+The application supports the following features:
 
 -   Upload text as `.txt` file
 -   Download text as `.txt` file
--   Automatically decrypt Caesar Cipher encrypted text (works across multiple languages)
--   Manually decrypt or encrypt text (works across multiple languages)
+-   Automatically decrypt Caesar Cipher encrypted text
+-   Manually rotate letters by vertically dragging letter columns
+-   Change the language/alphabet used for original and/or rotated text
+-   Although not the recommended experience, touch screen and mobile are supported
+-   Changes are automatically saved to the browser every 2.5 seconds or so (via `localStorage`)
 
-### Supported languages include:
+#### Supported languages include:
 
 -   English
 -   Spanish
@@ -35,6 +63,16 @@ This web application allows the user to encrypt and decrypt text using Caesar's 
 -   Basque
 -   Latvian
 -   Dutch
+
+### How to use
+
+When the app initially loads, the Original Text and Rotated Text are populated with an encrypted, randomly selected dad joke.
+
+The rotation defaults to `0`, from this point the user can either drag one of the two letter columns to rotate the text manually, click the `Auto Detect` button to decrypt and rotate the text via server, or replace the text with their own text.
+
+A `.txt` file can be uploaded to the Original Text by clicking the `Upload file` button. Rotated Text can be downloaded as a `.txt` file by clicking the `Download result`. Text in the Rotated Text can be clicked to copy to the clipboard.
+
+The alphabet used for Original Text and Rotated Text can be changed by clicking their corresponding `Language icon/button`.
 
 _This program was originally created for a homework assignment at LaunchCode's Lc101 (2018). I have since then updated this project._
 
