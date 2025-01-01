@@ -70,6 +70,7 @@ html {
         var(--primary-color) 50%,
         var(--secondary-color) 300%
     );
+    overflow-y: hidden;
 }
 
 html,
