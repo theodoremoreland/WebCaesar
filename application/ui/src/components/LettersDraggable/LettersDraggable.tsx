@@ -179,10 +179,12 @@ const LettersDraggable = ({
             if (isAutoRotating && rot !== 0) {
                 const originalOlRect: DOMRect | undefined =
                     originalOlRef.current?.getBoundingClientRect();
-                const originalOlHeight: number = originalOlRect?.height ?? 0;
+                const originalOlHeight: number | undefined =
+                    originalOlRect?.height;
 
-                if (originalOlHeight === 0) {
+                if (originalOlHeight === undefined) {
                     setIsAutoRotating(false);
+
                     return;
                 }
 
@@ -190,13 +192,7 @@ const LettersDraggable = ({
                 // This is to ensure the letter is aligned horizontally flush (assuming the list is not scrolled prior)
                 const deltaY: number =
                     originalOlHeight / 4 / lengthOfLongestAlphabet;
-
-                let newRot: undefined | number = calculateRot({
-                    originalOlRef,
-                    rotatedOlRef,
-                    isRotPositive: true,
-                    lengthOfLongestAlphabet,
-                });
+                let newRot: undefined | number;
                 let yDistanceTraveled: number = 0;
 
                 // Stop the auto-rotation if already scrolled entirety of two alphabets (e.g. olHeight / 2). Could also be olHeight / 4 I guess.
@@ -218,7 +214,7 @@ const LettersDraggable = ({
                     newRot = calculateRot({
                         originalOlRef,
                         rotatedOlRef,
-                        isRotPositive: true,
+                        isRotPositive,
                         lengthOfLongestAlphabet,
                     });
 
@@ -230,7 +226,13 @@ const LettersDraggable = ({
         } catch (error) {
             console.error(error);
         }
-    }, [isAutoRotating, setIsAutoRotating, rot, lengthOfLongestAlphabet]);
+    }, [
+        isAutoRotating,
+        setIsAutoRotating,
+        rot,
+        isRotPositive,
+        lengthOfLongestAlphabet,
+    ]);
 
     return (
         <section ref={sectionRef} className="LettersDraggable">
