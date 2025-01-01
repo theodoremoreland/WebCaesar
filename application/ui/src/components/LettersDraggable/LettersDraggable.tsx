@@ -176,10 +176,16 @@ const LettersDraggable = ({
     // TODO: Refactor, this is terrible
     useEffect(() => {
         try {
-            if (isAutoRotating) {
+            if (isAutoRotating && rot !== 0) {
                 const originalOlRect: DOMRect | undefined =
                     originalOlRef.current?.getBoundingClientRect();
                 const originalOlHeight: number = originalOlRect?.height ?? 0;
+
+                if (originalOlHeight === 0) {
+                    setIsAutoRotating(false);
+                    return;
+                }
+
                 // Attempt to move the list by half the size of a single letter in the list
                 // This is to ensure the letter is aligned horizontally flush (assuming the list is not scrolled prior)
                 const deltaY: number =
@@ -191,9 +197,13 @@ const LettersDraggable = ({
                     isRotPositive: true,
                     lengthOfLongestAlphabet,
                 });
-                let tries: number = 0;
+                let yDistanceTraveled: number = 0;
 
-                while (newRot !== rot && tries < 10_000) {
+                // Stop the auto-rotation if already scrolled entirety of two alphabets (e.g. olHeight / 2). Could also be olHeight / 4 I guess.
+                while (
+                    newRot !== rot &&
+                    yDistanceTraveled < originalOlHeight / 2
+                ) {
                     onWheelMove(
                         {
                             nativeEvent: new WheelEvent("wheel", { deltaY }),
@@ -201,8 +211,7 @@ const LettersDraggable = ({
                         } as React.WheelEvent<HTMLOListElement>,
                         {
                             olRef: originalOlRef,
-                            // Assume an automated event only if the original list has a height
-                            isAutomated: originalOlHeight > 0,
+                            isAutomated: true,
                         }
                     );
 
@@ -213,7 +222,7 @@ const LettersDraggable = ({
                         lengthOfLongestAlphabet,
                     });
 
-                    tries++;
+                    yDistanceTraveled += deltaY;
                 }
 
                 setIsAutoRotating(false);
