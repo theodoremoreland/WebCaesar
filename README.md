@@ -2,6 +2,8 @@
 
 <img src="presentation/thumbnail.webp" width="650">
 
+[View the web application](http://web-caesar.us-east-1.elasticbeanstalk.com/)
+
 ## Table of contents
 
 -   [Overview](#overview)
