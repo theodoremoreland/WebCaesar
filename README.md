@@ -7,11 +7,11 @@
 ## Table of contents
 
 -   [Overview](#overview)
+    -   [Technologies used](#technologies-used)
     -   [Caesar's Cipher](#caesars-cipher)
     -   [Features](#features)
         -   [Supported Languages](#supported-languages-include)
     -   [How to use](#how-to-use)
--   [Technologies used](#technologies-used)
 -   [How to run locally](#how-to-run-locally)
     -   [Run on Docker](#run-on-docker)
     -   [Run on Windows](#run-on-windows)
@@ -22,6 +22,24 @@
 ## Overview
 
 This web application allows the user to encrypt and decrypt text using Caesar's Cipher, starting with a randomly selected dad joke.
+
+### Technologies used
+
+-   Python
+-   TypeScript
+-   JavaScript
+-   Flask
+-   React
+-   HTML
+-   CSS
+-   Vite
+-   Axios
+-   Tanstack React Query
+-   Docker
+-   pyspellchecker
+-   react-toastify
+-   lodash
+-   black
 
 ### Caesar's Cipher
 
@@ -81,23 +99,6 @@ The alphabet used for Original Text and Rotated Text can be changed by clicking 
 
 _This program was originally created for a homework assignment at LaunchCode's Lc101 (2018). I have since then updated this project._
 
-## Technologies used
-
--   Python
--   TypeScript
--   JavaScript
--   Flask
--   React
--   HTML
--   CSS
--   Vite
--   Axios
--   Tanstack React Query
--   Docker
--   pyspellchecker
--   react-toastify
--   lodash
--   black
 
 # How to run locally
 
