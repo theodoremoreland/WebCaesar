@@ -54,5 +54,5 @@ export const debounceSaveToLocalStorage = debounce(
             rotatedLanguage
         );
     },
-    2_500
+    1_000
 );

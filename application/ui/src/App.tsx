@@ -109,15 +109,13 @@ const App = (): ReactElement => {
     }, [jokeData, jokeError]);
 
     useEffect(() => {
-        if (originalText !== "" && rotatedText !== "") {
-            debounceSaveToLocalStorage(
-                originalText,
-                rotatedText,
-                rot,
-                originalLanguage,
-                rotatedLanguage
-            );
-        }
+        debounceSaveToLocalStorage(
+            originalText,
+            rotatedText,
+            rot,
+            originalLanguage,
+            rotatedLanguage
+        );
     }, [originalText, rotatedText, rot, originalLanguage, rotatedLanguage]);
 
     useEffect(() => {
