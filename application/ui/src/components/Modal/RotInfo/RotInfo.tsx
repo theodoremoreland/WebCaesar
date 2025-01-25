@@ -27,7 +27,8 @@ const RotInfo = ({ title, handleClose }: Props): ReactElement => {
                         <br />
                         The left column represents letters in the original text
                         and the right column represents letters in the rotated
-                        text.
+                        text. The relationship between the two always reads left
+                        to right.
                         <br />
                         <br />
                         The rot can be positive or negative, but is positive by
