@@ -99,7 +99,6 @@ The alphabet used for Original Text and Rotated Text can be changed by clicking 
 
 _This program was originally created for a homework assignment at LaunchCode's Lc101 (2018). I have since then updated this project._
 
-
 # How to run locally
 
 ## Run on Docker
@@ -167,8 +166,50 @@ Visit: http://localhost:5000 to use the application.
 
 ## Screenshots
 
-WIP
-
 ### Desktop
 
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/1.png" width="650">
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/2.png" width="650">
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/3.png" width="650">
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/4.png" width="650">
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/5.png" width="650">
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/6.png" width="650">
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/7.png" width="650">
+
 ### Mobile
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/8.png" width="250">
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/9.png" width="250">
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/10.png" width="550">
+
+###
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/11.png" width="550">
