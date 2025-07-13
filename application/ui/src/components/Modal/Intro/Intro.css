@@ -13,13 +13,14 @@
     padding: 25px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    margin-top: 10vh;
+    margin-top: 6vh;
     color: var(--primary-font-color);
     line-height: 1.5em;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     background-color: var(--primary-color);
     overflow-x: hidden;
     overflow-y: auto;
+    animation: fadeIn 2s ease-in-out;
 
     .title {
         font-family: custom-bold;
@@ -81,7 +82,7 @@
 
         img {
             height: 100%;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 2s ease-in-out;
         }
     }
 }

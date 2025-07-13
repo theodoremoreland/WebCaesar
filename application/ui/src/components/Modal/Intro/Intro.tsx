@@ -37,22 +37,23 @@ const Intro = ({ handleClose }: Props): ReactElement => {
                     rotation of 1, 'A' becomes 'B', 'B' becomes 'C', and so on.
                 </p>
                 <div className="img-container">
-                    <img src={letterDrag} alt="" />
+                    <img src={letterDrag} alt="Dragging letters" />
                 </div>
                 <p>
                     To change the rotation, use the two letter columns in the
                     middle of the page. Each column can be dragged or scrolled
-                    vertically.
+                    vertically. Letters in the left column will be replaced by
+                    their adjacent letters in the right column.
                 </p>
                 <p>
-                    Letters in the left column will be replaced by their
-                    adjacent letters in the right column. The effect can be seen
-                    in real-time in the "Rotated text" output.
+                    Input your text in the "Original text" area on the left, and
+                    the rotated text will appear in the "Rotated text" area on
+                    the right.
                 </p>
                 <p>
-                    Words in the "Original text" input can be automatically
-                    decrypted by selecting the "Decrypt" button on the lower
-                    left.
+                    Words in the "Original text" area can be automatically
+                    decrypted by clicking the "Decrypt" button on the lower left
+                    of the "Original text" area.
                 </p>
                 <div className="button-container">
                     <button onClick={handleClose} aria-label="I understand">
