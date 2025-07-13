@@ -1,26 +1,26 @@
 // React
-import { ReactElement, useState } from "react";
+import { ReactElement, useState } from 'react';
 
 // Custom
-import { languageMetadata } from "../../constants/languageMetadata";
-import { copyToClipboard } from "./TextSection.controller";
+import { languageMetadata } from '../../constants/languageMetadata';
+import { copyToClipboard } from './TextSection.controller';
 
 // Components
-import RotInfo from "../Modal/RotInfo/RotInfo";
+import RotInfo from '../Modal/RotInfo/RotInfo';
 
 // Utils
-import { getFirstThreeLetters } from "../../utils";
+import { getFirstThreeLetters } from '../../utils';
 
 // Types
-import { SupportedLanguage } from "../../types";
+import { SupportedLanguage } from '../../types';
 
 // Images
-import DownloadIcon from "../../assets/images/download.svg?react";
-import InfoIcon from "../../assets/images/info.svg?react";
-import LanguageIcon from "../../assets/images/language.svg?react";
+import DownloadIcon from '../../assets/images/download.svg?react';
+import InfoIcon from '../../assets/images/info.svg?react';
+import LanguageIcon from '../../assets/images/language.svg?react';
 
 // Styles
-import "./TextSection.css";
+import './TextSection.css';
 
 interface Props {
     /**
@@ -86,7 +86,7 @@ const RotatedTextSection = ({
                     name="rotated-text"
                     placeholder="Rotated text will appear here..."
                     spellCheck="false"
-                    title={rotatedText === "" ? undefined : "Click to copy"}
+                    title={rotatedText === '' ? undefined : 'Click to copy'}
                     readOnly
                     value={rotatedText}
                     disabled={isLoading}
@@ -96,20 +96,20 @@ const RotatedTextSection = ({
                     <div className="pill-wrapper">
                         <button
                             title={
-                                originalText === "" || isLoading
-                                    ? "Must write text before changing alphabet"
-                                    : "Change alphabet used"
+                                originalText === '' || isLoading
+                                    ? 'Must write text before changing alphabet'
+                                    : 'Change alphabet used'
                             }
                             type="button"
-                            className={`pill ${
-                                isRotatedLanguageDropdownOpen ? "open" : ""
+                            className={`pill inverse ${
+                                isRotatedLanguageDropdownOpen ? 'open' : ''
                             }`}
                             onClick={() => {
                                 setIsRotatedLanguageDropdownOpen(
                                     !isRotatedLanguageDropdownOpen
                                 );
                             }}
-                            disabled={originalText === "" || isLoading}
+                            disabled={originalText === '' || isLoading}
                         >
                             <LanguageIcon className="icon" />
                             <span className="text">
@@ -164,11 +164,11 @@ const RotatedTextSection = ({
                         id="download"
                         type="button"
                         title={
-                            rotatedText === "" || isLoading
-                                ? "No text to download"
-                                : "Download rotated text"
+                            rotatedText === '' || isLoading
+                                ? 'No text to download'
+                                : 'Download rotated text'
                         }
-                        disabled={rotatedText === "" || isLoading}
+                        disabled={rotatedText === '' || isLoading}
                     >
                         <DownloadIcon id="download-icon" className="icon" />
                         <span className="text">Download result</span>

@@ -1,33 +1,33 @@
 // React
-import { ReactElement, ChangeEvent, useEffect, useState } from "react";
+import { ReactElement, ChangeEvent, useEffect, useState } from 'react';
 
 // Third party
-import { useMutation } from "react-query";
-import { toast } from "react-toastify";
+import { useMutation } from 'react-query';
+import { toast } from 'react-toastify';
 
 // Custom
-import decrypt from "../../http/decrypt";
-import { languageMetadata } from "../../constants/languageMetadata";
-import rotateString from "../../modules/rotateString";
+import decrypt from '../../http/decrypt';
+import { languageMetadata } from '../../constants/languageMetadata';
+import rotateString from '../../modules/rotateString';
 import {
     decryptErrorToastId,
     decryptSuccessToastId,
-} from "./TextSection.controller";
+} from './TextSection.controller';
 
 // Utils
-import { getFirstThreeLetters } from "../../utils";
+import { getFirstThreeLetters } from '../../utils';
 
 // Types
-import { SupportedLanguage } from "../../types";
+import { SupportedLanguage } from '../../types';
 
 // Images
-import UploadIcon from "../../assets/images/upload_file.svg?react";
-import RotateAutoIcon from "../../assets/images/rotate_auto.svg?react";
-import LanguageIcon from "../../assets/images/language.svg?react";
-import DeleteIcon from "../../assets/images/delete.svg?react";
+import UploadIcon from '../../assets/images/upload_file.svg?react';
+import RotateAutoIcon from '../../assets/images/rotate_auto.svg?react';
+import LanguageIcon from '../../assets/images/language.svg?react';
+import DeleteIcon from '../../assets/images/delete.svg?react';
 
 // Styles
-import "./TextSection.css";
+import './TextSection.css';
 
 interface Props {
     /**
@@ -82,7 +82,7 @@ const OriginalTextSection = ({
         setOriginalText(_originalText);
         setRotatedText(
             rotateString(
-                _originalText ?? "",
+                _originalText ?? '',
                 rot,
                 originalLanguage,
                 rotatedLanguage
@@ -95,7 +95,7 @@ const OriginalTextSection = ({
     ): void => {
         setOriginalLanguage(language);
         setOriginalText(
-            rotateString(originalText ?? "", 0, originalLanguage, language)
+            rotateString(originalText ?? '', 0, originalLanguage, language)
         );
         setIsOriginalLanguageDropdownOpen(false);
     };
@@ -117,14 +117,14 @@ const OriginalTextSection = ({
                 const text: string | ArrayBuffer | null | undefined =
                     e.target?.result;
 
-                if (typeof text !== "string") {
+                if (typeof text !== 'string') {
                     return;
                 }
 
                 setOriginalText(text);
                 setRotatedText(
                     rotateString(
-                        text ?? "",
+                        text ?? '',
                         rot,
                         originalLanguage,
                         rotatedLanguage
@@ -191,19 +191,19 @@ const OriginalTextSection = ({
                         <button
                             type="button"
                             title={
-                                originalText === "" || isLoading
-                                    ? "Must write text before changing alphabet"
-                                    : "Change alphabet used"
+                                originalText === '' || isLoading
+                                    ? 'Must write text before changing alphabet'
+                                    : 'Change alphabet used'
                             }
-                            className={`pill ${
-                                isOriginalLanguageDropdownOpen ? "open" : ""
+                            className={`pill inverse ${
+                                isOriginalLanguageDropdownOpen ? 'open' : ''
                             }`}
                             onClick={() => {
                                 setIsOriginalLanguageDropdownOpen(
                                     !isOriginalLanguageDropdownOpen
                                 );
                             }}
-                            disabled={originalText === "" || isLoading}
+                            disabled={originalText === '' || isLoading}
                         >
                             <LanguageIcon className="icon" />
                             <span className="text">
@@ -233,21 +233,21 @@ const OriginalTextSection = ({
                     <button
                         type="button"
                         title={
-                            originalText === ""
-                                ? "No text to clear"
-                                : "Clear text area"
+                            originalText === ''
+                                ? 'No text to clear'
+                                : 'Clear text area'
                         }
-                        className="pill"
+                        className="pill inverse"
                         onClick={() => {
-                            setOriginalText("");
-                            setRotatedText("");
+                            setOriginalText('');
+                            setRotatedText('');
                             setRot(0);
                             setOriginalLanguage(SupportedLanguage.English);
                             setRotatedLanguage(SupportedLanguage.English);
 
                             localStorage.clear();
                         }}
-                        disabled={originalText === "" || isLoading}
+                        disabled={originalText === '' || isLoading}
                     >
                         <DeleteIcon className="icon" />
                         <span className="text">Clear</span>
@@ -276,12 +276,12 @@ const OriginalTextSection = ({
                     id="decrypt"
                     type="button"
                     title={
-                        originalText === "" || isLoading
-                            ? "No text to rotate"
-                            : "Attempt to automatically decrypt text"
+                        originalText === '' || isLoading
+                            ? 'No text to rotate'
+                            : 'Attempt to automatically decrypt text'
                     }
                     onClick={handleDecrypt}
-                    disabled={originalText === "" || isLoading}
+                    disabled={originalText === '' || isLoading}
                 >
                     <RotateAutoIcon className="icon" />
                     <span className="text">Auto rotate</span>
