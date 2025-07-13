@@ -1,22 +1,32 @@
-.Modal {
+.Intro {
     z-index: 200;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    gap: 20px;
     width: auto;
-    max-width: 92%;
-    height: clamp(250px, 72%, 750px);
-    padding: 1em 1.25em;
+    max-width: 55ch;
+    min-height: 250px;
+    max-height: 90vh;
+    padding: 25px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     margin-top: 10vh;
     color: var(--primary-font-color);
+    line-height: 1.5em;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     background-color: var(--primary-color);
     overflow-x: hidden;
     overflow-y: auto;
+
+    .title {
+        font-family: custom-bold;
+        font-size: 2em;
+        margin: 0;
+        padding: 0;
+    }
 
     a:link,
     a:visited,
@@ -30,8 +40,10 @@
         text-decoration: underline;
     }
 
-    article {
-        margin: 1.4rem 0;
+    p {
+        padding: 0;
+        margin: 0;
+        line-height: 1.5em;
     }
 
     ul {
@@ -51,24 +63,8 @@
     }
 
     button {
-        margin: 0 5px;
-    }
-
-    .img-container {
-        position: relative;
-        height: clamp(200px, 25vh, 300px);
-
-        img {
-            height: 100%;
-        }
-    }
-
-    .close-button {
-        z-index: 2;
-        position: absolute;
-        top: 0;
-        right: 0;
         font-size: medium;
+        margin: 0 5px;
         padding: 0.5rem 1rem;
         color: var(--primary-color);
         background-color: var(--secondary-color);
@@ -79,44 +75,29 @@
         &:hover {
             filter: brightness(1.25);
         }
+
+        &#dont-show-again {
+            color: whitesmoke;
+            background-color: rgb(182, 33, 33);
+        }
     }
 
-    header {
-        position: relative;
+    .button-container {
         display: flex;
         flex-direction: row;
-        justify-content: flex-end;
+        justify-content: flex-start;
         align-items: center;
+        gap: 20px;
         width: 100%;
-        height: 4em;
-        padding: 10px;
-        color: white;
-        border: none;
-        border-radius: 0;
-        background-color: transparent;
     }
 
-    .title {
-        font-family: custom-bold;
-        font-size: 2em;
-        margin: 0;
-        padding: 0;
-    }
-
-    .content {
+    .img-container {
         position: relative;
-        width: 100%;
-        max-width: 55ch;
-        flex-grow: 1;
-        line-height: 1.5em;
-        border: none;
-        border-radius: 0;
-        background-color: transparent;
+        height: clamp(200px, 15vh, 300px);
 
-        p {
-            padding: 0;
-            margin: 1em 0;
-            line-height: 1.5em;
+        img {
+            height: 100%;
+            animation: fadeIn 0.5s ease-in-out;
         }
     }
 }

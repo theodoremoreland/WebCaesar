@@ -7,18 +7,22 @@ import { ToastContainer, toast } from 'react-toastify';
 
 // Custom
 import rotateString from './modules/rotateString';
-import togglePrimaryHighlightColor from './utils/togglePrimaryHighlightColor';
 import { SupportedLanguage } from './types';
 import {
     getLocalStorageData,
     jokeErrorToastId,
-    debounceSaveToLocalStorage,
-} from './App.controller';
+    shouldShowIntroModal,
+} from './App.utils';
+import {
+    useSaveToLocalStorage,
+    useTogglePrimaryHighlightColor,
+} from './App.hooks';
 
 // HTTP
 import getDadJoke from './http/getDadJoke';
 
 // Components
+import Intro from './components/Modal/Intro/Intro';
 import OriginalTextSection from './components/TextSection/OriginalTextSection';
 import RotatedTextSection from './components/TextSection/RotatedTextSection';
 import LettersDraggable from './components/LettersDraggable/LettersDraggable';
@@ -28,6 +32,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 const App = (): ReactElement => {
+    const [isIntroModalOpen, setIsIntroModalOpen] = useState<boolean>(true);
+
+    // App data states
     const [rot, setRot] = useState<number>(0);
     const [isRotPositive, setIsRotPositive] = useState<boolean>(true);
     const [isAutoRotating, setIsAutoRotating] = useState<boolean>(false);
@@ -58,6 +65,16 @@ const App = (): ReactElement => {
             )
         );
     }, [originalText, rot, originalLanguage, rotatedLanguage]);
+
+    // Custom hooks
+    useSaveToLocalStorage({
+        originalText,
+        rotatedText,
+        rot,
+        originalLanguage,
+        rotatedLanguage,
+    });
+    useTogglePrimaryHighlightColor(isRotPositive);
 
     useEffect(() => {
         const {
@@ -109,25 +126,18 @@ const App = (): ReactElement => {
     }, [jokeData, jokeError]);
 
     useEffect(() => {
-        debounceSaveToLocalStorage(
-            originalText,
-            rotatedText,
-            rot,
-            originalLanguage,
-            rotatedLanguage
-        );
-    }, [originalText, rotatedText, rot, originalLanguage, rotatedLanguage]);
-
-    useEffect(() => {
-        togglePrimaryHighlightColor(isRotPositive);
-    }, [isRotPositive]);
-
-    useEffect(() => {
         handleRotate();
     }, [handleRotate]);
 
     return (
         <main>
+            {shouldShowIntroModal() && isIntroModalOpen && (
+                <Intro
+                    handleClose={() => {
+                        setIsIntroModalOpen(false);
+                    }}
+                />
+            )}
             <div className="content">
                 <OriginalTextSection
                     isOtherLoading={isLoading}

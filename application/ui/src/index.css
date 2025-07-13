@@ -24,13 +24,13 @@
 }
 
 :root {
-    --primary-color: #0d1117;
+    --primary-color: #262627;
     --secondary-color: #fee715;
     --tertiary-color: #ffffff;
     --quaternary-color: #ff5a5f;
 
     --font-color: var(--tertiary-color);
-    --border-color: #fee71599;
+    --border-color: #fee7155e;
     --highlight-font-color: var(--primary-color);
     --highlight-color: var(--secondary-color);
     --highlight-color-light: color-mix(
@@ -97,4 +97,22 @@ button:disabled {
 .Toastify__close-button--light {
     opacity: 0.8 !important;
     color: var(--font-color) !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

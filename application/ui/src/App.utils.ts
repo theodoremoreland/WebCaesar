@@ -56,3 +56,22 @@ export const debounceSaveToLocalStorage = debounce(
     },
     1_000
 );
+
+export const shouldShowIntroModal = (): boolean => {
+    const hasClickedDontShowAgain: boolean =
+        localStorage.getItem('dontShowIntroModal') === 'true';
+    const lastShownDateString: string | null = localStorage.getItem(
+        'introModalLastShownDate'
+    );
+
+    const lastShownDate = new Date(lastShownDateString || 0);
+    const currentDate = new Date();
+
+    // Check if the last shown date is more than 30 days ago
+    const daysDifference = Math.floor(
+        (currentDate.getTime() - lastShownDate.getTime()) /
+            (1000 * 60 * 60 * 24)
+    );
+
+    return !hasClickedDontShowAgain && daysDifference > 30;
+};
