@@ -1,31 +1,31 @@
 // React
-import { ReactElement, useState, useEffect, useCallback } from "react";
+import { ReactElement, useState, useEffect, useCallback } from 'react';
 
 // Third party
-import { useQuery } from "react-query";
-import { ToastContainer, toast } from "react-toastify";
+import { useQuery } from 'react-query';
+import { ToastContainer, toast } from 'react-toastify';
 
 // Custom
-import rotateString from "./modules/rotateString";
-import togglePrimaryHighlightColor from "./utils/togglePrimaryHighlightColor";
-import { SupportedLanguage } from "./types";
+import rotateString from './modules/rotateString';
+import togglePrimaryHighlightColor from './utils/togglePrimaryHighlightColor';
+import { SupportedLanguage } from './types';
 import {
     getLocalStorageData,
     jokeErrorToastId,
     debounceSaveToLocalStorage,
-} from "./App.controller";
+} from './App.controller';
 
 // HTTP
-import getDadJoke from "./http/getDadJoke";
+import getDadJoke from './http/getDadJoke';
 
 // Components
-import OriginalTextSection from "./components/TextSection/OriginalTextSection";
-import RotatedTextSection from "./components/TextSection/RotatedTextSection";
-import LettersDraggable from "./components/LettersDraggable/LettersDraggable";
+import OriginalTextSection from './components/TextSection/OriginalTextSection';
+import RotatedTextSection from './components/TextSection/RotatedTextSection';
+import LettersDraggable from './components/LettersDraggable/LettersDraggable';
 
 // Styles
-import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 const App = (): ReactElement => {
     const [rot, setRot] = useState<number>(0);
@@ -37,21 +37,21 @@ const App = (): ReactElement => {
     const [rotatedLanguage, setRotatedLanguage] = useState<SupportedLanguage>(
         SupportedLanguage.English
     );
-    const [originalText, setOriginalText] = useState<string>("");
-    const [rotatedText, setRotatedText] = useState<string>("");
+    const [originalText, setOriginalText] = useState<string>('');
+    const [rotatedText, setRotatedText] = useState<string>('');
 
     const {
         data: jokeData,
         error: jokeError,
         isFetching: isFetchingDadJoke,
-    } = useQuery("dad-joke", getDadJoke, { retry: false });
+    } = useQuery('dad-joke', getDadJoke, { retry: false });
 
     const isLoading: boolean = isFetchingDadJoke; // Here in case we need to add more loading states
 
     const handleRotate = useCallback((): void => {
         setRotatedText(
             rotateString(
-                originalText ?? "",
+                originalText ?? '',
                 rot,
                 originalLanguage,
                 rotatedLanguage
@@ -78,8 +78,8 @@ const App = (): ReactElement => {
             const savedRot: number = parseInt(rot);
 
             if (isNaN(savedRot)) {
-                console.error("Invalid rot value in local storage");
-                toast.error("Invalid rot value in local storage", {
+                console.error('Invalid rot value in local storage');
+                toast.error('Invalid rot value in local storage', {
                     toastId: jokeErrorToastId,
                 });
 

@@ -1,7 +1,7 @@
-import isFirstLetter from "../../utils/isFirstLetter";
-import isLastLetter from "../../utils/isLastLetter";
+import isFirstLetter from '../../utils/isFirstLetter';
+import isLastLetter from '../../utils/isLastLetter';
 
-import { CharactersToIndex } from "../../types";
+import { CharactersToIndex } from '../../types';
 
 export interface FillObject {
     value: string;
@@ -21,7 +21,7 @@ export const fill = (array: string[], desiredLength: number): FillObject[] => {
 
     while (newArray.length < desiredLength) {
         newArray.push({
-            value: "",
+            value: '',
             index: newArray.length,
         });
     }
@@ -70,9 +70,9 @@ export const getCenterLetters = (
     }
 
     const originalElements: HTMLCollectionOf<HTMLLIElement> =
-        originalOlRef.current.getElementsByTagName("li");
+        originalOlRef.current.getElementsByTagName('li');
     const rotatedElements: HTMLCollectionOf<HTMLLIElement> =
-        rotatedOlRef.current.getElementsByTagName("li");
+        rotatedOlRef.current.getElementsByTagName('li');
 
     const originalElementsWithPosition: LiPositionMetadata[] = [
         ...originalElements,
@@ -169,7 +169,7 @@ export const onWheelMove = (
     const childRect: DOMRect = olRef.current.getBoundingClientRect();
 
     const newTop: number =
-        Number(olRef.current.style.top.replace("px", "")) + deltaY;
+        Number(olRef.current.style.top.replace('px', '')) + deltaY;
     const isWithinResetThresholdScrollingDown: boolean =
         newTop - get25Percent(childRect.height) >= 10;
     const isWithinResetThresholdScrollingUp: boolean =
@@ -211,12 +211,12 @@ export const onMouseDown = (
     }
 
     startingOlTop.current = Number(
-        window.getComputedStyle(olRef.current).top.replace("px", "")
+        window.getComputedStyle(olRef.current).top.replace('px', '')
     );
     startingMousePositionRef.current = event.clientY;
 
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
 };
 
 export const onTouchStart = (
@@ -240,12 +240,12 @@ export const onTouchStart = (
     }
 
     startingOlTop.current = Number(
-        window.getComputedStyle(olRef.current).top.replace("px", "")
+        window.getComputedStyle(olRef.current).top.replace('px', '')
     );
     startingMousePositionRef.current = event.touches[0].clientY;
 
-    document.addEventListener("touchmove", onTouchMove);
-    document.addEventListener("touchend", onTouchEnd);
+    document.addEventListener('touchmove', onTouchMove);
+    document.addEventListener('touchend', onTouchEnd);
 };
 
 export const determineLiClassName = (
@@ -254,12 +254,12 @@ export const determineLiClassName = (
     character: string
 ) => {
     if (isFirstLetter(charactersToIndex, character)) {
-        return "first";
+        return 'first';
     } else if (isLastLetter(charactersToIndex, characterCount, character)) {
-        return "last";
+        return 'last';
     }
 
-    return "";
+    return '';
 };
 
 export const moveListOnMouseMove = (

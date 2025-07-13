@@ -1,8 +1,8 @@
 // React
-import { ReactElement, useRef, useCallback, useMemo, useEffect } from "react";
+import { ReactElement, useRef, useCallback, useMemo, useEffect } from 'react';
 
 // Custom
-import { languageMetadata } from "../../constants/languageMetadata";
+import { languageMetadata } from '../../constants/languageMetadata';
 import {
     quadruple,
     fill,
@@ -14,17 +14,17 @@ import {
     FillObject,
     moveListOnMouseMove,
     calculateRot,
-} from "./LettersDraggable.controller";
+} from './LettersDraggable.controller';
 
 // Types
-import { SupportedLanguage } from "../../types";
+import { SupportedLanguage } from '../../types';
 
 // Images
-import SwipeVerticalIcon from "../../assets/images/swipe_vertical.svg?react";
-import TouchDoubleIcon from "../../assets/images/touch_double.svg?react";
+import SwipeVerticalIcon from '../../assets/images/swipe_vertical.svg?react';
+import TouchDoubleIcon from '../../assets/images/touch_double.svg?react';
 
 // Styles
-import "./LettersDraggable.css";
+import './LettersDraggable.css';
 
 interface Props {
     originalLanguage: SupportedLanguage;
@@ -124,13 +124,13 @@ const LettersDraggable = ({
     );
 
     const onOriginalOlMouseUp = useCallback(() => {
-        document.removeEventListener("mousemove", onOriginalOlMouseMove);
-        document.removeEventListener("mouseup", onOriginalOlMouseUp);
+        document.removeEventListener('mousemove', onOriginalOlMouseMove);
+        document.removeEventListener('mouseup', onOriginalOlMouseUp);
     }, [onOriginalOlMouseMove]);
 
     const onOriginalOlTouchEnd = useCallback(() => {
-        document.removeEventListener("touchmove", onOriginalOlTouchMove);
-        document.removeEventListener("touchend", onOriginalOlTouchEnd);
+        document.removeEventListener('touchmove', onOriginalOlTouchMove);
+        document.removeEventListener('touchend', onOriginalOlTouchEnd);
     }, [onOriginalOlTouchMove]);
 
     const onRotatedOlMouseMove = useCallback(
@@ -160,13 +160,13 @@ const LettersDraggable = ({
     );
 
     const onRotatedOlMouseUp = useCallback(() => {
-        document.removeEventListener("mousemove", onRotatedOlMouseMove);
-        document.removeEventListener("mouseup", onRotatedOlMouseUp);
+        document.removeEventListener('mousemove', onRotatedOlMouseMove);
+        document.removeEventListener('mouseup', onRotatedOlMouseUp);
     }, [onRotatedOlMouseMove]);
 
     const onRotatedOlTouchEnd = useCallback(() => {
-        document.removeEventListener("touchmove", onRotatedOlTouchMove);
-        document.removeEventListener("touchend", onRotatedOlTouchEnd);
+        document.removeEventListener('touchmove', onRotatedOlTouchMove);
+        document.removeEventListener('touchend', onRotatedOlTouchEnd);
     }, [onRotatedOlTouchMove]);
 
     useEffect(() => {
@@ -202,7 +202,7 @@ const LettersDraggable = ({
                 ) {
                     onWheelMove(
                         {
-                            nativeEvent: new WheelEvent("wheel", { deltaY }),
+                            nativeEvent: new WheelEvent('wheel', { deltaY }),
                             preventDefault: () => {},
                         } as React.WheelEvent<HTMLOListElement>,
                         {
@@ -247,7 +247,7 @@ const LettersDraggable = ({
                 ref={originalOlRef}
                 id="character-list-original"
                 className={`character-list ${
-                    isRotPositive ? "positive" : "negative"
+                    isRotPositive ? 'positive' : 'negative'
                 }`}
                 title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
                 onDoubleClick={() => setIsRotPositive(!isRotPositive)}
@@ -301,7 +301,7 @@ const LettersDraggable = ({
                 ref={rotatedOlRef}
                 id="character-list-rotated"
                 className={`character-list ${
-                    isRotPositive ? "positive" : "negative"
+                    isRotPositive ? 'positive' : 'negative'
                 }`}
                 title="Drag vertically to rotate text. Double click to change rotation sign (positive/negative)."
                 onDoubleClick={() => setIsRotPositive(!isRotPositive)}

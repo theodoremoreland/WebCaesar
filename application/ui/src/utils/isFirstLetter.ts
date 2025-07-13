@@ -1,4 +1,4 @@
-import { CharactersToIndex } from "../types";
+import { CharactersToIndex } from '../types';
 
 export default (
     charactersToIndex: CharactersToIndex,

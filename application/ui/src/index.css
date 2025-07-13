@@ -1,26 +1,26 @@
 @font-face {
     font-family: custom-thin;
-    src: url("./assets/fonts/Urbanist-Thin.ttf");
+    src: url('./assets/fonts/Urbanist-Thin.ttf');
 }
 
 @font-face {
     font-family: custom-light;
-    src: url("./assets/fonts/Urbanist-Light.ttf");
+    src: url('./assets/fonts/Urbanist-Light.ttf');
 }
 
 @font-face {
     font-family: custom-regular;
-    src: url("./assets/fonts/Urbanist-Regular.ttf");
+    src: url('./assets/fonts/Urbanist-Regular.ttf');
 }
 
 @font-face {
     font-family: custom-medium;
-    src: url("./assets/fonts/Urbanist-Medium.ttf");
+    src: url('./assets/fonts/Urbanist-Medium.ttf');
 }
 
 @font-face {
     font-family: custom-bold;
-    src: url("./assets/fonts/Urbanist-Bold.ttf");
+    src: url('./assets/fonts/Urbanist-Bold.ttf');
 }
 
 :root {
@@ -51,8 +51,11 @@
 
 * {
     box-sizing: border-box;
-    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out,
-        color 0.5s ease-in-out, fill 0.5s ease-in-out;
+    transition:
+        background-color 0.5s ease-in-out,
+        border-color 0.5s ease-in-out,
+        color 0.5s ease-in-out,
+        fill 0.5s ease-in-out;
 
     &::selection {
         color: var(--primary-color);

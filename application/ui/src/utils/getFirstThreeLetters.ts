@@ -1,6 +1,6 @@
-import { languageMetadata } from "../constants/languageMetadata";
+import { languageMetadata } from '../constants/languageMetadata';
 
-import { SupportedLanguage } from "../types";
+import { SupportedLanguage } from '../types';
 
 export default (language: SupportedLanguage): [string, string, string] => {
     const indexToCharacters = languageMetadata[language].indexToCharacters;

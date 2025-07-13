@@ -1,8 +1,8 @@
 // Third party
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 // Custom
-import { baseUrl } from "./index";
+import { baseUrl } from './index';
 
 interface DecryptRequest {
     text: string;

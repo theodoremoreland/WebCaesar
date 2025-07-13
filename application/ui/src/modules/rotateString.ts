@@ -1,9 +1,9 @@
 // Custom
-import findCharacterIndex from "../utils/findCharacterIndex";
-import { languageMetadata } from "../constants/languageMetadata";
+import findCharacterIndex from '../utils/findCharacterIndex';
+import { languageMetadata } from '../constants/languageMetadata';
 
 // Types
-import { SupportedLanguage } from "../types";
+import { SupportedLanguage } from '../types';
 
 const rotateCharacter = (
     char: string,
@@ -40,7 +40,7 @@ export default (
     originalLanguage: SupportedLanguage,
     rotatedLanguage: SupportedLanguage
 ): string => {
-    let rotated: string = "";
+    let rotated: string = '';
 
     for (const char of text) {
         // If the character is in the rotated language, rotate it

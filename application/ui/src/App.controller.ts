@@ -1,10 +1,10 @@
 // Third party
-import { debounce } from "lodash";
+import { debounce } from 'lodash';
 
 // Types
-import { SupportedLanguage } from "./types";
+import { SupportedLanguage } from './types';
 
-export const jokeErrorToastId: string = "joke-error-toast";
+export const jokeErrorToastId: string = 'joke-error-toast';
 
 export const getLocalStorageData = (): {
     originalText: string | null;
@@ -13,13 +13,13 @@ export const getLocalStorageData = (): {
     originalLanguage: string | null;
     rotatedLanguage: string | null;
 } => {
-    const originalText: string | null = localStorage.getItem("originalText");
-    const rotatedText: string | null = localStorage.getItem("rotatedText");
-    const rot: string | null = localStorage.getItem("rot");
+    const originalText: string | null = localStorage.getItem('originalText');
+    const rotatedText: string | null = localStorage.getItem('rotatedText');
+    const rot: string | null = localStorage.getItem('rot');
     const originalLanguage: string | null =
-        localStorage.getItem("originalLanguage");
+        localStorage.getItem('originalLanguage');
     const rotatedLanguage: string | null =
-        localStorage.getItem("rotatedLanguage");
+        localStorage.getItem('rotatedLanguage');
 
     return {
         originalText,
@@ -37,11 +37,11 @@ export const setLocalStorageData = (
     originalLanguage: SupportedLanguage,
     rotatedLanguage: SupportedLanguage
 ): void => {
-    localStorage.setItem("originalText", originalText);
-    localStorage.setItem("rotatedText", rotatedText);
-    localStorage.setItem("rot", rot.toString());
-    localStorage.setItem("originalLanguage", originalLanguage);
-    localStorage.setItem("rotatedLanguage", rotatedLanguage);
+    localStorage.setItem('originalText', originalText);
+    localStorage.setItem('rotatedText', rotatedText);
+    localStorage.setItem('rot', rot.toString());
+    localStorage.setItem('originalLanguage', originalLanguage);
+    localStorage.setItem('rotatedLanguage', rotatedLanguage);
 };
 
 export const debounceSaveToLocalStorage = debounce(

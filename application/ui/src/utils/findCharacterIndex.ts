@@ -1,6 +1,6 @@
-import { languageMetadata } from "../constants/languageMetadata";
+import { languageMetadata } from '../constants/languageMetadata';
 
-import { SupportedLanguage } from "../types";
+import { SupportedLanguage } from '../types';
 
 export default (character: string, language: SupportedLanguage): number => {
     const lower: string = character.toLowerCase();
