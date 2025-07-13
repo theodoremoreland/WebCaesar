@@ -1,5 +1,5 @@
 // Third party
-import { debounce } from 'lodash';
+import debounce from 'lodash.debounce';
 
 // Types
 import { SupportedLanguage } from './types';
