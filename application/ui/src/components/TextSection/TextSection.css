@@ -10,7 +10,8 @@
     background-color: var(--primary-color);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    box-shadow:
+        rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 
     @media screen and (min-width: 1000px) {
@@ -218,7 +219,8 @@
             color: var(--primary-color);
             font-size: 0.75rem;
             background-color: var(--secondary-color);
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+            box-shadow:
+                rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
                 rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
         }
 

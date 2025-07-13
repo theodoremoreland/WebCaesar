@@ -90,7 +90,7 @@ a {
 }
 
 button:disabled {
-    background-color: var(--border-color) !important;
+    opacity: 0.5 !important;
     cursor: not-allowed !important;
 }
 
