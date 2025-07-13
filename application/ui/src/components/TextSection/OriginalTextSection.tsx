@@ -257,6 +257,21 @@ const OriginalTextSection = ({
             <hr />
             <div className="buttons">
                 <button
+                    id="decrypt"
+                    type="button"
+                    title={
+                        originalText === '' || isLoading
+                            ? 'No text to decrypt'
+                            : 'Attempt to automatically decrypt text'
+                    }
+                    aria-label='"Decrypt text"'
+                    onClick={handleDecrypt}
+                    disabled={originalText === '' || isLoading}
+                >
+                    <RotateAutoIcon className="icon" />
+                    <span className="text">Decrypt</span>
+                </button>
+                <button
                     id="upload"
                     type="button"
                     title="Upload text file."
@@ -271,20 +286,6 @@ const OriginalTextSection = ({
                         accept=".txt"
                         onChange={handleFileUpload}
                     />
-                </button>
-                <button
-                    id="decrypt"
-                    type="button"
-                    title={
-                        originalText === '' || isLoading
-                            ? 'No text to rotate'
-                            : 'Attempt to automatically decrypt text'
-                    }
-                    onClick={handleDecrypt}
-                    disabled={originalText === '' || isLoading}
-                >
-                    <RotateAutoIcon className="icon" />
-                    <span className="text">Auto rotate</span>
                 </button>
             </div>
         </section>
