@@ -36,26 +36,6 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_ROLE_NAME }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Create Lightsail container service if missing
-        run: |
-          SERVICE_NAME="my-service"
-          REGION="${{ secrets.AWS_REGION }}"
-
-          EXISTS=$(aws lightsail get-container-services \
-            --region "$REGION" \
-            --query "containerServices[?serviceName=='$SERVICE_NAME'] | length(@)")
-
-          if [ "$EXISTS" -eq 0 ]; then
-            echo "Creating container service: $SERVICE_NAME"
-            aws lightsail create-container-service \
-              --service-name "$SERVICE_NAME" \
-              --power nano \
-              --scale 1 \
-              --region "$REGION"
-          else
-            echo "Container service $SERVICE_NAME already exists."
-          fi
-
       - name: Push to Lightsail
         run: |
           aws lightsail push-container-image \
