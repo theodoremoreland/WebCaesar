@@ -4,6 +4,9 @@ import { ReactElement } from 'react';
 // Custom components
 import Backdrop from '../Backdrop';
 
+// Custom
+import { saveDontShowAgain } from './Intro.utils';
+
 // Images
 import letterDrag from '../../../assets/images/letter_drag.gif';
 
@@ -15,6 +18,11 @@ interface Props {
 }
 
 const Intro = ({ handleClose }: Props): ReactElement => {
+    const handleDontShowAgain = (): void => {
+        saveDontShowAgain();
+        handleClose();
+    };
+
     return (
         <Backdrop>
             <div className="Intro">
@@ -62,6 +70,7 @@ const Intro = ({ handleClose }: Props): ReactElement => {
                     <button
                         id="dont-show-again"
                         aria-label="Don't show this again"
+                        onClick={handleDontShowAgain}
                     >
                         Don't show this again
                     </button>
