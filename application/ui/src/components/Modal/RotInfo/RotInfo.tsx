@@ -1,9 +1,9 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react';
 
-import Modal from "../Modal";
+import Modal from '../Modal';
 
 // Images
-import letterDrag from "../../../assets/images/letter_drag.gif";
+import letterDrag from '../../../assets/images/letter_drag.gif';
 
 interface Props {
     title: string;
@@ -17,20 +17,15 @@ const RotInfo = ({ title, handleClose }: Props): ReactElement => {
                 <article>
                     <h3>How to change the rotation</h3>
                     <div className="img-container">
-                        <img src={letterDrag} alt="" />
+                        <img src={letterDrag} alt="Dragging letters" />
                     </div>
                     <p>
-                        To change the rotation (rot), use the two letter columns
-                        in the middle of the page. Each column can be dragged or
-                        scrolled vertically to change the rotation amount.
-                        <br />
-                        <br />
-                        The left column represents letters in the original text
-                        and the right column represents letters in the rotated
-                        text. The relationship between the two always reads left
-                        to right.
-                        <br />
-                        <br />
+                        To change the rotation, use the two letter columns in
+                        the middle of the page. Each column can be dragged or
+                        scrolled vertically. Letters in the left column will be
+                        replaced by their adjacent letters in the right column.
+                    </p>
+                    <p>
                         The rot can be positive or negative, but is positive by
                         default. Double click on one of the columns to toggle
                         between positive and negative rotations.

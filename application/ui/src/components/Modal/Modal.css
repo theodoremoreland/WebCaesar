@@ -60,6 +60,7 @@
 
         img {
             height: 100%;
+            animation: fadeIn 2s ease-in-out;
         }
     }
 
