@@ -58,7 +58,12 @@ const Intro = ({ handleClose }: Props): ReactElement => {
                     the rotated text will appear in the "Rotated text" area on
                     the right.
                 </p>
-                <p>
+                <p className="mobile-only">
+                    Words in the "Original text" area can be automatically
+                    decrypted by opening the "Original text" options and
+                    selecting the "Decrypt" button.
+                </p>
+                <p className="desktop-only">
                     Words in the "Original text" area can be automatically
                     decrypted by clicking the "Decrypt" button on the lower left
                     of the "Original text" area.

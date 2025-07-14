@@ -7,6 +7,7 @@ import { copyToClipboard } from './TextSection.controller';
 
 // Components
 import RotInfo from '../Modal/RotInfo/RotInfo';
+import Modal from '../Modal/Modal';
 
 // Utils
 import { getFirstThreeLetters } from '../../utils';
@@ -17,8 +18,9 @@ import { SupportedLanguage } from '../../types';
 // Images
 import DownloadIcon from '../../assets/images/download.svg?react';
 import InfoIcon from '../../assets/images/info.svg?react';
+import NumbersIcon from '../../assets/images/numbers.svg?react';
 import LanguageIcon from '../../assets/images/language.svg?react';
-import MenuIcon from '../../assets/images/menu.svg?react';
+import SettingsIcon from '../../assets/images/settings.svg?react';
 
 // Styles
 import './TextSection.css';
@@ -80,6 +82,56 @@ const RotatedTextSection = ({
                     className="clickaway"
                     onClick={() => setIsRotatedLanguageDropdownOpen(false)}
                 ></div>
+            )}
+            {isMobileMenuOpen && (
+                <Modal
+                    title="Output options"
+                    handleClose={() => setIsMobileMenuOpen(false)}
+                >
+                    <ul className="menu">
+                        <li>
+                            <a
+                                href={`data:text/plain;charset=utf-8,${encodeURIComponent(
+                                    rotatedText
+                                )}`}
+                                download="rotated_text.txt"
+                            >
+                                <button
+                                    id="download"
+                                    type="button"
+                                    title={
+                                        rotatedText === '' || isLoading
+                                            ? 'No text to download'
+                                            : 'Download rotated text'
+                                    }
+                                    disabled={rotatedText === '' || isLoading}
+                                >
+                                    <DownloadIcon
+                                        id="download-icon"
+                                        className="icon"
+                                    />
+                                    <span className="text">
+                                        Download result
+                                    </span>
+                                </button>
+                            </a>
+                        </li>
+                        <li>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setIsRotatedLanguageDropdownOpen(false);
+                                    setIsMobileMenuOpen(false);
+                                    setIsRotInfoModalOpen(true);
+                                }}
+                            >
+                                <NumbersIcon className="icon" />
+                                <span className="text">rot </span>
+                                <span>{rot}</span>
+                            </button>
+                        </li>
+                    </ul>
+                </Modal>
             )}
             <label htmlFor="rotated-text">Rotated text</label>
             <div className="textarea-container">
@@ -160,9 +212,11 @@ const RotatedTextSection = ({
                     id="menu"
                     className="mobile-only"
                     type="button"
-                    title="Open menu"
+                    title="Output options"
+                    onClick={() => setIsMobileMenuOpen(true)}
                 >
-                    <MenuIcon className="icon" />
+                    <SettingsIcon className="icon" />
+                    <span className="text">Options</span>
                 </button>
                 <a
                     href={`data:text/plain;charset=utf-8,${encodeURIComponent(

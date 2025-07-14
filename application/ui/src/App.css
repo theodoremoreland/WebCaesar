@@ -24,11 +24,19 @@ main {
     height: 100%;
 }
 
+.mobile-only {
+    display: flex !important;
+}
+
 .desktop-only {
     display: none !important;
 }
 
 @media screen and (min-width: 1000px) {
+    .mobile-only {
+        display: none !important;
+    }
+
     .desktop-only {
         display: flex !important;
     }

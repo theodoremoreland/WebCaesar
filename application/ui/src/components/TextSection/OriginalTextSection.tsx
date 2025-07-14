@@ -30,7 +30,7 @@ import UploadIcon from '../../assets/images/upload_file.svg?react';
 import RotateAutoIcon from '../../assets/images/rotate_auto.svg?react';
 import LanguageIcon from '../../assets/images/language.svg?react';
 import DeleteIcon from '../../assets/images/delete.svg?react';
-import MenuIcon from '../../assets/images/menu.svg?react';
+import SettingsIcon from '../../assets/images/settings.svg?react';
 
 // Styles
 import './TextSection.css';
@@ -111,6 +111,7 @@ const OriginalTextSection = ({
         if (originalText) {
             setIsRotPositive(true);
             decryptMutate({ text: originalText });
+            setIsMobileMenuOpen(false);
         }
     };
 
@@ -140,7 +141,21 @@ const OriginalTextSection = ({
             };
 
             reader.readAsText(file);
+
+            setIsMobileMenuOpen(false);
         }
+    };
+
+    const handleClearText = (): void => {
+        setOriginalText('');
+        setRotatedText('');
+        setRot(0);
+        setOriginalLanguage(SupportedLanguage.English);
+        setRotatedLanguage(SupportedLanguage.English);
+
+        resetLocalStorage();
+
+        setIsMobileMenuOpen(false);
     };
 
     useEffect(() => {
@@ -182,10 +197,11 @@ const OriginalTextSection = ({
                 ></div>
             )}
             {isMobileMenuOpen && (
-                <Modal title="" handleClose={() => setIsMobileMenuOpen(false)}>
-                    <ul className="content">
-                        <li></li>
-                        <li></li>
+                <Modal
+                    title="Input options"
+                    handleClose={() => setIsMobileMenuOpen(false)}
+                >
+                    <ul className="menu">
                         <li>
                             <button
                                 id="decrypt"
@@ -219,6 +235,21 @@ const OriginalTextSection = ({
                                     accept=".txt"
                                     onChange={handleFileUpload}
                                 />
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                type="button"
+                                title={
+                                    originalText === ''
+                                        ? 'No text to clear'
+                                        : 'Clear text area'
+                                }
+                                onClick={handleClearText}
+                                disabled={originalText === '' || isLoading}
+                            >
+                                <DeleteIcon className="icon" />
+                                <span className="text">Clear</span>
                             </button>
                         </li>
                     </ul>
@@ -311,10 +342,11 @@ const OriginalTextSection = ({
                     id="menu"
                     className="mobile-only"
                     type="button"
-                    title="Open menu"
+                    title="Input options"
                     onClick={() => setIsMobileMenuOpen(true)}
                 >
-                    <MenuIcon className="icon" />
+                    <SettingsIcon className="icon" />
+                    <span className="text">Options</span>
                 </button>
                 <button
                     id="decrypt"
