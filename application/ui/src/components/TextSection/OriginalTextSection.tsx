@@ -17,6 +17,7 @@ import {
 
 // Components
 import Loading from '../Modal/Loading/Loading';
+import Modal from '../Modal/Modal';
 
 // Utils
 import { getFirstThreeLetters } from '../../utils';
@@ -29,6 +30,7 @@ import UploadIcon from '../../assets/images/upload_file.svg?react';
 import RotateAutoIcon from '../../assets/images/rotate_auto.svg?react';
 import LanguageIcon from '../../assets/images/language.svg?react';
 import DeleteIcon from '../../assets/images/delete.svg?react';
+import MenuIcon from '../../assets/images/menu.svg?react';
 
 // Styles
 import './TextSection.css';
@@ -67,6 +69,7 @@ const OriginalTextSection = ({
 }: Props): ReactElement => {
     const [isOriginalLanguageDropdownOpen, setIsOriginalLanguageDropdownOpen] =
         useState<boolean>(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
     const {
         data: decryptData,
@@ -178,6 +181,49 @@ const OriginalTextSection = ({
                     onClick={() => setIsOriginalLanguageDropdownOpen(false)}
                 ></div>
             )}
+            {isMobileMenuOpen && (
+                <Modal title="" handleClose={() => setIsMobileMenuOpen(false)}>
+                    <ul className="content">
+                        <li></li>
+                        <li></li>
+                        <li>
+                            <button
+                                id="decrypt"
+                                type="button"
+                                title={
+                                    originalText === '' || isLoading
+                                        ? 'No text to decrypt'
+                                        : 'Attempt to automatically decrypt text'
+                                }
+                                aria-label='"Decrypt text"'
+                                onClick={handleDecrypt}
+                                disabled={originalText === '' || isLoading}
+                            >
+                                <RotateAutoIcon className="icon" />
+                                <span className="text">Decrypt</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                id="upload"
+                                type="button"
+                                title="Upload text file."
+                                disabled={isLoading}
+                            >
+                                <UploadIcon className="icon" />
+                                <span className="text">Upload text file</span>
+                                <input
+                                    className="hidden"
+                                    title="Upload .txt file"
+                                    type="file"
+                                    accept=".txt"
+                                    onChange={handleFileUpload}
+                                />
+                            </button>
+                        </li>
+                    </ul>
+                </Modal>
+            )}
             <label htmlFor="original-text">Original text</label>
             <div className="textarea-container">
                 <textarea
@@ -190,7 +236,7 @@ const OriginalTextSection = ({
                     disabled={isLoading}
                     maxLength={30_000}
                 />
-                <div className="pills">
+                <div className="pills desktop-only">
                     <div className="pill-wrapper">
                         <button
                             type="button"
@@ -258,11 +304,21 @@ const OriginalTextSection = ({
                     </button>
                 </div>
             </div>
-            <hr />
+            <hr className="desktop-only" />
             {isDecryptLoading && <Loading text="Decrypting..." />}
             <div className="buttons">
                 <button
+                    id="menu"
+                    className="mobile-only"
+                    type="button"
+                    title="Open menu"
+                    onClick={() => setIsMobileMenuOpen(true)}
+                >
+                    <MenuIcon className="icon" />
+                </button>
+                <button
                     id="decrypt"
+                    className="desktop-only"
                     type="button"
                     title={
                         originalText === '' || isLoading
@@ -278,6 +334,7 @@ const OriginalTextSection = ({
                 </button>
                 <button
                     id="upload"
+                    className="desktop-only"
                     type="button"
                     title="Upload text file."
                     disabled={isLoading}

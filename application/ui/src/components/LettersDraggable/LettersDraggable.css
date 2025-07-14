@@ -123,7 +123,7 @@
 
     .icons {
         position: relative;
-        display: flex;
+        display: none;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -133,6 +133,7 @@
 
     @media screen and (min-width: 1000px) {
         & .icons {
+            display: flex;
             padding: 1rem;
         }
     }

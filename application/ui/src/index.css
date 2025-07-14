@@ -24,6 +24,8 @@
 }
 
 :root {
+    overscroll-behavior: none;
+
     --primary-color: #262627;
     --secondary-color: #fee715;
     --tertiary-color: #ffffff;

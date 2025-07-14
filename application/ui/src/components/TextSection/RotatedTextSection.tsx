@@ -18,6 +18,7 @@ import { SupportedLanguage } from '../../types';
 import DownloadIcon from '../../assets/images/download.svg?react';
 import InfoIcon from '../../assets/images/info.svg?react';
 import LanguageIcon from '../../assets/images/language.svg?react';
+import MenuIcon from '../../assets/images/menu.svg?react';
 
 // Styles
 import './TextSection.css';
@@ -48,6 +49,7 @@ const RotatedTextSection = ({
         useState<boolean>(false);
     const [isRotInfoModalOpen, setIsRotInfoModalOpen] =
         useState<boolean>(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
     const isLoading: boolean = isOtherLoading; // Here in case we need to add more loading states
 
@@ -92,7 +94,7 @@ const RotatedTextSection = ({
                     disabled={isLoading}
                     onClick={() => copyToClipboard(rotatedText)}
                 />
-                <div className="pills">
+                <div className="pills desktop-only">
                     <div className="pill-wrapper">
                         <button
                             title={
@@ -152,13 +154,22 @@ const RotatedTextSection = ({
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr className="desktop-only" />
             <div className="buttons">
+                <button
+                    id="menu"
+                    className="mobile-only"
+                    type="button"
+                    title="Open menu"
+                >
+                    <MenuIcon className="icon" />
+                </button>
                 <a
                     href={`data:text/plain;charset=utf-8,${encodeURIComponent(
                         rotatedText
                     )}`}
                     download="rotated_text.txt"
+                    className="desktop-only"
                 >
                     <button
                         id="download"
