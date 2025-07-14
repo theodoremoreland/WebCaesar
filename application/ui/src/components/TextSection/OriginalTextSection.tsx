@@ -12,6 +12,7 @@ import rotateString from '../../modules/rotateString';
 import {
     decryptErrorToastId,
     decryptSuccessToastId,
+    resetLocalStorage,
 } from './TextSection.controller';
 
 // Components
@@ -248,7 +249,7 @@ const OriginalTextSection = ({
                             setOriginalLanguage(SupportedLanguage.English);
                             setRotatedLanguage(SupportedLanguage.English);
 
-                            localStorage.clear();
+                            resetLocalStorage();
                         }}
                         disabled={originalText === '' || isLoading}
                     >
