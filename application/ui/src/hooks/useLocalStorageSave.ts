@@ -1,12 +1,8 @@
-// React
 import { useEffect } from 'react';
+import { debounceSaveToLocalStorage } from '../App.utils';
+import { SupportedLanguage } from '../types';
 
-// Custom
-import { debounceSaveToLocalStorage } from './App.utils';
-import { SupportedLanguage } from './types';
-import togglePrimaryHighlightColor from './utils/togglePrimaryHighlightColor';
-
-export const useSaveToLocalStorage = ({
+export const useLocalStorageSave = ({
     originalText,
     rotatedText,
     rot,
@@ -32,12 +28,4 @@ export const useSaveToLocalStorage = ({
     return undefined;
 };
 
-export const useTogglePrimaryHighlightColor = (
-    isRotPositive: boolean
-): void => {
-    useEffect(() => {
-        togglePrimaryHighlightColor(isRotPositive);
-    }, [isRotPositive]);
-
-    return undefined;
-};
+export default useLocalStorageSave;

@@ -13,16 +13,15 @@ import {
     jokeErrorToastId,
     shouldShowIntroModal,
 } from './App.utils';
-import {
-    useSaveToLocalStorage,
-    useTogglePrimaryHighlightColor,
-} from './App.hooks';
+import useLocalStorageSave from './hooks/useLocalStorageSave';
+import useHighlightColorToggle from './hooks/useHighlightColorToggle';
 
 // HTTP
 import getDadJoke from './http/getDadJoke';
 
 // Components
 import Intro from './components/Modal/Intro/Intro';
+import Loading from './components/Modal/Loading/Loading';
 import OriginalTextSection from './components/TextSection/OriginalTextSection';
 import RotatedTextSection from './components/TextSection/RotatedTextSection';
 import LettersDraggable from './components/LettersDraggable/LettersDraggable';
@@ -53,7 +52,7 @@ const App = (): ReactElement => {
         isFetching: isFetchingDadJoke,
     } = useQuery('dad-joke', getDadJoke, { retry: false });
 
-    const isLoading: boolean = isFetchingDadJoke; // Here in case we need to add more loading states
+    const isLoading: boolean = isFetchingDadJoke || isAutoRotating; // Here in case we need to add more loading states
 
     const handleRotate = useCallback((): void => {
         setRotatedText(
@@ -67,14 +66,14 @@ const App = (): ReactElement => {
     }, [originalText, rot, originalLanguage, rotatedLanguage]);
 
     // Custom hooks
-    useSaveToLocalStorage({
+    useLocalStorageSave({
         originalText,
         rotatedText,
         rot,
         originalLanguage,
         rotatedLanguage,
     });
-    useTogglePrimaryHighlightColor(isRotPositive);
+    useHighlightColorToggle(isRotPositive);
 
     useEffect(() => {
         const {
@@ -131,7 +130,8 @@ const App = (): ReactElement => {
 
     return (
         <main>
-            {shouldShowIntroModal() && isIntroModalOpen && (
+            {isLoading && <Loading text="Loading..." />}
+            {shouldShowIntroModal() && isIntroModalOpen && !isLoading && (
                 <Intro
                     handleClose={() => {
                         setIsIntroModalOpen(false);

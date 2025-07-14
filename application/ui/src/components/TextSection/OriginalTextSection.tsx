@@ -14,6 +14,9 @@ import {
     decryptSuccessToastId,
 } from './TextSection.controller';
 
+// Components
+import Loading from '../Modal/Loading/Loading';
+
 // Utils
 import { getFirstThreeLetters } from '../../utils';
 
@@ -255,6 +258,7 @@ const OriginalTextSection = ({
                 </div>
             </div>
             <hr />
+            {isDecryptLoading && <Loading text="Decrypting..." />}
             <div className="buttons">
                 <button
                     id="decrypt"
