@@ -18,3 +18,13 @@ export interface IndexToCharacters {
 export interface CharactersToIndex {
     [character: string]: number;
 }
+
+export enum LocalStorageKeys {
+    ORIGINAL_TEXT = 'originalText',
+    ROTATED_TEXT = 'rotatedText',
+    ROT = 'rot',
+    ORIGINAL_LANGUAGE = 'originalLanguage',
+    ROTATED_LANGUAGE = 'rotatedLanguage',
+    DONT_SHOW_INTRO = 'dontShowIntro',
+    INTRO_MODAL_LAST_SHOWN_DATE = 'introModalLastShownDate',
+}

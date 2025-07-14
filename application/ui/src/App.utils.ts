@@ -2,7 +2,7 @@
 import debounce from 'lodash.debounce';
 
 // Types
-import { SupportedLanguage } from './types';
+import { SupportedLanguage, LocalStorageKeys } from './types';
 
 export const jokeErrorToastId: string = 'joke-error-toast';
 
@@ -13,13 +13,19 @@ export const getLocalStorageData = (): {
     originalLanguage: string | null;
     rotatedLanguage: string | null;
 } => {
-    const originalText: string | null = localStorage.getItem('originalText');
-    const rotatedText: string | null = localStorage.getItem('rotatedText');
-    const rot: string | null = localStorage.getItem('rot');
-    const originalLanguage: string | null =
-        localStorage.getItem('originalLanguage');
-    const rotatedLanguage: string | null =
-        localStorage.getItem('rotatedLanguage');
+    const originalText: string | null = localStorage.getItem(
+        LocalStorageKeys.ORIGINAL_TEXT
+    );
+    const rotatedText: string | null = localStorage.getItem(
+        LocalStorageKeys.ROTATED_TEXT
+    );
+    const rot: string | null = localStorage.getItem(LocalStorageKeys.ROT);
+    const originalLanguage: string | null = localStorage.getItem(
+        LocalStorageKeys.ORIGINAL_LANGUAGE
+    );
+    const rotatedLanguage: string | null = localStorage.getItem(
+        LocalStorageKeys.ROTATED_LANGUAGE
+    );
 
     return {
         originalText,
@@ -37,11 +43,11 @@ export const setLocalStorageData = (
     originalLanguage: SupportedLanguage,
     rotatedLanguage: SupportedLanguage
 ): void => {
-    localStorage.setItem('originalText', originalText);
-    localStorage.setItem('rotatedText', rotatedText);
-    localStorage.setItem('rot', rot.toString());
-    localStorage.setItem('originalLanguage', originalLanguage);
-    localStorage.setItem('rotatedLanguage', rotatedLanguage);
+    localStorage.setItem(LocalStorageKeys.ORIGINAL_TEXT, originalText);
+    localStorage.setItem(LocalStorageKeys.ROTATED_TEXT, rotatedText);
+    localStorage.setItem(LocalStorageKeys.ROT, rot.toString());
+    localStorage.setItem(LocalStorageKeys.ORIGINAL_LANGUAGE, originalLanguage);
+    localStorage.setItem(LocalStorageKeys.ROTATED_LANGUAGE, rotatedLanguage);
 };
 
 export const debounceSaveToLocalStorage = debounce(
@@ -59,9 +65,9 @@ export const debounceSaveToLocalStorage = debounce(
 
 export const shouldShowIntroModal = (): boolean => {
     const hasClickedDontShowAgain: boolean =
-        localStorage.getItem('dontShowIntroModal') === 'true';
+        localStorage.getItem(LocalStorageKeys.DONT_SHOW_INTRO) === 'true';
     const lastShownDateString: string | null = localStorage.getItem(
-        'introModalLastShownDate'
+        LocalStorageKeys.INTRO_MODAL_LAST_SHOWN_DATE
     );
 
     const lastShownDate = new Date(lastShownDateString || 0);
