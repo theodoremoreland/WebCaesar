@@ -8,7 +8,7 @@ RUN npm install
 RUN npm run build
 
 # Final stage for creating python image that copies over the ui dist folder
-FROM python:3.11-slim-buster as dev
+FROM python:3.11-slim-buster AS dev
 
 WORKDIR /application
 
