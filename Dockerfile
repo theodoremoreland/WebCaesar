@@ -21,4 +21,4 @@ COPY --from=node-base /application/ui/dist ./ui/dist
 
 EXPOSE 5000
 
-CMD ["gunicorn", "application:application", "--bind", "0.0.0.0:5000"]
+CMD ["gunicorn", "--chdir", "/application", "application:application", "--bind", "0.0.0.0:5000"]
