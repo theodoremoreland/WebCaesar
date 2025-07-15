@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build Docker image
-        run: docker build -t myapp:latest .
+        run: docker build -t web-caesar:latest .
 
       - name: Upgrade AWS CLI version and setup lightsailctl
         run: |
@@ -39,6 +39,14 @@ jobs:
       - name: Push to Lightsail
         run: |
           aws lightsail push-container-image \
-            --service-name my-service \
+            --service-name web-caesar-container-service \
             --label latest \
-            --image myapp:latest
+            --image web-caesar:latest
+
+      - name: Deploy container to Lightsail
+        run: |
+          aws lightsail create-container-service-deployment \
+            --service-name web-caesar-container-service \
+            --containers file://containers.json \
+            --public-endpoint file://endpoint.json \
+            --region ${{ secrets.AWS_REGION }}

@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  web-caesar-service:
-    container_name: web-caesar-dev-container
+  web-caesar-container-service:
+    container_name: web-caesar
     build:
       context: ..
       dockerfile: ./Dockerfile
