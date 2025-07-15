@@ -40,7 +40,7 @@ jobs:
         run: |
           aws lightsail push-container-image \
             --service-name web-caesar-container-service \
-            --label latest \
+            --label web-caesar \
             --image web-caesar:latest
 
       - name: Deploy container to Lightsail
