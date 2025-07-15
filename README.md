@@ -39,6 +39,7 @@ This web application allows the user to encrypt and decrypt text using Caesar's 
 - pyspellchecker
 - react-toastify
 - lodash
+- gunicorn
 - black
 
 ### Caesar's Cipher

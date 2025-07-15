@@ -1,5 +1,5 @@
 # First stage for creating ui dist folder
-FROM node:22-alpine as node-base
+FROM node:22-alpine AS node-base
 
 WORKDIR /application/ui
 
@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY --from=node-base /application/ui/dist ./ui/dist
 
-CMD ["python", "application.py"]
+CMD ["gunicorn", "application:application", "--bind", "0.0.0.0:5000"]

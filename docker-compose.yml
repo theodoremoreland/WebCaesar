@@ -4,7 +4,7 @@ services:
   web-caesar-container-service:
     container_name: web-caesar
     build:
-      context: ..
+      context: .
       dockerfile: ./Dockerfile
     ports:
       - 5000:5000
