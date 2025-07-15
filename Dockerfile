@@ -19,4 +19,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY --from=node-base /application/ui/dist ./ui/dist
 
+EXPOSE 5000
+
 CMD ["gunicorn", "application:application", "--bind", "0.0.0.0:5000"]
