@@ -2,7 +2,7 @@
   "web-caesar": {
     "image": "web-caesar.latest",
     "ports": {
-      "5000": "5000"
+      "HTTP": "5000"
     }
   }
 }
