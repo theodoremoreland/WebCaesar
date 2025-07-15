@@ -1,5 +1,5 @@
 {
-  "containerName": "my-container",
+  "containerName": "web-caesar",
   "containerPort": 5000,
   "healthCheck": {
     "path": "/",
@@ -7,6 +7,5 @@
     "timeoutSeconds": 2,
     "healthyThreshold": 2,
     "unhealthyThreshold": 2
-  },
-  "protocol": "HTTP"
+  }
 }
