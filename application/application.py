@@ -55,7 +55,7 @@ def decrypt_route():
         decrypted = decrypt(text)
 
         return json.dumps(decrypted)
-    except KeyError:
+    except KeyError as e:
         error_message: str = (
             "Invalid key error. Key: 'text' must be of type 'string' and cannot be empty."
         )
