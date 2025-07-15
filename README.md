@@ -2,7 +2,7 @@
 
 <img src="presentation/thumbnail.webp" width="650">
 
-[View the web application](http://web-caesar.us-east-1.elasticbeanstalk.com/)
+[View the web application](https://web-caesar-container-service.tw35szt7qqpz2.us-east-2.cs.amazonlightsail.com/)
 
 ## Table of contents
 
@@ -75,7 +75,7 @@ The application supports the following features:
 - Although not the recommended experience, touch screen and mobile are supported
 - Changes are automatically saved to the browser every 2.5 seconds or so (via `localStorage`)
 
-#### Supported languages include:
+#### Supported languages include
 
 - English
 - Spanish
@@ -104,23 +104,17 @@ _This program was originally created for a homework assignment at LaunchCode's L
 
 ## Run on Docker
 
-Firstly, confirm that Docker is installed and running. Next confirm that no other application is using port `5000` as port `5000` is needed for the Flask server. If you need to run Flask on an alternative port, you can modify the last line in the `application/application.py` and the ports in the `docker/docker-compose.yml` file.
+Firstly, confirm that Docker is installed and running. Next confirm that no other application is using port `5000` as port `5000` is needed for the Flask server. If you need to run Flask on an alternative port, you can modify the last line in the `application/application.py` and the ports in the `docker-compose.yml` file.
 
 **It is assumed the user is at the root of this project and is using a UNIX style command line environment when referencing the CLI commands below.**
 
-Open terminal at root of this project then move into docker/ directory:
-
-```
-cd docker/
-```
-
 Build Docker image and start Docker container:
 
-```
+```bash
 docker compose up --build
 ```
 
-Visit: http://localhost:5000 to use the application.
+Visit: <http://localhost:5000> to use the application.
 
 ## Run on Windows
 
@@ -135,35 +129,35 @@ Confirm that no other application is using port `5000` as port `5000` is needed 
 
 Open terminal at root of this project then run the following command to build the ui:
 
-```
+```bash
 cd application/ui/ && npm i && npm run build && cd ..
 ```
 
 If the previous command was successful, you should now be in the `application` folder. From here, create `venv` folder in application folder using Python 3.11:
 
-```
+```bash
 python3.11 -m venv venv
 ```
 
 Activate venv:
 
-```
+```bash
 source venv/Scripts/activate
 ```
 
 Install python packages to venv:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 Start application:
 
-```
+```bash
 python application.py
 ```
 
-Visit: http://localhost:5000 to use the application.
+Visit: <http://localhost:5000> to use the application.
 
 ## Screenshots
 
