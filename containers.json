@@ -1,8 +1,8 @@
 {
   "web-caesar": {
-    "image": "web-caesar.latest",
+    "image": ":web-caesar-container-service.latest.1",
     "ports": {
-      "HTTP": "5000"
+      "5000": "HTTP"
     }
   }
 }
