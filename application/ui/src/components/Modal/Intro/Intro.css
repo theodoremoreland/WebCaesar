@@ -6,11 +6,11 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 15px;
-    width: 90%;
+    width: 86%;
     max-width: 55ch;
     min-height: 250px;
-    max-height: 92vh;
-    padding: 25px;
+    max-height: 85vh;
+    padding: 30px 25px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     margin-top: 4vh;

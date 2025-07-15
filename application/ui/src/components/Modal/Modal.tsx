@@ -9,7 +9,7 @@ import './Modal.css';
 
 interface Props {
     children: ReactElement;
-    title: string;
+    title?: string;
     handleClose: () => void;
 }
 
@@ -28,7 +28,7 @@ const Modal = ({ children, title, handleClose }: Props) => {
                         Close
                     </button>
                 </nav>
-                <h2 className="title">{title}</h2>
+                {title && <h2 className="title">{title}</h2>}
                 <div className="content">{children}</div>
             </div>
         </Backdrop>

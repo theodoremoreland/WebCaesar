@@ -138,7 +138,7 @@ const App = (): ReactElement => {
                     }}
                 />
             )}
-            <div className="content">
+            <div id="app-content">
                 <OriginalTextSection
                     isOtherLoading={isLoading}
                     originalText={originalText}

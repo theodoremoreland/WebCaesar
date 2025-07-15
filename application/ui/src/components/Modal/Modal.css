@@ -6,10 +6,10 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: auto;
-    max-width: 92%;
+    max-width: 90%;
     height: auto;
     max-height: 72%;
-    padding: 1em 1.25em;
+    padding: 1.5em;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     margin-top: 10vh;
@@ -19,10 +19,6 @@
     overflow-x: hidden;
     overflow-y: auto;
 
-    @media screen and (min-width: 1000px) {
-        height: clamp(250px, 72%, 750px);
-    }
-
     nav {
         position: relative;
         display: flex;
@@ -30,8 +26,7 @@
         justify-content: flex-end;
         align-items: center;
         width: 100%;
-        height: 4em;
-        padding: 10px;
+        padding: 10px 0;
         color: white;
         border: none;
         border-radius: 0;
@@ -50,17 +45,13 @@
         text-decoration: underline;
     }
 
-    article {
-        margin: 1.4rem 0;
-    }
-
     button {
         margin: 0 5px;
     }
 
     .img-container {
         position: relative;
-        height: clamp(200px, 25vh, 300px);
+        height: clamp(200px, 10vh, 300px);
 
         img {
             height: 100%;
@@ -69,10 +60,6 @@
     }
 
     .close-button {
-        z-index: 2;
-        position: absolute;
-        top: 0;
-        right: 0;
         font-size: medium;
         padding: 0.5rem 1rem;
         color: var(--primary-color);
@@ -97,16 +84,12 @@
         position: relative;
         width: 100%;
         max-width: 55ch;
-        flex-grow: 1;
+
         line-height: 1.5em;
-        border: none;
-        border-radius: 0;
-        background-color: transparent;
 
         p {
             padding: 0;
-            margin: 1em 0;
-            line-height: 1.5em;
+            margin: 0;
         }
     }
 }

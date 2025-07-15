@@ -20,8 +20,8 @@
     }
 
     .wreath {
-        width: 25vh;
-        height: 25vh;
+        width: 28vh;
+        height: 28vh;
         animation: rotate 10s linear infinite;
 
         path {
