@@ -75,11 +75,25 @@
 
     .button-container {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-start;
         align-items: center;
         gap: 20px;
         width: 100%;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    @media screen and (min-width: 600px) {
+        .button-container {
+            flex-direction: row;
+        }
+
+        button {
+            width: auto;
+        }
     }
 
     .img-container {
