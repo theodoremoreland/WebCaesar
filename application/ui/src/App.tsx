@@ -130,7 +130,7 @@ const App = (): ReactElement => {
 
     return (
         <main>
-            {isLoading && <Loading text="Loading..." />}
+            {isLoading && <Loading text="Loading" />}
             {shouldShowIntroModal() && isIntroModalOpen && !isLoading && (
                 <Intro
                     handleClose={() => {

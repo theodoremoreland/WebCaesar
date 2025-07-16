@@ -336,7 +336,7 @@ const OriginalTextSection = ({
                 </div>
             </div>
             <hr className="desktop-only" />
-            {isDecryptLoading && <Loading text="Decrypting..." />}
+            {isDecryptLoading && <Loading text="Decrypting" />}
             <div className="buttons">
                 <button
                     id="menu"
