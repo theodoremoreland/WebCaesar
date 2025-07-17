@@ -2,7 +2,7 @@
 
 <img src="presentation/thumbnail.webp" width="650">
 
-[View the web application](https://web-caesar-container-service.tw35szt7qqpz2.us-east-2.cs.amazonlightsail.com/)
+[View the web application](https://web-caesar.theodoremoreland.dev/)
 
 ## Table of contents
 
