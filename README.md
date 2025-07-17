@@ -13,7 +13,7 @@
     - [Supported Languages](#supported-languages-include)
   - [How to use](#how-to-use)
 - [How to run locally](#how-to-run-locally)
-  - [Run on Docker](#run-on-docker)
+  - [Run on Docker (Recommended)](#run-on-docker-recommended)
   - [Run on Windows](#run-on-windows)
 - [Screenshots](#screenshots)
   - [Desktop](#desktop)
@@ -100,9 +100,9 @@ The alphabet used for Original Text and Rotated Text can be changed by clicking 
 
 _This program was originally created for a homework assignment at LaunchCode's Lc101 (2018). I have since then updated this project._
 
-# How to run locally
+## How to run locally
 
-## Run on Docker
+### Run on Docker (Recommended)
 
 Firstly, confirm that Docker is installed and running. Next confirm that no other application is using port `5000` as port `5000` is needed for the Flask server. If you need to run Flask on an alternative port, you can modify the last line in the `application/application.py` and the ports in the `docker-compose.yml` file.
 
@@ -116,7 +116,7 @@ docker compose up --build
 
 Visit: <http://localhost:5000> to use the application.
 
-## Run on Windows
+### Run on Windows
 
 Assumes the following:
 
@@ -163,48 +163,62 @@ Visit: <http://localhost:5000> to use the application.
 
 ### Desktop
 
-###
-
 <img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/1.png" width="650">
-
-###
 
 <img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/2.png" width="650">
 
-###
-
 <img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/3.png" width="650">
-
-###
 
 <img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/4.png" width="650">
 
-###
-
 <img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/5.png" width="650">
-
-###
 
 <img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/6.png" width="650">
 
-###
-
 <img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/7.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/8.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/9.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/10.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/11.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/12.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/13.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/14.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/15.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/16.png" width="650">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/17.png" width="650">
 
 ### Mobile
 
-###
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/18.png" width="250">
 
-<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/8.png" width="250">
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/19.png" width="250">
 
-###
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/20.png" width="250">
 
-<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/9.png" width="250">
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/21.png" width="250">
 
-###
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/22.png" width="250">
 
-<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/10.png" width="550">
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/23.png" width="250">
 
-###
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/24.png" width="250">
 
-<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/11.png" width="550">
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/25.png" width="250">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/26.png" width="250">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/27.png" width="250">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/28.png" width="550">
+
+<img src="https://dj8eg5xs13hf6.cloudfront.net/web-caesar/29.png" width="550">
