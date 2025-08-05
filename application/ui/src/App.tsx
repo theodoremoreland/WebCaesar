@@ -140,7 +140,10 @@ const App = (): ReactElement => {
                     }}
                 />
             )}
-            <div id="app-content">
+            <div
+                id="app-content"
+                className={isRotPositive ? 'rot-positive' : 'rot-negative'}
+            >
                 <OriginalTextSection
                     isOtherLoading={isLoading}
                     originalText={originalText}

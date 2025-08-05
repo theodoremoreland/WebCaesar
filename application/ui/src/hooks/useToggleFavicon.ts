@@ -8,8 +8,8 @@ const useToggleFavicon = (isRotPositive: boolean) => {
 
         if (link) {
             link.href = isRotPositive
-                ? '/black-skull-with-laurel-wreath.png'
-                : '/yellow-skull-with-laurel-wreath.png';
+                ? '/yellow-skull-with-laurel-wreath.png'
+                : '/black-skull-with-laurel-wreath.png';
         }
     }, [isRotPositive]);
 };
