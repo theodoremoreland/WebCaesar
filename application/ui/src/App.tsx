@@ -15,6 +15,7 @@ import {
 } from './App.utils';
 import useLocalStorageSave from './hooks/useLocalStorageSave';
 import useHighlightColorToggle from './hooks/useHighlightColorToggle';
+import useToggleFavicon from './hooks/useToggleFavicon';
 
 // HTTP
 import getDadJoke from './http/getDadJoke';
@@ -74,6 +75,7 @@ const App = (): ReactElement => {
         rotatedLanguage,
     });
     useHighlightColorToggle(isRotPositive);
+    useToggleFavicon(isRotPositive);
 
     useEffect(() => {
         const {
