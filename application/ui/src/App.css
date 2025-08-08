@@ -44,7 +44,7 @@ main {
 
     &.rot-negative .textarea-section::before {
         background-image: url('/black-skull-with-laurel-wreath.png');
-        opacity: 0.2;
+        opacity: 0.3;
     }
 }
 
